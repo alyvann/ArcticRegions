@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<title>The Russia Left Behind</title>
+<style>
+body {
+  font: 17px/28px Georgia;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #004276;
+}
+
+.article {
+  border-top: solid 1px #fff;
+}
+
+.section {
+  padding-top: 150px;
+}
+
+.section--last {
+  padding-bottom: 130px;
+}
+
+.section .text {
+  margin: auto 25%;
+  max-width: 800px;
+}
+
+.section h4.text {
+  font: 500 15px/1.2em "nyt-franklin";
+  text-transform: uppercase;
+  color: #999;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.section h3.text {
+  font: 200 36px/1.2em "nyt-cheltenham";
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.additional-credits {
+  font-style: italic;
+  color: #999;
+  margin-top: 60px;
+  font-size: 0.9em;
+}
+
+@media (max-width: 859px) {
+  .section .text {
+    margin: auto 5%;
+    max-width: auto;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  body {
+    font-size: 22px;
+    line-height: 34px;
+  }
+
+  .section h4.text {
+    font-size: 24px;
+    text-align: center;
+    margin: 10px 30px;
+  }
+
+  .section h3.text {
+    font-size: 48px;
+    text-align: center;
+    margin: 10px 30px 30px 30px;
+  }
+}
+
+.map-section {
+  padding: 0;
+  left: 0;
+  width: 100%;
+}
+
+.map-overview {
+  background-color: #b9b6af;
+}
+
+.map-section svg {
+  overflow: hidden;
+}
+
+.map-road {
+  fill: none;
+  stroke: #ccc;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.map-road--story {
+  stroke: #f93;
+  stroke-opacity: .6;
+  stroke-width: 3px;
+}
+
+.map-key,
+.map-label {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.map-label {
+  fill: #666;
+}
+
+.map-label--russia {
+  fill: #000;
+}
+
+.map-chatter {
+  font-family: "nyt-cheltenham";
+  font-size: 20px;
+  text-shadow: 0 1px 0 #cac7be, 0 -1px 0 #cac7be, 1px 0 0 #cac7be, -1px 0 0 #cac7be;
+}
+
+.ios .map-chatter {
+  font-size: 18px;
+}
+
+.map-label--road {
+  text-anchor: end;
+}
+
+.map-left .map-label {
+  cursor: pointer;
+  fill: #ccc;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+  text-anchor: end;
+}
+
+.map-left .map-label circle {
+  fill: #999;
+}
+
+.map-left .map-label--visited {
+  fill: #000;
+}
+
+.map-left .map-label--visiting {
+  font-weight: bold;
+}
+
+.map-left .map-label--visiting circle {
+  fill: #000;
+}
+
+.map-overview .map-label--road :first-child,
+.map-overview .map-label--road :last-child {
+  fill: #000;
+  font: bold 15px sans-serif;
+}
+
+.map-label--country {
+  font-style: oblique;
+  letter-spacing: 2px;
+}
+
+.map-label--country :last-child {
+  font-size: 13px;
+  opacity: 0.8;
+  font-weight: 200;
+}
+
+.map-key path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+@media (max-width: 859px) {
+  .map-left {
+    display: none;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .map-label--country {
+    font-size: 17px;
+  }
+
+  .map-label--russia {
+    display: none;
+  }
+
+  .ios .map-chatter {
+    font-size: 27px;
+    fill-opacity: 1 !important;
+  }
+
+  .map-overview .map-label--road {
+    fill-opacity: 0;
+  }
+
+  .map-overview .map-label--road :first-child,
+  .map-overview .map-label--road :last-child {
+    fill-opacity: 1;
+    font-size: 25px;
+  }
+}
+
+</style>
+<script>
+(function() {
+
+var defers = [];
+defer = function(f) { defers.push(f); };
+await = function() { defers.forEach(function(f) { f(); }); };
+
+})();
+</script>
+<div class="main">
+  <a class="map-marker" data-key="St. Petersburg"></a>
+  <div class="section map-section map-overview" data-height="1" data-zoom-start="0" data-zoom-end="0.6">
+    <!--[if lte IE 8]><img src="http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/207ffeebeb08f93156b7a4be9b0c17863de3143a/map-overview-fallback.jpg" style="width:100%;"><![endif]-->
+  </div>
+  <div class="article">
+  <style>
+  
+  .map-container,
+  .head-container {
+    z-index: 2;
+  }
+  
+  .map-left {
+    left: 0;
+    top: 0;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    width: auto;
+  }
+  
+  .ios .map-left {
+    display: none;
+  }
+  
+  </style>
+  <div class="section map-section map-left"></div>
+  <script>
+  
+  if (!/iPad|iPod|iPhone/.test(navigator.userAgent)) defer(function() {
+  
+  var width,
+      height,
+      nativeHeight = 1000,
+      scale,
+      y0,
+      y1;
+  
+  var y = d3.scale.linear()
+      .range([0, .125, .171, .267, .455, .613, .680, .955, 1]);
+  
+  var resizeTimeout,
+      render = function() {};
+  
+  var path = d3.geo.path()
+      .projection(d3.geo.transform({point: function(x, y) { this.stream.point(x * scale, y * scale); }}));
+  
+  var section = d3.select(".map-left");
+  
+  var svg = section.append("svg");
+  
+  var g = svg.append("g");
+  
+  var marker = d3.selectAll([]);
+  
+  var article = d3.select(".article");
+  
+  d3.select(window)
+      .on("resize.map-left", resized)
+      .on("load.map-left", resized)
+      .call(resized);
+  
+  function resized() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(afterresized, 10);
+  }
+  
+  function afterresized() {
+    width = document.body.clientWidth / 4;
+    height = innerHeight;
+    scale = (height - 200) / nativeHeight;
+    y0 = article.node().offsetTop;
+    y1 = y0 + article.node().offsetHeight - innerHeight;
+  
+    svg
+        .attr("width", width)
+        .attr("height", height);
+  
+    g
+        .attr("transform", "translate(" + (width / 2 + 48) + "," + height / 2 + ")");
+  
+    y
+        .domain(marker
+          .each(function(d) { d.properties.position = this.offsetTop; })
+          .data().map(function(d) { return d.properties.position; }));
+  
+    render();
+  }
+  
+  d3.json("http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/207ffeebeb08f93156b7a4be9b0c17863de3143a/map-left.json", function(error, topo) {
+    var road = topojson.feature(topo, topo.objects.road),
+        roadLength = length(road.geometry.coordinates),
+        cities = topojson.feature(topo, topo.objects.cities).features;
+  
+    marker = d3.selectAll(".map-marker")
+        .data(cities, function(d) { return d ? d.properties.name : this.getAttribute("data-key"); })
+        .each(function(d, i) { d.properties.position = this.offsetTop; d.properties.top = y.range()[i]; });
+  
+    y.domain(cities.map(function(d) { return d.properties.position; }));
+  
+    g.append("path")
+        .datum(road)
+        .attr("class", "map-road");
+  
+    var feature = g.append("path")
+        .datum(road)
+        .attr("class", "map-road map-road--story");
+  
+    var label = g.append("g")
+        .attr("class", "map-label map-label--road")
+      .selectAll("g")
+        .data(cities)
+      .enter().append("g")
+        .on("click", clicked);
+  
+    label.append("circle")
+        .attr("r", 2.5);
+  
+    label.append("text")
+        .attr("dy", ".35em")
+        .attr("x", -10)
+        .text(function(d) { return d.properties.name; });
+  
+    render = function() {
+      g.selectAll("path").attr("d", path);
+      label.attr("transform", function(d) { d = d.geometry.coordinates; return "translate(" + d[0] * scale + "," + d[1] * scale + ")"; });
+      scrolled();
+    };
+  
+    d3.select(window)
+        .on("scroll.map-left", scrolled)
+        .call(render);
+  
+    function scrolled() {
+      var top = y(pageYOffset), maxTop = 0;
+  
+      section
+          .style("top", pageYOffset > y1 ? y1 - pageYOffset + "px" : pageYOffset < y0 ? y0 - pageYOffset + "px" : null);
+  
+      feature
+          .style("stroke-dasharray", top * roadLength * scale + "," + roadLength * scale);
+  
+      label
+          .classed("map-label--visited", function(d) { var t = d.properties.top; if (t < top) { if (t > maxTop) maxTop = t; return true; }})
+          .classed("map-label--visiting", function(d) { return d.properties.top === maxTop; });
+    }
+  
+    function clicked(d, i) {
+      d3.transition()
+          .duration(750)
+          .tween("scroll", function() {
+            var offset = d3.interpolateNumber(pageYOffset, d.properties.position + (i ? 40 : 0));
+            return function(t) { scrollTo(0, offset(t)); };
+          });
+    }
+  });
+  
+  function length(line) {
+    var i = 0,
+        n = line.length,
+        p0,
+        p1 = line[0],
+        length = 0,
+        dx,
+        dy;
+  
+    while (++i < n) {
+      p0 = p1;
+      p1 = line[i];
+      dx = p1[0] - p0[0];
+      dy = p1[1] - p0[1];
+      length += Math.sqrt(dx * dx + dy * dy);
+    }
+  
+    return length;
+  }
+  
+  });
+  
+  </script>
+  <a class="map-marker" data-key="Lyuban"></a>
+  <div class="section">
+    <h4 class="text">Lyuban</h4>
+    <h3 class="text">A Modern Train, a Rotting City</h3>
+    <div class="text">
+      <p>A few times every day, the high-speed train between St. Petersburg and Moscow barrels through the threadbare town of Lyuban. When word gets out that the head of Russia’s state railway company — a close friend of President Vladimir V. Putin — is aboard, the station’s employees line up on the platform standing at attention, saluting Russia’s modernization for the seconds it takes the train to fly through. <em>Whoosh</em>.</p>
+      <p>But Vladimir G. Naperkovsky is not one of them. He watched with a cold, blue-eyed stare as the train passed the town where he was born, with its pitted roads and crumbling buildings. At 52, having shut down his small computer repair business, Mr. Naperkovsky is leaving for another region in Russia, hoping it is not too late to start a new life in a more prosperous place. The reasons are many, but his view boils down to this: “Gradually,” he said, explaining his view of Lyuban, “everything is rotting.”</p>
+      
+      <p>At the edges of Russia’s two great cities, another Russia begins.</p>
+      <p>This will not be apparent at next year’s Winter Olympics in Sochi, nor is it visible from the German-engineered high-speed train. It is along the highway between Moscow and St. Petersburg — a narrow 430-mile stretch of road that is a 12-hour trip by car — that one sees the great stretches of Russia so neglected by the state that they seem drawn backward in time.</p>
+      <p>As the state’s hand recedes from the hinterlands, people are struggling with choices that belong to past centuries: to heat their homes with a wood stove, which must be fed by hand every three hours, or burn diesel fuel, which costs half a month’s salary? When the road has so deteriorated that ambulances cannot reach their home, is it safe to stay? When their home can’t be sold, can they leave?</p>
+      <p>Clad in rubber slippers, his forearms sprinkled with tattoos, Mr. Naperkovsky is the kind of plain-spoken man’s man whom Russians would call a “muzhik.” He had something he wanted to pass on to Mr. Putin, who has led Russia during 13 years of political stability and economic expansion.</p>
+      <p>“The people on the top do not know what is happening down here,” he said. “They have their own world. They eat differently, they sleep on different sheets, they drive different cars. They don’t know what is going on here. If I needed one word to describe it, I would say it is a swamp, a stagnant swamp. As it was, so it is. Nothing is changing.”</p>
+      <p>Driving the highway, the M10, today, one finds beauty and decay. There are places where wild boars roam abandoned villages, gorging themselves on the fruit of orchards planted by men.</p>
+      <p>There are spots on this highway where it seems time has stopped. A former prison guard is spending his savings building wooden roadside chapels, explaining that “many souls” weigh on his conscience. A rescue worker from the nuclear meltdown at Chernobyl is waiting, 27 years later, for the apartment the Soviets promised him as a reward. Women sit on the shoulder, selling tea to travelers from a row of samovars. Above them, pillars of steam vanish into the sky, just as they did in 1746, the year construction on the road began.</p>
+    </div>
+  </div>
+  <a class="map-marker" data-key="Chudovo"></a>
+  <div class="section">
+    <h4 class="text">Chudovo</h4>
+    <h3 class="text">A Wedding for a 14-Year-Old</h3>
+    <div class="text">
+      <p>A furor had erupted off a side street in Chudovo, where the road was dirt and the houses were built of scrap lumber. A wedding was under way.</p>
+      <p>The bride was Mariuka, a Gypsy girl of 14. Her eyes and skin had the same honey-gold cast, and she was a head taller than most of the men in the village. At some point in the last year it had become clear that she was on the verge of becoming an unusual, startling beauty, and this, a guest whispered, was the reason her family had sped up the wedding. So that, as he put it, “she would not start messing around.”</p>
+      <p>She looked like a neighborhood teenager hired to baby-sit the groom, Ryoma, who was 13. It was unclear how they had produced a bloody sheet, brandished traditionally at Gypsy weddings to certify that her hymen had been broken. (“You can break it with your hands,” said his mother, Luisa Mikhai, a kind-faced woman.)</p>
+      <p>The past was tugging on all of them. Before the Soviet Union collapsed, the Education Ministry insisted that all children attend school, but not now. Forty percent of the children here do not study at all, said Stephania Kulayeva of St. Petersburg’s Memorial Anti-Discrimination Center. The vacuum has allowed the tradition of child marriage to come roaring back.</p>
+      <p>As Mariuka hurtled across this threshold, women arrived to celebrate in crazy waves of color. The master of ceremonies gripped a battery-powered microphone, working the crowd into a delirium of gaiety. “Happier! Happier! Happier! Opa! Opa! Opa!” The tiny groom sat in a chair in the corner, playing video games on his phone.</p>
+      <p>Night was falling, and their departure took place in a cascade of elaborate, syrupy toasts, interrupted only once by a woman who pulled a guest aside, unsmiling, and asked her to take one last look at the place she was leaving.</p>
+      <p>“We have no gas, we have no water,” she said. “We have nothing.”</p>
+    </div>
+  </div>
+  <a class="map-marker" data-key="Veliky Novgorod"></a>
+  <div class="section">
+    <h4 class="text">Near Veliky Novgorod</h4>
+    <h3 class="text">A 70-Mile Traffic Jam</h3>
+    <div class="text">
+      <p>The M10 highway looks normal enough at the southern limits of St. Petersburg, but then, with a jolt, it begins to atrophy. For the next 430 miles the surface of the highway, while paved, varies from corduroy to jaw-rattling patchwork. Sometimes it has four lanes, sometimes two, with few medians and frequently no lane markings at all.</p>
+      <p>Traffic creeps forward behind a procession of 18-wheelers hauling goods from the port of St. Petersburg, passing villages with names like Cockroachville, Teacupville and Chessville. It is the most heavily traveled cargo route in Russia, and yet for truck drivers complying with safety regulations, it takes 24 hours to travel between the two cities, said Viktor Dosenko, vice president of the International Transport Academy. On a good road, he said, the trip should take 10 hours.</p>
+      <p>From time to time, the dismal condition of the highway has made national news. After a snowstorm in November, about 10,000 vehicles got stuck in a traffic jam that extended more than 70 miles, trapping some drivers for three days in subzero temperatures. Valery Voitko, who heads a trade union of long-haul truck drivers, described his drivers that week as “not even angry any more, but in a state of dumb despair, that year in and year out the same thing happens.”</p>
+      <p>It is not that the Russian Federation cannot manage public works projects — next year’s Olympic Games are expected to cost $50 billion, about three and a half times the cost of last year’s Summer Games in London. Gazprom, the Russian natural gas giant, recently spearheaded construction of the world’s longest undersea pipeline, a feat of engineering.</p>
+      <p>So why is this highway so antiquated? A new toll road, the M11, will not be fully open until 2018, at which point Mr. Putin will have been in charge for 18 years.</p>
+      <p>Asked about the M10 during an interview last year, Mr. Putin’s press secretary, Dmitri S. Peskov, answered by tracing, in order of urgency, the challenges that Mr. Putin faced in his first and second presidential terms.</p>
+      <p>He brought Russia’s oligarchs to heel. He reclaimed authority over the security services. He eliminated the popular election of governors. He wrested television back from private hands. He raised pensions and paid off Russia’s foreign debt. By the time Mr. Peskov mentioned the staggering decline of Brezhnev-era infrastructure, his explanation had gone on for 28 sentences.</p>
+      <p>“Certainly,” he concluded, “in these circumstances it was impossible to think about a road between Moscow and St. Petersburg.”</p>
+    </div>
+  </div>
+  <a class="map-marker" data-key="Valdai"></a>
+  <div class="section">
+    <h4 class="text">Valdai</h4>
+    <h3 class="text">A Church Worthy of Putin’s Backyard</h3>
+    <div class="text">
+      <p>Midway through our journey, five golden domes came into view.</p>
+      <p>Set on an island in a mirror-like lake outside the city of Valdai was evidence, the first we had seen, that someone had cared a great deal about fixing something. The 17th-century Iversky Monastery, used by the Soviets to house tuberculosis patients, has undergone a swift and lustrous renovation, financed by a phalanx of state-connected companies like Sberbank, Gazprom and Russian Railways. Its lawns are velvety, its tower the colors of roses and clotted cream.</p>
+      <p>On a recent afternoon, a tour guide shared the secret of the monastery’s rebirth: Mr. Putin has a vacation home next door.</p>
+      <p>“Across the river there is his residence, so it is within his line of sight,” said the tour guide, Nadezhda Yakovleva. Ms. Yakovleva boasted that he visits frequently and spontaneously, taking such a granular interest that he is apt to approach builders to question why they are using that shade of paint. Fluttering her hand toward a patch of sky, she described a magical scene of communion between “the sovereign,” as she called him, and his people: His helicopter flies so low that when tourists call out to him from the ground, he actually answers.</p>
+      <p>The monastery’s abbot, Father Antony, looked alarmed by her characterization, saying Mr. Putin had made only a couple of official visits. The cleric’s restraint was understandable — church officials have repeatedly weathered tabloid rumors that Mr. Putin was secretly wed there to Alina Kabayeva, a former Olympic gymnast, or cordoned it off for a secret baptism.</p>
+      <p>And in the village that abuts Mr. Putin’s vacation compound, a drunken workman told extravagant tales of amenities he had glimpsed within its high concrete walls, like individual basins that would allow guests to bathe in honey and yogurt. Then, disgusted, he spat out the sum of his army pension. “To him, if there is life outside the Moscow ring road, we are vegetables, not people,” the workman said, a little blearily, before his friends, visibly anxious, pulled him away.</p>
+      <p>But even he longed for Mr. Putin’s motorcade to drive up the road now and then, if only to ensure that it is well maintained. If there is one thing that people in this part of the country crave from Mr. Putin, it is his attention. They are the people who make public requests to him for five hours on live television, in an annual ritual made for a modern-day czar.</p>
+    </div>
+  </div>
+  <a class="map-marker" data-key="Pochinok"></a>
+  <div class="section">
+    <h4 class="text">Pochinok</h4>
+    <h3 class="text">‘As if We Were on an Island’</h3>
+    <div class="text">
+      <p>Beyond Valdai, where collective farms once extended for miles in all directions, heading off the highway for more than a few miles is like leaving the known world.</p>
+      <p>Overhead the sky churns, many-layered and full of light. Along the road is riotous life, peonies the size of volleyballs swimming in the haze of midsummer. After that, the woods are denser and harder to penetrate. Five miles west of the M10 lies the village of Pochinok, where the wilderness is slowly closing in around Nina Kolesnikova and her children.</p>
+      <p>If once animals living in this forest learned to avoid humans, something now tells them not to be afraid. The other day, Ms. Kolesnikova, 42, emerged from her house and found that her dog’s throat had been torn out. She could make out the tracks of three large wolves across the kitchen garden.</p>
+      <p>“They have come to where the people are,” she said. “They are not afraid of the dogs. Why should they be afraid of us?”</p>
+      <p>Between the great cities are hundreds of disappearing settlements: towns becoming villages, villages becoming forest. The Soviets cut off support for them during efficiency drives in the 1960s and ’70s, which categorized villages as “promising” or “unpromising.”</p>
+      <p>But the death of a village is a slow process. A geographer, Tatiana Nefyodova, calls them “black holes,” and estimates that they make up 70 to 80 percent of Russia’s northwest, where Moscow and St. Petersburg act as giant vacuum cleaners, sucking people and capital from the rest of the country.</p>
+      <p>Those left behind are thrust into ever deeper isolation. Ms. Kolesnikova’s family bathes once a month now in bad weather, and the house smells mossy. The road is so derelict that no strangers pass through — this much is evident from the rapt stares of her towheaded sons. They have grown up deep in the forest.</p>
+      <p>Ms. Kolesnikova is not leaving, though. Asked why, she gave an answer that would resonate with any Russian: The air is clean. They gather berries and mushrooms in the summer. They produce their own cottage cheese and sour cream. “Everything is ours,” she said.</p>
+      <p>And yet the risks rise from year to year. Last spring, when the mud was so deep that “we lived as if we were on an island,” she and her neighbors appealed to the local prosecutor. They argued that the state was obliged to keep the roads passable year-round, if only for the safety of the last souls who remain in this wood.</p>
+      <p>They received an answer, on official letterhead, and the answer was no.</p>
+    </div>
+  </div>
+  <a class="map-marker" data-key="Torzhok"></a>
+  <div class="section">
+    <h4 class="text">Torzhok</h4>
+    <h3 class="text">‘I Am the Boss, You Are a Fool’</h3>
+    <div class="text">
+      <p>Occasionally, someone important draws attention to the decay of small-town Russia.</p>
+      <p>It plays out like this: A visiting dignitary will express public and sputtering rage at the city’s condition. He will fix the mayor — often, a loyal member of his own political team — with a glare like an ice pick. The mayor will look at his shoes and remain silent. Moral responsibility is in that way transferred downward, the public mollified. The name for this spectacle, among the most cherished in Russian political life, is, “I am the boss, you are a fool.”</p>
+      <p>Most Russians live in housing built in the late Soviet period. A report released last year by the Russian Union of Engineers found that 20 percent of city dwellings lack hot water, 12 percent have no central heating and 10 percent no indoor plumbing. Gas leaks, explosions and heating breakdowns happen with increasing frequency, but in most places infrastructure is simply edging quietly toward collapse.</p>
+      <p>There is a reason for this: Compared with populist steps like raising salaries and pensions, spending on infrastructure does little to shore up Mr. Putin’s popularity, said Natalya Zubarevich, a sociologist at Moscow’s Independent Institute of Social Policy. If something goes wrong, the Kremlin can always fire a regional official.</p>
+      <p>Just ask Gen. Yevgeny I. Ignatov, a former mayor of Torzhok, who stepped down two years ago after a dressing-down from the regional governor. Two years later, sitting in his neat, well-lighted kitchen, General Ignatov no longer had any reason to speak diplomatically. The money available for repairing heat and water systems, for example, was about 12 percent of what was needed. And everything was breaking at once.</p>
+      <p>“What can be done without money?” he said. “Twelve percent is only enough to patch the holes, but not always, and not enough for all the holes. You choose the most horrible hole out of all the big ones, so that people can simply survive the winter.” But the Kremlin, he said, has insulated itself from the consequences.</p>
+      <p>“Turn on any channel, and what you see is that they are all thieves in the provinces, they destroyed everything, they are idiots and bastards, they don’t do anything and don’t want to,” he said. Now angry, the former mayor quoted a line from Pushkin: “Russia will arise from her age-old sleep,” it goes, “and our names will be inscribed on the wreckage of despotism.”</p>
+      <p>It was a stirring line of poetry, but it was written 99 years before the October Revolution.</p>
+    </div>
+  </div>
+  <a class="map-marker" data-key="Chernaya Gryaz"></a>
+  <div class="section section--last">
+    <h4 class="text">Chernaya Gryaz</h4>
+    <h3 class="text">‘Black Dirt’</h3>
+    <div class="text">
+      <p>A traveler who has reached the village of Chernaya Gryaz — the name means “Black Dirt” — can feel the suck of Moscow on his skin. So it was for the truck driver Aleksandr Chertkov who, squinting in the direction of the city, had the square-jawed, cleareyed look of a Soviet monument to the workingman. Years spent on Russia’s highways have undermined his faith in just about everything.</p>
+      <p>Black Dirt is known for its prostitutes, mostly shop workers recruited from provincial cities, who waver on high heels on the highway’s shoulder as 18-wheelers blow past. It is known, equally, for televised police raids on prostitution — footage showing uniformed officers chasing women into birch groves, then shoving them out shamefaced to answer a cameraman’s questions.</p>
+      <p>Mr. Chertkov rolled his eyes at this ritual: A few days pass, and the same women are out on the road again. They are a sight as permanent as the row of samovars selling tea to truck drivers. You could almost forget that, in Russia, prostitution is illegal. The road will kill your illusions that way.</p>
+      <p>Consider the secondary roads that exist on maps but were never actually built, leaving Mr. Chertkov’s rig at a dead end in farmland or deep forest. Consider the traffic police officers in Dagestan, who, when Mr. Chertkov refused to pay a 3,000-ruble bribe (about $92), twisted his arms behind his back and made him breathe into a funnel they had fashioned out of paper towels. “The Breathalyzer shows that you have been drinking,” he was told. “The fine is 3,000 rubles.”</p>
+      <p>Mr. Chertkov has begun to crave order, something he imagines existed under Stalin. He feels envious when he drives through Belarus, where the police are too afraid to ask for bribes. The Russia he sees from the cab of his truck doesn’t suffer from a lack of freedom; it suffers from a lack of control.</p>
+      <a class="map-marker" data-key="Moscow"></a>
+      <p>“There is no master in the house,” he said of Russia’s leaders. “They sign decrees if necessary, but it’s as if they live somewhere abroad and come here to work. They don’t give a damn.”</p>
+      <p>A few miles down the road was Moscow, bulging, spreading, enriching itself and epitomizing his complaints about the direction the country is taking. “It’s like a tumor, and all around it is poverty,” he said.</p>
+      <p>But then his time came, as well. Mr. Chertkov washed the grease off his thick hands and hauled himself up into the cab of his truck and pulled away.</p>
+      <p>Proximity to Moscow was hardening him, Mr. Chertkov said, as his rig merged with traffic from the airport. Maybe it was time to check out for a season, park his rig in his native village where people are simpler and more virtuous. Put his keys on the shelf and do nothing until the spring.</p>
+      <p>But these were the idle thoughts of a man moving at full speed in the direction of the Kremlin. On the right he passed one of Russia’s largest shopping malls, and a high wall of housing blocks that are home to some 8,000 new arrivals. After that there was nowhere to go but in.</p>
+      <div class="additional-credits">Translations by Natalia V. Osipova and Philipp Chapkovski</div>
+    </div>
+  </div>
+  </div>
+  <style>
+  
+  .advertisement-section {
+    padding: 0;
+    background: #333;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .advertisement-content {
+    padding: 17px 0;
+    font: 500 14px/22px sans-serif;
+    color: #999;
+    text-align: center;
+  }
+  
+  #advertisement-frame {
+    margin: 12px auto;
+  }
+  
+  </style>
+</div>
+<script src="http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/207ffeebeb08f93156b7a4be9b0c17863de3143a/lib.js">
+</script>
+<script>(function() {
+
+var watched = [];
+
+d3.behavior.watch = function() {
+  var event = d3.dispatch("statechange", "scroll");
+
+  function watch(selection) {
+    selection.each(function(i) {
+      watched.push({
+        element: this,
+        state: 0,
+        index: i,
+        event: event
+      });
+    });
+  }
+
+  return d3.rebind(watch, event, "on");
+};
+
+if (/iPhone|iPad|iPad/.test(navigator.userAgent)) {
+  d3.select("body")
+      .classed("ios", "true");
+
+  d3.select(window)
+      .on("resize.watch", watch_scrolledStatic)
+      .on("DOMContentLoaded.watch", watch_scrolledStatic);
+} else {
+  d3.select(window)
+      .on("resize.watch", watch_scrolled)
+      .on("scroll.watch", watch_scrolled)
+      .on("DOMContentLoaded.watch", watch_scrolled);
+}
+
+function watch_scrolled() {
+  watched.forEach(function(watch) {
+    var rect = watch.element.getBoundingClientRect();
+    if (rect.top + rect.height < 0 || rect.bottom - rect.height - innerHeight > 0) {
+      watch_state(watch, 0);
+    } else {
+      var t = rect.top / (innerHeight - rect.height);
+      watch_state(watch, t < 0 || t > 1 ? 1 : 2);
+      watch_dispatch(watch, {type: "scroll", offset: t, rect: rect});
+    }
+  });
+}
+
+function watch_scrolledStatic() {
+  watched.forEach(function(watch) {
+    watch_state(watch, 1);
+    watch_dispatch(watch, {type: "scroll", offset: .5, rect: {top: 0}}); // XXX rect
+  });
+}
+
+function watch_state(watch, state1) {
+  var state0 = watch.state;
+  if (state0 !== state1) watch_dispatch(watch, {
+    type: "statechange",
+    state: watch.state = state1,
+    previousState: state0
+  });
+}
+
+function watch_dispatch(watch, event) {
+  var element = watch.element,
+      sourceEvent = event.sourceEvent = d3.event;
+  try {
+    d3.event = event;
+    watch.event[event.type].call(element, element.__data__, watch.index);
+  } finally {
+    d3.event = sourceEvent;
+  }
+}
+
+await();
+
+})();</script>

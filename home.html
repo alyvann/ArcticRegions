@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+  
+		<title>Arctic Regions</title>
+
+		<script src="js/jquery.js"></script>
+<!-- 		// <script src="js/d3.js"></script> -->
+
+		<!-- <link href='../libs/css/crimson_text_font.css' rel='stylesheet' type='text/css'> -->
+            <!-- <link rel="stylesheet" href="../libs/css/template.css"> -->
+<!--             // <script src="http://d3js.org/d3.v3.min.js" type="text/javascript"></script> -->
+
+		<style type="text/css">
+/*
+  body {
+    background: #333;
+  }*/
+
+		  .coastline {
+		    fill: none;
+		    stroke: red;
+		    stroke-width: 1px;
+		  }
+
+		  .graticule {
+		  fill: none;
+		  stroke: #777;
+		  stroke-width: .5px;
+		  stroke-opacity: .5;
+		  }
+
+		  .land {
+		    fill: #222;
+		  }
+
+		  .boundary {
+		    fill: none;
+		    stroke: #333;
+		    stroke-width: .5px;
+		  }
+
+			.head-sections {
+				display: inline-block;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				position: relative;
+			}
+
+			h1 {
+				color: white;
+				text-align: center;
+				top: 50%;
+				position: relative;
+				font-size: 50pt;
+				z-index: 1;
+			}
+
+			h2 {
+				color: white;
+				text-align: center;
+				top: 50%;
+				position: relative;
+				z-index: 1;
+			}
+
+			p {
+				color: black;
+			}
+			.full-image {
+				position: absolute;
+				z-index: 0;
+				width: 100%;
+			}
+			.map-image {
+				width: 100%;
+			}
+
+			body, html {
+				margin:0;
+				padding:0;
+			}
+			#body-section {
+				position: absolute;
+				width: 100%;
+				background-color: white;
+			}
+
+			#map {
+				margin:0;
+				padding: 0;
+			}
+
+			#sidenotes_wrapper {
+				visibility: visible;
+				width:375px;
+				height:100%;
+				padding-left: 10px;
+				padding-right:15px;
+				background-color: white;
+			}
+
+			#sidebar_inner {
+				position: fixed;
+				top: 0;
+				width: 375px;
+				overflow-y:hidden;
+				margin-right: 25px;
+				background-color: white;
+			}
+
+			#essay_wrapper {
+				position:absolute;
+				background-color: white;
+
+			}
+
+			@media screen and (max-width: 1015px) {
+				#essay_wrapper {
+					width:100%;
+				}
+				#sidenotes_wrapper, #side_image {
+					visibility: hidden;
+				}
+			}
+
+			p {
+				line-height: 2;
+				padding-left: 30px;
+				padding-right: 30px;
+			}
+
+			.landmark_markers {
+				padding-left: 20px;
+			}
+
+			#side_image {
+				width:375px;
+				margin: auto;
+				top: 0;
+				bottom: 0;
+				position: static;
+				max-height: 100%;
+			}
+
+			#revealing_div {
+				width: 375px;
+				position: static;
+				max-height: 100%;
+				background-color: white;
+			}
+			video {
+				padding-left: 30px;
+				padding-right: 30px;
+			}
+			span {
+				padding-left: 25px;
+				padding-right: 25px;
+			}
+
+			#main {
+				margin: 0 auto;
+				max-width: 1300px;
+				background-color: white;
+			}
+			h3 {
+				margin-left: 20px;
+			}
+			body {
+				/*background-color: #ADD8E6;*/
+			}
+			a {
+				color:#ADD8E6;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="main">
+			<div class="head-sections" id="head-section">
+				<img id="head-image" class="full-image" src="images/home_image.jpg"/>
+				<h1>Tracing <i style="color:#ADD8E6">The Arctic Regions</i></h1>
+				<h2>A Project by Stanford's Center for Spatial and Textual Analysis</h2>
+				<h2>George Philip LeBourdais</h2>
+				<h2>Frank Zheng</h2>
+			</div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+			<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+			<div id="map">
+				
+				<img class="map-image" src="images/david_rumsey_map_online.jpg" />
+				<span>Northern Regions, in Colton's Atlas Of The World, Illustrating Physical And Political Geography. Published by J.H. Colton And Co. 172 William St. New York. 1855 by J.H. Colton & Co. New York. No. XII.</span>
+				<br>
+				<span>David Rumsey Map Collection Cartography Associates</span>
+				<br>
+				<span><a href="http://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~1652~130011:Northern-Regions-?sort=Pub_List_No_InitialSort%2CPub_Date%2CPub_List_No%2CSeries_No&qvq=q:arctic;sort:Pub_List_No_InitialSort%2CPub_Date%2CPub_List_No%2CSeries_No;lc:RUMSEY~8~1&mi=15&trs=695">Link</a></span>
+				
+			</div>
+
+			<div id="body-section">
+				<div id="essay_wrapper">
+
+					<h3 id="1_landmark"class="landmark_markers">Landmark 1</h3>
+					
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<h3 id="2_landmark"class="landmark_markers">Landmark 2</h3>
+
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<h3 id="3_landmark"class="landmark_markers">Landmark 3</h3>
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<h3 id="4_landmark"class="landmark_markers">Landmark 4</h3>
+					<video id="icetest" width="90%"controls>
+					  <source src="images/icetest2.mp4" type="video/mp4">
+					</video>
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<h3 id="5_landmark"class="landmark_markers">Landmark 5</h3>
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<p>Aliquam posuere massa at nunc tempor, vitae mollis risus tincidunt. Ut convallis orci nec aliquet facilisis. Pellentesque finibus bibendum ante, sed convallis tortor molestie quis. Morbi sagittis tincidunt risus, sit amet mattis mi ullamcorper sed. Nulla ac mattis quam, in suscipit nisl. Curabitur lectus dui, hendrerit in vulputate non, tempor ac augue. Integer et mollis ex, quis vulputate sem. Ut aliquet lacinia erat, a feugiat nibh congue eget. Proin quis gravida neque. Aenean quis dolor eget odio condimentum pulvinar non vel dolor. Quisque at mattis dolor, non ullamcorper massa. Nullam in urna nec eros rutrum elementum. Vivamus quis rutrum magna, vel vestibulum est.</p>
+
+					<p>Duis a nibh sapien. Pellentesque mauris purus, auctor sed libero vel, efficitur tempor enim. Duis tristique posuere sem, eu vehicula neque. Maecenas lobortis tellus ut tellus volutpat vulputate vel ac neque. Donec sed turpis sit amet tellus facilisis placerat quis at mauris. Duis nec ex justo. Etiam mollis scelerisque erat. Integer vel molestie magna, non semper lectus. Mauris dapibus justo magna, efficitur vestibulum neque imperdiet sit amet.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+
+					<p>Duis a nibh sapien. Pellentesque mauris purus, auctor sed libero vel, efficitur tempor enim. Duis tristique posuere sem, eu vehicula neque. Maecenas lobortis tellus ut tellus volutpat vulputate vel ac neque. Donec sed turpis sit amet tellus facilisis placerat quis at mauris. Duis nec ex justo. Etiam mollis scelerisque erat. Integer vel molestie magna, non semper lectus. Mauris dapibus justo magna, efficitur vestibulum neque imperdiet sit amet.</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non convallis tortor. Praesent mattis quam arcu, id venenatis orci finibus in. Aenean justo nibh, dignissim quis ultrices vitae, pulvinar at lorem. Morbi et felis sed justo eleifend dapibus a nec purus. Sed gravida turpis lacinia, blandit dolor ut, vestibulum quam. Integer sit amet quam ut metus finibus aliquam sed eu eros. Suspendisse sagittis felis ac lacus lobortis feugiat.</p>
+
+					<p>Mauris sollicitudin nibh ac libero fringilla lacinia. Suspendisse maximus, dui et semper varius, ipsum libero finibus nunc, vitae laoreet sem nibh vel purus. Vivamus rutrum massa ac ligula sagittis cursus. Proin laoreet ullamcorper ante, ut mollis dolor iaculis ut. Etiam nec sapien a sapien viverra volutpat. Donec sodales sem ac dolor dictum, ut sollicitudin lorem ultricies. Maecenas ac leo mollis orci imperdiet aliquam ac ac dolor. Vestibulum in sodales nisi. Integer pretium laoreet purus, sed facilisis ipsum pharetra sit amet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In condimentum tincidunt orci, quis eleifend diam. Nullam lectus dolor, pretium eget maximus eget, semper at odio. Suspendisse potenti. Vestibulum auctor blandit lacus, nec condimentum ligula varius sed.</p>
+				</div>
+				<div id="sidenotes_wrapper">
+					<div id="sidebar_inner">
+						<!-- <img id="side_image" src="images/side_photo1.png"/> -->
+						<div id="revealing_div"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+	  <script src="http://d3js.org/topojson.v1.min.js"></script>
+	  <script src="http://d3js.org/queue.v1.min.js"></script>
+		<script>
+			
+			$('#head-section').css({'height': 920 + 'px'});
+			$('.full-image').css({'height': 920 + 'px'});
+
+			var leftDistance = $(window).width() - $('#main').width();
+			if ($(window).width() > 1000) {
+				$('#essay_wrapper').css({'width':$(window).width() - 360 - leftDistance});
+				$('#essay_wrapper').css({'right': leftDistance - 20});
+			} else {
+				$('#essay_wrapper').css({'width': 100 + '%'});
+				$('#essay_wrapper').css({'right': 0});
+			}
+
+			var alreadyMade = false;
+			
+			$(window).on('scroll', function() {
+				var scrollTop = $(this).scrollTop();
+
+				var topDistance = $('#essay_wrapper').offset().top;
+				// var distance1 = $('#1_landmark').offset().top;
+				// var distance2 = $('#2_landmark').offset().top;
+				// var distance3 = $('#3_landmark').offset().top;
+				// var distance4 = $('#4_landmark').offset().top;
+				// var distance5 = $('#5_landmark').offset().top;
+				
+
+				if(topDistance < scrollTop) {
+					$('#sidebar_inner').css({'position':'fixed'});
+					$('#sidebar_inner').css({'height': 100 + '%'});
+					// $('#side_image').css({'position':'absolute'});
+					$('#revealing_div').css({'position':'absolute'});
+					var heightOfRevealing = $('#sidebar_inner').height();
+					var heightOfEssay = $('#essay_wrapper').height();
+					var windowHeight = window.innerHeight;
+					var realHeight = heightOfEssay - windowHeight;
+					var percentageShown = scrollTop - topDistance;
+					percentageShown = percentageShown/realHeight + 0.10;
+					var newHeight = (1 - percentageShown) * heightOfRevealing;
+					$('#revealing_div').css({'height':newHeight+ 'px'})
+				} else {
+
+					$('#sidebar_inner').css({'position':'absolute'});
+					$('#sidebar_inner').css({'height': 'initial'});
+					$('#side_image').css({'position':'static'});
+					$('#revealing_div').css({'position':'static'});
+					var heightOfRevealing = $('#side_image').height();
+					$('#revealing_div').css({'height':heightOfRevealing + 'px'});
+				}
+
+				// if (scrollTop < distance2 && scrollTop >= distance1) {
+				// 	$('#side_image').attr('src','images/side_photo1.png');
+				// } else if (scrollTop >= distance2 && scrollTop < distance3){
+				// 	$('#side_image').attr('src','images/side_photo2.png');
+				// } else if (scrollTop >= distance3 && scrollTop < distance4){
+				// 	$('#side_image').attr('src','images/side_photo3.png');
+				// } else if (scrollTop >= distance4 && scrollTop < distance5){
+				// 	$('#side_image').attr('src','images/side_photo4.png');
+				// } else if (scrollTop >= distance5){
+				// 	$('#side_image').attr('src','images/side_photo5.png');
+				// } else {
+				// 	$('#side_image').attr('src','');
+				// }
+
+				if (topDistance < scrollTop && !alreadyMade) {
+					alreadyMade = true;
+					queue().defer(d3.json, "world-50m.json").defer(d3.json, "coast.topojson").await(makeMap);
+
+					// Defaults
+					var width = 375;
+					var height = $(window).height();
+					var	svg = d3.select('#sidebar_inner').append('svg').attr('width', width).attr('height', height);
+
+					var circleData = [{ "cx": 100, "cy": 70, "link": "http://www.google.com" }, 
+					{ "cx": 90, "cy": 500, "radius": 20, "link": "http://www.facebook.com" }];
+
+					var text = svg.selectAll("text").data(circleData).enter().append("text");
+
+					var textLabels = text
+                 		.attr("x", function(d) { return d.cx; })
+		                .attr("y", function(d) { return d.cy; })
+		                .text( function (d) { return d.link; })
+		                .attr("font-family", "sans-serif")
+		                .attr("font-size", "12px")
+		                .attr("fill", "red")
+		                .on("click", function(d) {window.open(d.link); });
+
+					var scale = 0;
+					var max = 5600;
+					if (height >= 1200) {
+						scale = max;
+					} else {
+						scale = (height/1200) * max;
+					}
+					// Projection information
+					var projection = d3.geo.stereographic()
+					  .scale(scale)
+					  .translate([width / 2, height / 2])
+					  .rotate([50, -70])
+					  .clipAngle(180 - 1e-4)
+					  .clipExtent([[0, 0], [width, height]])
+					  .precision(.1);
+
+					var path = d3.geo.path().projection(projection);
+					
+
+					// Build our map
+					function makeMap(error, world, greenland) {
+					  if (error) throw error;
+
+					  // Draw world countries and borders
+					  // svg.insert("path", ".graticule")
+					  //     .datum(topojson.feature(world, world.objects.land))
+					  //     .attr("class", "land")
+					  //     .attr("d", path);
+
+					  // svg.insert("path", ".graticule")
+					  //     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+					  //     .attr("class", "boundary")
+					  //     .attr("d", path);
+
+					  // Select our coastline objects
+					  var route = topojson.feature(greenland, greenland.objects['coast']);
+
+					  // Make a group for features
+					  var greenland_coast = svg.append('g').attr('class', 'feature-group');
+
+					  // Add coastline data
+					  greenland_coast.selectAll('.coastline')
+					    .data(route.features)
+					  .enter().append('path')
+					    .attr('class', 'coastline')
+					    .attr('d', path);
+
+					}
+					
+				} else if (topDistance > scrollTop) {
+					d3.select("svg").remove();
+					alreadyMade = false;
+				}
+			});
+
+			
+
+			
+
+			$(window).resize( function () {
+				var scrollTop = $(window).scrollTop();
+				var topDistance = $('#essay_wrapper').offset().top;
+				// var width = 375;
+				// var height = $(window).height();
+				// queue().defer(d3.json, "world-50m.json").defer(d3.json, "coast.topojson").await(makeMap);
+
+				// Projection information
+				if (topDistance < scrollTop) {
+					width = 375;
+					height = $(window).height();
+					d3.select("svg").remove();
+					queue().defer(d3.json, "world-50m.json").defer(d3.json, "coast.topojson").await(makeMap);
+					svg = d3.select('#sidebar_inner').append('svg').attr('width', width).attr('height', height);
+
+					var circleData = [{ "cx": 100, "cy": 70, "link": "http://www.google.com" }, 
+					{ "cx": 90, "cy": 500, "radius": 20, "link": "http://www.facebook.com" }];
+
+					var text = svg.selectAll("text").data(circleData).enter().append("text");
+
+					var textLabels = text
+                 		.attr("x", function(d) { return d.cx; })
+		                .attr("y", function(d) { return d.cy; })
+		                .text( function (d) { return d.link; })
+		                .attr("font-family", "sans-serif")
+		                .attr("font-size", "12px")
+		                .attr("fill", "red")
+		                .on("click", function(d) {window.open(d.link); });
+
+					scale = 0;
+					max = 5600;
+					if (height >= 1200) {
+						scale = max;
+					} else {
+						scale = (height/1200) * max;
+					}
+					projection = d3.geo.stereographic()
+					  .scale(scale)
+					  .translate([width / 2, height / 2])
+					  .rotate([50, -70])
+					  .clipAngle(180 - 1e-4)
+					  .clipExtent([[0, 0], [width, height]])
+					  .precision(.1);
+
+					 path = d3.geo.path().projection(projection);
+					 alreadyMade = true;
+
+		 			function makeMap(error, world, greenland) {
+					  if (error) throw error;
+
+					  // Draw world countries and borders
+					  // svg.insert("path", ".graticule")
+					  //     .datum(topojson.feature(world, world.objects.land))
+					  //     .attr("class", "land")
+					  //     .attr("d", path);
+
+					  // svg.insert("path", ".graticule")
+					  //     .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+					  //     .attr("class", "boundary")
+					  //     .attr("d", path);
+
+					  // Select our coastline objects
+					  var route = topojson.feature(greenland, greenland.objects['coast']);
+
+					  // Make a group for features
+					  var greenland_coast = svg.append('g').attr('class', 'feature-group');
+
+					  // Add coastline data
+					  greenland_coast.selectAll('.coastline')
+					    .data(route.features)
+					  .enter().append('path')
+					    .attr('class', 'coastline')
+					    .attr('d', path);
+
+					}
+				} else {
+					d3.select("svg").remove();
+					alreadyMade = false;
+				}
+
+				$('#head-section').css({'height': 920 + 'px'});
+				$('.full-image').css({'height': 920 + 'px'});
+
+				var leftDistance = $(window).width() - $('#main').width();
+				if ($(window).width() > 1000) {
+					$('#essay_wrapper').css({'width':$(window).width() - 360 - leftDistance});
+					$('#essay_wrapper').css({'right': leftDistance - 20});
+				} else {
+					$('#essay_wrapper').css({'width': 100 + '%'});
+					$('#essay_wrapper').css({'right': 0});
+				}
+
+				// var distance1 = $('#1_landmark').offset().top;
+				// var distance2 = $('#2_landmark').offset().top;
+				// var distance3 = $('#3_landmark').offset().top;
+				// var distance4 = $('#4_landmark').offset().top;
+				// var distance5 = $('#5_landmark').offset().top;
+
+				// var heightOfRevealing = $('#sidebar_inner').height();
+				var heightOfEssay = $('#essay_wrapper').height();
+				var windowHeight = window.innerHeight;
+				var realHeight = heightOfEssay - windowHeight;				
+
+				if(topDistance < scrollTop) {
+					$('#sidebar_inner').css({'position':'fixed'});
+					$('#sidebar_inner').css({'height': 100 + '%'});
+					// $('#side_image').css({'position':'absolute'});
+					$('#revealing_div').css({'position':'absolute'});
+					var heightOfRevealing = $('#sidebar_inner').height();
+					var heightOfEssay = $('#essay_wrapper').height();
+					var windowHeight = window.innerHeight;
+					var realHeight = heightOfEssay - windowHeight;
+					var percentageShown = scrollTop - topDistance;
+					percentageShown = percentageShown/realHeight + 0.10;
+					var newHeight = (1 - percentageShown) * heightOfRevealing;
+					$('#revealing_div').css({'height':newHeight+ 'px'})
+				} else {
+
+					$('#sidebar_inner').css({'position':'absolute'});
+					$('#sidebar_inner').css({'height': 'initial'});
+					$('#side_image').css({'position':'static'});
+					$('#revealing_div').css({'position':'static'});
+					var heightOfRevealing = $('#side_image').height();
+					$('#revealing_div').css({'height':heightOfRevealing + 'px'});
+				}
+				// if (scrollTop < distance2 && scrollTop >= distance1) {
+				// 	$('#side_image').attr('src','images/side_photo1.png');
+				// } else if (scrollTop >= distance2 && scrollTop < distance3){
+				// 	$('#side_image').attr('src','images/side_photo2.png');
+				// } else if (scrollTop >= distance3 && scrollTop < distance4){
+				// 	$('#side_image').attr('src','images/side_photo3.png');
+				// } else if (scrollTop >= distance4 && scrollTop < distance5){
+				// 	$('#side_image').attr('src','images/side_photo4.png');
+				// } else if (scrollTop >= distance5){
+				// 	$('#side_image').attr('src','images/side_photo5.png');
+				// }else {
+				// 	$('#side_image').attr('src','');
+				// }
+			});
+
+		</script>
+	</body>
+</html>
