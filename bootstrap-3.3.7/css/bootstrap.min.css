@@ -10,17 +10,18 @@ html, body {
 }
 
 .top-img-div{
-	max-height: 50%;
+	max-height: 30%;
+	width: 100%;
 	overflow: hidden;
-	display:flex;
-	align-items:center;
-	justify-content:center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .img-top {
 	left: 0;
 	top: 0;
-/*	position: fixed; */	
+	/*position: absolute; 	*/
 	z-index: 101;
 	width: 100%;
 	vertical-align: middle;
