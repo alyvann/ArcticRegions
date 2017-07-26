@@ -53,10 +53,16 @@ window.onscroll = function(event){
 }
 
 
+// handles all page navigation
 function onPageButtonClick(e){
 	var element_id = e.target.id;
 	var toUpdate = true;
 
+	//unhighlight the current page button div
+	var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
+	current_button_div.classList.remove("active");
+
+	// update the gloabl current essay num
 	if (element_id == "previous") {
 		if (curr_essay_num == 1) {
 			toUpdate = false;
@@ -78,6 +84,7 @@ function onPageButtonClick(e){
 		curr_essay_num = essay_selected_num;
 	}
 
+	// update the current page if necessary
 	if (toUpdate){
 		// updates the top image to the image corresponding with the correct page
 		var new_image_src = essay_dict[element_id]["top_image"];
@@ -91,17 +98,43 @@ function onPageButtonClick(e){
 		window.scrollTo(0,0);
 	}
 
-	// TO DO... highlight the current page selected... 
+	// enable or disable the previous and next buttons
+	var prev_button = document.getElementById("previous-button-div");
+	var next_button = document.getElementById("next-button-div");
+
+	if (curr_essay_num == 1) { 
+		prev_button.className += " disabled";
+	} else {
+		prev_button.classList.remove("disabled");
+	}
+
+	if (curr_essay_num == 10) {
+		next_button.className += " disabled";
+	} else {
+		next_button.classList.remove("disabled");
+	}
+
+	// highlight the current page button div
+	if (element_id != "previous" && element_id != "next"){
+		var updated_button_div = document.getElementById(element_id + "-button-div");
+		updated_button_div.className += " active";
+	}
 }
 
+
+// Initializes the page with the first essay
 function init(){
 	// load first essay
 	var first_essay_doc = essay_dict["essay1"]["article_content"];
 	$("#content").load(first_essay_doc); 
 
-	// initialize previous and next ??? 
+	// disable the previous button
+	var prev_button = document.getElementById("previous-button-div");
+	prev_button.className += " disabled";
 
 	// highlight the current page selected... 
+	var first_essay_button_div = document.getElementById("essay1-button-div");
+	first_essay_button_div.className += " active";
 }
 
 init();
