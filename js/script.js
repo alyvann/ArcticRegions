@@ -50,11 +50,11 @@ function onPageButtonClick(e){
 
 	if(element_id == "previous"){
 		console.log("You've selected previous.");
-		// determine which page to go to... 
+		// TO DO... determine which page to go to... 
 
 	}else if(element_id == "next"){
 		console.log("You've selected next.");
-		// determine which page to go to...
+		// TO DO... determine which page to go to...
 
 	}else{	
 		// updates the top image to the image corresponding with the correct page
@@ -69,9 +69,15 @@ function onPageButtonClick(e){
 	
 	// scroll to top of article
 	window.scrollTo(0,0);
+
+	// TO DO... highlight the current page selected... 
 }
 
-function init(){}
+function init(){
+	// initialize previous and next ??? 
+	// load first essay
+	// highlight the current page selected... 
+}
 
 init();
 
