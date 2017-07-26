@@ -36,24 +36,29 @@ window.onscroll = function(event){
 
 
 function onPageButtonClick(e){
-	var dict = {"essay1": {"top_image": "../images/TARI_1_desolation.jpeg", "article_content": "essay1.html"}, 
-				"essay2": {"top_image": "../images/TARI_2.Julianeshaab.jpg", "article_content": "essay2.html"},
-				"essay3": {"top_image": "../images/TARI_3.Kakortok.jpg", "article_content": "essay3.html"},
-				"essay4": {"top_image": "../images/TARI_4.1sermitsialik.jpg", "article_content": "essay4.html"},
-				"essay5": {"top_image": "../images/TARI_5.karsut.jpg", "article_content": "essay5.html"}};
+	var dict = {"essay1": {"top_image": "images/TARI_1_desolation.jpeg", "article_content": "essay1.html"}, 
+				"essay2": {"top_image": "images/TARI_2.Julianeshaab.jpg", "article_content": "essay2.html"},
+				"essay3": {"top_image": "images/TARI_3.Kakortok.jpg", "article_content": "essay3.html"},
+				"essay4": {"top_image": "images/TARI_4.1sermitsialik.jpg", "article_content": "essay4.html"},
+				"essay5": {"top_image": "images/TARI_5.karsut.jpg", "article_content": "essay5.html"}};
 
 	var element_id = e.target.id;
 
 	if(element_id == "previous"){
 		console.log("You've selected previous.");
+		// determine which page to go to... 
 	}else if(element_id == "next"){
 		console.log("You've selected next.");
+		// determine which page to go to... 
 	}else{
 		console.log(dict[element_id]);
+	
+		var new_image_src = dict[element_id]["top_image"];
+		document.getElementById("curr-img").src = new_image_src;
+		
 	}
 
 }
-
 
 function init(){}
 
