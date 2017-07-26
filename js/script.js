@@ -10,6 +10,8 @@ var essay_dict = {"essay1": {"top_image": "images/home_image.jpg", "article_cont
 				"essay10": {"top_image": "images/TARI_9.jacobshavn.jpg", "article_content": "essay10.html"}
 				};
 
+var curr_essay_num = 1;
+
 
 // Get the combined size of the navigation bar and top image
 function getHeaderSize(){
@@ -53,16 +55,30 @@ window.onscroll = function(event){
 
 function onPageButtonClick(e){
 	var element_id = e.target.id;
+	var toUpdate = true;
 
-	if(element_id == "previous"){
-		console.log("You've selected previous.");
-		// TO DO... determine which page to go to... 
+	if (element_id == "previous") {
+		if (curr_essay_num == 1) {
+			toUpdate = false;
+		} else {
+			curr_essay_num -= 1;
+			element_id = "essay" + curr_essay_num;
+		}
 
-	}else if(element_id == "next"){
-		console.log("You've selected next.");
-		// TO DO... determine which page to go to...
+	} else if(element_id == "next") {
+		if (curr_essay_num == 10){
+			toUpdate = false;
+		} else {
+			curr_essay_num += 1;
+			element_id = "essay" + curr_essay_num;
+		}
 
-	}else{	
+	} else {
+		var essay_selected_num = parseInt(element_id.match(/\d+$/));
+		curr_essay_num = essay_selected_num;
+	}
+
+	if (toUpdate){
 		// updates the top image to the image corresponding with the correct page
 		var new_image_src = essay_dict[element_id]["top_image"];
 		document.getElementById("curr-img").src = new_image_src;
@@ -71,20 +87,20 @@ function onPageButtonClick(e){
 		var new_content_doc = essay_dict[element_id]["article_content"];
 		$("#content").load(new_content_doc); 
 
+		// scroll to top of article
+		window.scrollTo(0,0);
 	}
-	
-	// scroll to top of article
-	window.scrollTo(0,0);
 
 	// TO DO... highlight the current page selected... 
 }
 
 function init(){
+	// load first essay
 	var first_essay_doc = essay_dict["essay1"]["article_content"];
 	$("#content").load(first_essay_doc); 
 
 	// initialize previous and next ??? 
-	// load first essay
+
 	// highlight the current page selected... 
 }
 
