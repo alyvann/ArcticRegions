@@ -14,21 +14,25 @@ function getHeaderSize(){
 
 
 window.onresize = function(event) {
+	// fix the position of the top image
     var top_image = document.getElementById("top-img");
 	top_image.style.left = "0px";
 	top_image.style.top = "0px";
 
+	// correct the location of the article
 	var article = document.getElementById("article");
 	article.style.marginTop = "0px";
 }
 
 
 window.onscroll = function(event){
+	// fix the position of the top image
 	var top_image = document.getElementById("top-img");
 	top_image.style.position = "fixed";
 	top_image.style.left = "0px";
 	top_image.style.top = "0px";
 
+	// correct the location of the article 
 	header_size = getHeaderSize();
 	var article = document.getElementById("article");
 	article.style.marginTop = header_size;
@@ -47,17 +51,24 @@ function onPageButtonClick(e){
 	if(element_id == "previous"){
 		console.log("You've selected previous.");
 		// determine which page to go to... 
+
 	}else if(element_id == "next"){
 		console.log("You've selected next.");
-		// determine which page to go to... 
-	}else{
-		console.log(dict[element_id]);
-	
+		// determine which page to go to...
+
+	}else{	
+		// updates the top image to the image corresponding with the correct page
 		var new_image_src = dict[element_id]["top_image"];
 		document.getElementById("curr-img").src = new_image_src;
-		
-	}
 
+		// load new article
+		var new_content_doc = dict[element_id]["article_content"];
+		$("#content").load(new_content_doc); 
+
+	}
+	
+	// scroll to top of article
+	window.scrollTo(0,0);
 }
 
 function init(){}
