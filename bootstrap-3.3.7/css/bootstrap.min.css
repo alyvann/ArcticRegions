@@ -21,8 +21,12 @@ html, body {
 .img-top {
 	left: 0;
 	top: 0;
-	/*position: absolute; 	*/
 	z-index: 101;
 	width: 100%;
 	vertical-align: middle;
+}
+
+.flow-beneath{
+	z-index: -100;
+	position: relative;
 }
