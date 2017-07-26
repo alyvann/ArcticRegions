@@ -10,7 +10,7 @@ html, body {
 }
 
 .top-img-div{
-	max-height: 30%;
+	max-height: 50%;
 	width: 100%;
 	overflow: hidden;
 	display: flex;
@@ -29,4 +29,11 @@ html, body {
 .flow-beneath{
 	z-index: -100;
 	position: relative;
+}
+
+#article{
+/*	position: fixed;
+*/	left:0;
+	top: 0;
+	overflow-y: scroll;
 }

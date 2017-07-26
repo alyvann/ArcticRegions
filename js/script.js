@@ -15,11 +15,9 @@ function getHeaderSize(){
 
 window.onresize = function(event) {
     var top_image = document.getElementById("top-img");
-    top_image.style.position = null;
-	// top_image.style.left = "0px";
-	// top_image.style.top = "0px";
+	top_image.style.left = "0px";
+	top_image.style.top = "0px";
 
-	header_size = getHeaderSize();
 	var article = document.getElementById("article");
 	article.style.marginTop = "0px";
 }
@@ -37,10 +35,7 @@ window.onscroll = function(event){
 
 
 
-// function init(){
-// 	header_size = getHeaderSize();
-// 	var article = document.getElementById("article");
-// 	article.style.marginTop = header_size;
-// }
+function init(){
+}
 
-// init();
+init();
