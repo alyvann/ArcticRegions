@@ -24,10 +24,14 @@
       <a class="navbar-brand">Tracing the Arctic Regions</a>
     </nav> 
 
+
     <!-- TOP IMAGE -->
     <div id="top-img" class="top-img-div">
-        <img id="curr-img" class="img-top" src="images/home_image.jpg"/>
+      <a href="#img-modal" data-toggle="modal" onclick="openModal()">
+        <img id="curr-img" class="img-top" src="images/home_image.jpg" onclick="openModal()"/>
+      </a>
     </div>
+
 
     <!-- ARTICLE -->
     <div id="article" class="container-fluid"> 
@@ -38,6 +42,19 @@
         <div id="content" class="col-xs-9 col-sm-9 col-md-9 col-lg-9"></div>
       </div>
     </div>
+
+
+    <!-- MODAL -->
+    <div id="img-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img class="" src="#"/>
+            </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- FOOTER -->
     <footer class="footer text-center">

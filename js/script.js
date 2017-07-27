@@ -55,7 +55,14 @@ window.onscroll = function(event){
 	header_size = getHeaderSize();
 	var article = document.getElementById("article");
 	article.style.marginTop = header_size;
-	
+
+}
+
+
+function openModal(){
+	var curr_essay = "essay" + curr_essay_num.toString();
+	var curr_image = essay_dict[curr_essay]["top_image"];
+	$('#img-modal img').attr('src', curr_image); 
 }
 
 

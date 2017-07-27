@@ -35,9 +35,10 @@ html, body {
 }
 
 
-/*#article{
-	left:0;
-	top: 0;
-	overflow-y: scroll;
+.modal-dialog{
+	position: relative;
+    display: table;
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
 }
-*/
