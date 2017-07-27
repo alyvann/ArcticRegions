@@ -10,20 +10,23 @@ html, body {
 }
 
 .top-img-div{
-	max-height: 50%;
+	/*max-height: 50%;*/
+	height: 50%;
 	width: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #222;
+	z-index: 101;
 }
 
 .img-top {
-	left: 0;
+	/*left: 0;
 	top: 0;
-	z-index: 101;
 	width: 100%;
-	vertical-align: middle;
+	vertical-align: middle;*/
+    max-height: 100%;
 }
 
 .flow-beneath{
@@ -31,8 +34,8 @@ html, body {
 	position: relative;
 }
 
-/*
-#article{
+
+/*#article{
 	left:0;
 	top: 0;
 	overflow-y: scroll;

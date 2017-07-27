@@ -15,41 +15,47 @@ var curr_essay_num = 1;
 
 // Get the combined size of the navigation bar and top image
 function getHeaderSize(){
-	// var nav_bar = document.getElementById("nav");
-	// var nav_height = $(nav_bar).css('height');
+	var nav_bar = document.getElementById("nav");
+	var nav_height = $(nav_bar).css('height');
 
 	var top_image = document.getElementById("top-img");
 	var top_image_height = $(top_image).css('height');
 	
-	// var total_height = parseInt(nav_height) + parseInt(top_image_height);
-	var total_height = parseInt(top_image_height);
+	var total_height = parseInt(nav_height) + parseInt(top_image_height);
 	return total_height.toString() + "px";
 }
 
 
 window.onresize = function(event) {
 	// fix the position of the top image
+	var nav_bar = document.getElementById("nav");
+	var nav_height = $(nav_bar).css('height');
+
     var top_image = document.getElementById("top-img");
 	top_image.style.left = "0px";
-	top_image.style.top = "0px";
+	top_image.style.top = nav_height;
 
 	// correct the location of the article
 	var article = document.getElementById("article");
 	article.style.marginTop = "0px";
+
 }
 
 
 window.onscroll = function(event){
 	// fix the position of the top image
+	var nav_bar = document.getElementById("nav");
+	var nav_height = $(nav_bar).css('height');
+
 	var top_image = document.getElementById("top-img");
-	top_image.style.position = "fixed";
 	top_image.style.left = "0px";
-	top_image.style.top = "0px";
+	top_image.style.top = nav_height;
 
 	// correct the location of the article 
 	header_size = getHeaderSize();
 	var article = document.getElementById("article");
 	article.style.marginTop = header_size;
+	
 }
 
 
@@ -59,8 +65,8 @@ function onPageButtonClick(e){
 	var toUpdate = true;
 
 	//unhighlight the current page button div
-	var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
-	current_button_div.classList.remove("active");
+	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
+	// current_button_div.classList.remove("active");
 
 	// update the gloabl current essay num
 	if (element_id == "previous") {
@@ -124,6 +130,20 @@ function onPageButtonClick(e){
 
 // Initializes the page with the first essay
 function init(){
+	// fix top image below navigation bar
+	var nav_bar = document.getElementById("nav");
+	var nav_height = $(nav_bar).css('height');
+
+	var top_image = document.getElementById("top-img");
+	top_image.style.position = "fixed";
+	top_image.style.left = "0px";
+	top_image.style.top = nav_height;
+
+	// correct the location of the article 
+	header_size = getHeaderSize();
+	var article = document.getElementById("article");
+	article.style.marginTop = header_size;
+
 	// load first essay
 	var first_essay_doc = essay_dict["essay1"]["article_content"];
 	$("#content").load(first_essay_doc); 
@@ -135,6 +155,9 @@ function init(){
 	// highlight the current page selected... 
 	var first_essay_button_div = document.getElementById("essay1-button-div");
 	first_essay_button_div.className += " active";
+
+
+
 }
 
 init();
