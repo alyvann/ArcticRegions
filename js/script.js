@@ -1,4 +1,4 @@
-var essay_dict = {"essay1": {"top_image": "images/home_image.jpg", "article_content": "essay1.html"}, 
+var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "article_content": "essay1.html"}, 
 				"essay2": {"top_image": "images/TARI_1_desolation.jpeg", "article_content": "essay2.html"},
 				"essay3": {"top_image": "images/TARI_2.Julianeshaab.jpg", "article_content": "essay3.html"},
 				"essay4": {"top_image": "images/TARI_3.Kakortok.jpg", "article_content": "essay4.html"},
