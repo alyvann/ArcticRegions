@@ -9,6 +9,7 @@ html, body {
    height: 100%;
 }
 
+
 .top-img-div{
 	/*max-height: 50%;*/
 	height: 50%;
@@ -21,6 +22,7 @@ html, body {
 	z-index: 101;
 }
 
+
 .img-top {
 	/*left: 0;
 	top: 0;
@@ -28,6 +30,7 @@ html, body {
 	vertical-align: middle;*/
     max-height: 100%;
 }
+
 
 .flow-beneath{
 	z-index: -100;

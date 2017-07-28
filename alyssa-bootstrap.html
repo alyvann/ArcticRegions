@@ -20,27 +20,41 @@
 
   <body>
     <!-- NAVIGATION -->
-    <nav id="nav" class="navbar-fixed-top navbar-inverse">
-      <a class="navbar-brand">Tracing the Arctic Regions</a>
-    </nav> 
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
 
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="cesta-logos/CestaLogo_bw_inverse.svg" height="100%">
+          </a>
+          <a class="navbar-brand" href="#">Tracing the Arctic Region</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Project Description<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Page 1-1</a></li>
+                <li><a href="#">Page 1-2</a></li>
+                <li><a href="#">Page 1-3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Contributors</a></li> <!-- class="active" -->
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <!-- TOP IMAGE -->
     <div id="top-img" class="top-img-div">
       <a href="#img-modal" data-toggle="modal" onclick="openModal()">
-        <img id="curr-img" class="img-top" src="images/home_image.jpg" onclick="openModal()"/>
+        <img id="curr-img" class="img-top" src="images/home_image.jpg"/>
       </a>
-    </div>
-
-
-    <!-- ARTICLE -->
-    <div id="article" class="container-fluid"> 
-      <div class="row flow-beneath">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <p>Insert map here!</p>
-        </div>
-        <div id="content" class="col-xs-9 col-sm-9 col-md-9 col-lg-9"></div>
-      </div>
     </div>
 
 
@@ -52,6 +66,17 @@
                 <img class="" src="#"/>
             </div>
         </div>
+      </div>
+    </div>
+
+
+    <!-- ARTICLE -->
+    <div id="article" class="container-fluid"> 
+      <div class="row flow-beneath">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p>Insert map here!</p>
+        </div>
+        <div id="content" class="col-xs-9 col-sm-9 col-md-9 col-lg-9"></div>
       </div>
     </div>
 

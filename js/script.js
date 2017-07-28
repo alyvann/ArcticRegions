@@ -163,8 +163,6 @@ function init(){
 	var first_essay_button_div = document.getElementById("essay1-button-div");
 	first_essay_button_div.className += " active";
 
-
-
 }
 
 init();
