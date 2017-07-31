@@ -36,6 +36,7 @@ html, body {
 	position: relative;
 }
 
+
 .in-line-horizontal-image{
 	display: block;
 	margin: auto;
@@ -43,9 +44,14 @@ html, body {
 	padding-bottom: 10px;
 }
 
+
 .in-line-vertical-image{
-	
+	display: block;
+	margin: auto;
+	max-height: 50%;
+	padding-bottom: 10px;
 }
+
 
 .modal-dialog{
 	position: relative;
