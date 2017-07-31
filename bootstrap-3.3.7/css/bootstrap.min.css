@@ -9,10 +9,9 @@ html, body {
    height: 100%;
 }
 
-
 .top-img-div{
 	/*max-height: 50%;*/
-	height: 50%;
+	height: 40%;
 	width: 100%;
 	/*overflow: hidden;*/
 	display: flex;
@@ -37,6 +36,16 @@ html, body {
 	position: relative;
 }
 
+.in-line-horizontal-image{
+	display: block;
+	margin: auto;
+	width: 75%;
+	padding-bottom: 10px;
+}
+
+.in-line-vertical-image{
+	
+}
 
 .modal-dialog{
 	position: relative;
