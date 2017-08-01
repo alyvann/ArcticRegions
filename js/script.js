@@ -84,11 +84,10 @@ function updateSideImages(){
 	} else {
 		document.getElementById("right-image").src = "images/HomePage_ArcticRegionsCover.jpg";
 	}
-
 }
 
 
-function pageUpdate(element_id){
+function pageUpdates(element_id){
 	// updates the top image to the image corresponding with the correct page
 	var new_image_src = essay_dict[element_id]["top_image"];
 	document.getElementById("main-image").src = new_image_src;
@@ -126,54 +125,50 @@ function pageUpdate(element_id){
 }
 
 
-function onSideImageClick(e){
-	var image_id = e.target.id;
-	var element_id = "";
+function updateEssay(e){
+	var clicked_element_id = e.target.id;
+	var to_update = true;
+	var essay_id = "";
 
-	if (image_id == "left-image"){
-		if (curr_essay_num != 1) {
+	if (clicked_element_id == "left-image" || clicked_element_id == "previous"){
+		if (curr_essay_num == 1) {
+			to_update = false;
+		} else{
 			curr_essay_num -= 1;
-			element_id = "essay" + curr_essay_num;
+			essay_id = "essay" + curr_essay_num;
 		}
-	} else if (image_id == "right-image"){
-		if (curr_essay_num != 10){
+
+	} else if (clicked_element_id == "right-image" || clicked_element_id == "next"){
+		if (curr_essay_num == 10){
+			to_update = false;
+		} else{
 			curr_essay_num += 1;
-			element_id = "essay" + curr_essay_num;
+			essay_id = "essay" + curr_essay_num;
 		}
+	} else {
+		var essay_selected_num = parseInt(element_id.match(/\d+$/));
+		curr_essay_num = essay_selected_num;
+		essay_id = "essay" + curr_essay_num;
 	}
 
-	pageUpdate(element_id);
+	if (to_update){
+		pageUpdates(essay_id);
+	}
+}
+
+
+function onSideImageClick(e){
+	updateEssay(e);
 }
 
 
 // handles all page navigation
 function onPageButtonClick(e){
-	var element_id = e.target.id;
-
-	//unhighlight the current page button div
+	// // unhighlight the current page button div
 	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
 	// current_button_div.classList.remove("active");
 
-	// update the gloabl current essay num
-	if (element_id == "previous") {
-		if (curr_essay_num != 1) {
-			curr_essay_num -= 1;
-			element_id = "essay" + curr_essay_num;
-		}
-
-	} else if(element_id == "next") {
-		if (curr_essay_num != 10){
-			curr_essay_num += 1;
-			element_id = "essay" + curr_essay_num;
-		}
-
-	} else {
-		var essay_selected_num = parseInt(element_id.match(/\d+$/));
-		curr_essay_num = essay_selected_num;
-	}
-
-	// update the current page
-	pageUpdate(element_id);
+	updateEssay(e);
 }
 
 
@@ -205,7 +200,7 @@ function init(){
 	var first_essay_button_div = document.getElementById("essay1-button-div");
 	first_essay_button_div.className += " active";
 
-
+	// insert side images
 	var left_image_src = "images/HomePage_ArcticRegionsCover.jpg"
 	var right_image_src = essay_dict["essay2"]["top_image"];
 	document.getElementById("right-image").src = right_image_src;
