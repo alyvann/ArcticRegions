@@ -66,6 +66,28 @@ function openModal(){
 }
 
 
+function updateSideImages(){
+	if(curr_essay_num > 1){ // update previous image
+		var prev_essay = "essay" + (curr_essay_num - 1).toString();
+		var prev_essay_image = essay_dict[prev_essay]["top_image"];
+		document.getElementById("left-image").src = prev_essay_image;
+
+	} else {
+		document.getElementById("left-image").src = "images/HomePage_ArcticRegionsCover.jpg";
+	}
+
+	if(curr_essay_num < 10){ // update next image
+		var next_essay = "essay" + (curr_essay_num + 1).toString();
+		var next_essay_image = essay_dict[next_essay]["top_image"];
+		document.getElementById("right-image").src = next_essay_image;
+
+	} else {
+		document.getElementById("right-image").src = "images/HomePage_ArcticRegionsCover.jpg";
+	}
+
+}
+
+
 // handles all page navigation
 function onPageButtonClick(e){
 	var element_id = e.target.id;
@@ -109,6 +131,8 @@ function onPageButtonClick(e){
 
 		// scroll to top of article
 		window.scrollTo(0,0);
+
+		updateSideImages();
 	}
 
 	// enable or disable the previous and next buttons
@@ -162,6 +186,12 @@ function init(){
 	// highlight the current page selected... 
 	var first_essay_button_div = document.getElementById("essay1-button-div");
 	first_essay_button_div.className += " active";
+
+
+	var left_image_src = "images/HomePage_ArcticRegionsCover.jpg"
+	var right_image_src = essay_dict["essay2"]["top_image"];
+	document.getElementById("right-image").src = right_image_src;
+	document.getElementById("left-image").src = left_image_src;
 
 }
 
