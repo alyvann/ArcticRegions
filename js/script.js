@@ -18,7 +18,7 @@ function getHeaderSize(){
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
 
-	var top_image = document.getElementById("top-img");
+	var top_image = document.getElementById("top-images");
 	var top_image_height = $(top_image).css('height');
 	
 	var total_height = parseInt(nav_height) + parseInt(top_image_height);
@@ -31,7 +31,7 @@ window.onresize = function(event) {
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
 
-    var top_image = document.getElementById("top-img");
+    var top_image = document.getElementById("top-images");
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;
 
@@ -47,7 +47,7 @@ window.onscroll = function(event){
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
 
-	var top_image = document.getElementById("top-img");
+	var top_image = document.getElementById("top-images");
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;
 
@@ -101,7 +101,7 @@ function onPageButtonClick(e){
 	if (toUpdate){
 		// updates the top image to the image corresponding with the correct page
 		var new_image_src = essay_dict[element_id]["top_image"];
-		document.getElementById("curr-img").src = new_image_src;
+		document.getElementById("main-image").src = new_image_src;
 
 		// load new article
 		var new_content_doc = essay_dict[element_id]["article_content"];
@@ -141,7 +141,7 @@ function init(){
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
 
-	var top_image = document.getElementById("top-img");
+	var top_image = document.getElementById("top-images");
 	top_image.style.position = "fixed";
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;

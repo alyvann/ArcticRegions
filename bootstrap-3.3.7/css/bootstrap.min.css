@@ -9,7 +9,7 @@ html, body {
    height: 100%;
 }
 
-.top-img-div{
+#top-images{
 	/*max-height: 50%;*/
 	height: 40%;
 	width: 100%;
@@ -22,12 +22,20 @@ html, body {
 }
 
 
-.img-top {
+#main-image {
 	/*left: 0;
 	top: 0;
 	width: 100%;
 	vertical-align: middle;*/
-    height: 95%;
+    max-height: 95%;
+}
+
+
+.side-image{
+	float: left;
+	max-height: 45%;
+	opacity: 0.3;
+	margin: 10px;
 }
 
 
