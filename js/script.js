@@ -146,7 +146,7 @@ function updateEssay(e){
 			essay_id = "essay" + curr_essay_num;
 		}
 	} else {
-		var essay_selected_num = parseInt(element_id.match(/\d+$/));
+		var essay_selected_num = parseInt(clicked_element_id.match(/\d+$/));
 		curr_essay_num = essay_selected_num;
 		essay_id = "essay" + curr_essay_num;
 	}
@@ -155,7 +155,6 @@ function updateEssay(e){
 		pageUpdates(essay_id);
 	}
 }
-
 
 function onSideImageClick(e){
 	updateEssay(e);
