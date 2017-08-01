@@ -88,52 +88,19 @@ function updateSideImages(){
 }
 
 
-// handles all page navigation
-function onPageButtonClick(e){
-	var element_id = e.target.id;
-	var toUpdate = true;
+function pageUpdate(element_id){
+	// updates the top image to the image corresponding with the correct page
+	var new_image_src = essay_dict[element_id]["top_image"];
+	document.getElementById("main-image").src = new_image_src;
 
-	//unhighlight the current page button div
-	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
-	// current_button_div.classList.remove("active");
+	// load new article
+	var new_content_doc = essay_dict[element_id]["article_content"];
+	$("#content").load(new_content_doc); 
 
-	// update the gloabl current essay num
-	if (element_id == "previous") {
-		if (curr_essay_num == 1) {
-			toUpdate = false;
-		} else {
-			curr_essay_num -= 1;
-			element_id = "essay" + curr_essay_num;
-		}
+	// scroll to top of article
+	window.scrollTo(0,0);
 
-	} else if(element_id == "next") {
-		if (curr_essay_num == 10){
-			toUpdate = false;
-		} else {
-			curr_essay_num += 1;
-			element_id = "essay" + curr_essay_num;
-		}
-
-	} else {
-		var essay_selected_num = parseInt(element_id.match(/\d+$/));
-		curr_essay_num = essay_selected_num;
-	}
-
-	// update the current page if necessary
-	if (toUpdate){
-		// updates the top image to the image corresponding with the correct page
-		var new_image_src = essay_dict[element_id]["top_image"];
-		document.getElementById("main-image").src = new_image_src;
-
-		// load new article
-		var new_content_doc = essay_dict[element_id]["article_content"];
-		$("#content").load(new_content_doc); 
-
-		// scroll to top of article
-		window.scrollTo(0,0);
-
-		updateSideImages();
-	}
+	updateSideImages();
 
 	// enable or disable the previous and next buttons
 	var prev_button = document.getElementById("previous-button-div");
@@ -156,6 +123,57 @@ function onPageButtonClick(e){
 		var updated_button_div = document.getElementById(element_id + "-button-div");
 		updated_button_div.className += " active";
 	}
+}
+
+
+function onSideImageClick(e){
+	var image_id = e.target.id;
+	var element_id = "";
+
+	if (image_id == "left-image"){
+		if (curr_essay_num != 1) {
+			curr_essay_num -= 1;
+			element_id = "essay" + curr_essay_num;
+		}
+	} else if (image_id == "right-image"){
+		if (curr_essay_num != 10){
+			curr_essay_num += 1;
+			element_id = "essay" + curr_essay_num;
+		}
+	}
+
+	pageUpdate(element_id);
+}
+
+
+// handles all page navigation
+function onPageButtonClick(e){
+	var element_id = e.target.id;
+
+	//unhighlight the current page button div
+	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
+	// current_button_div.classList.remove("active");
+
+	// update the gloabl current essay num
+	if (element_id == "previous") {
+		if (curr_essay_num != 1) {
+			curr_essay_num -= 1;
+			element_id = "essay" + curr_essay_num;
+		}
+
+	} else if(element_id == "next") {
+		if (curr_essay_num != 10){
+			curr_essay_num += 1;
+			element_id = "essay" + curr_essay_num;
+		}
+
+	} else {
+		var essay_selected_num = parseInt(element_id.match(/\d+$/));
+		curr_essay_num = essay_selected_num;
+	}
+
+	// update the current page
+	pageUpdate(element_id);
 }
 
 

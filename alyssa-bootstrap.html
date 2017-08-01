@@ -56,14 +56,16 @@
 
     <!-- TOP IMAGES -->
     <div id="top-images">  
-        <img id="left-image" class="side-image" src=""/>
+
+        <img id="left-image" class="side-image" onclick="onSideImageClick(event)" src=""/>
 
         <a href="#img-modal" data-toggle="modal" onclick="openModal()">
           <img id="main-image" src="images/HistoryEssay_ColtonMap.jpg"/>
         </a>
 
-        <img id="right-image" class="side-image" src=""/>
+        <img id="right-image" class="side-image" onclick="onSideImageClick(event)" src=""/>
     </div> 
+
 
     <!-- MODAL -->
     <div id="img-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -76,6 +78,7 @@
       </div>
     </div>
 
+
     <!-- ARTICLE -->
     <div id="article" class="container-fluid"> 
       <div class="row flow-beneath">
@@ -85,6 +88,7 @@
         <div id="content" class="col-xs-9 col-sm-9 col-md-9 col-lg-9"></div>
       </div>
     </div>
+
 
     <!-- FOOTER -->
     <footer class="footer text-center">
