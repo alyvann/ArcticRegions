@@ -1,3 +1,7 @@
+/*********************
+	Global Variables
+**********************/
+var curr_essay_num = 1;
 var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "article_content": "essays/essay1.html"}, 
 				"essay2": {"top_image": "images/TARI_1.CapeDesolation.jpg", "article_content": "essays/essay2.html"},
 				"essay3": {"top_image": "images/TARI_2.Julianeshaab.jpg", "article_content": "essays/essay3.html"},
@@ -10,23 +14,11 @@ var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "
 				"essay10": {"top_image": "images/TARI_9.homewardbound.jpg", "article_content": "essays/essay10.html"}
 				};
 
-var curr_essay_num = 1;
 
-
-// Get the combined size of the navigation bar and top image
-function getHeaderSize(){
-	var nav_bar = document.getElementById("nav");
-	var nav_height = $(nav_bar).css('height');
-
-	var top_image = document.getElementById("top-images");
-	var top_image_height = $(top_image).css('height');
-	
-	var total_height = parseInt(nav_height) + parseInt(top_image_height);
-	return total_height.toString() + "px";
-}
-
-
-window.onresize = function(event) {
+/*********************
+	Listeners
+**********************/
+window.onresize = function() {
 	// fix the position of the top image
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
@@ -47,11 +39,9 @@ window.onresize = function(event) {
 	article.style.marginLeft = (parseInt($(map_container).css('width')) * 2.0).toString() + "px"; // FIX THIS !!!
 
 	// re-scale/re-draw the map // DO THIS!!! 
-
 }
 
-
-window.onscroll = function(event){
+window.onscroll = function(){
 	// fix the position of the top image
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
@@ -71,6 +61,10 @@ window.onscroll = function(event){
 	article.style.marginTop = header_size;
 }
 
+// Handles all page navigation updates
+function onPageButtonClick(e){
+	updateEssay(e);
+}
 
 function openModal(){
 	var curr_essay = "essay" + curr_essay_num.toString();
@@ -79,7 +73,36 @@ function openModal(){
 }
 
 
-function updateSideImages(){
+/*********************
+	Other Functions
+**********************/
+
+// Get the combined size of the navigation bar and top image container
+function getHeaderSize(){
+	var nav_bar = document.getElementById("nav");
+	var nav_height = $(nav_bar).css('height');
+
+	var top_image = document.getElementById("top-images");
+	var top_image_height = $(top_image).css('height');
+	
+	var total_height = parseInt(nav_height) + parseInt(top_image_height);
+	return total_height.toString() + "px";
+}
+
+function getMapHeight(){
+	var header_size = parseInt(getHeaderSize());
+	return $(window).height() - header_size;
+}
+
+function getCurrEssayId(){
+	return "essay" + curr_essay_num.toString();
+}
+
+function updateImages(){
+	// updates the top image to the image corresponding with the correct page
+	var new_image_src = essay_dict[getCurrEssayId()]["top_image"];
+	document.getElementById("main-image").src = new_image_src;
+
 	if(curr_essay_num > 1){ // update previous image
 		var prev_essay = "essay" + (curr_essay_num - 1).toString();
 		var prev_essay_image = essay_dict[prev_essay]["top_image"];
@@ -99,91 +122,69 @@ function updateSideImages(){
 	}
 }
 
-
-function pageUpdates(element_id){
-	// updates the top image to the image corresponding with the correct page
-	var new_image_src = essay_dict[element_id]["top_image"];
-	document.getElementById("main-image").src = new_image_src;
-
+function updateArticle(){
 	// load new article
-	var new_content_doc = essay_dict[element_id]["article_content"];
+	var new_content_doc = essay_dict[getCurrEssayId()]["article_content"];
 	$("#content").load(new_content_doc); 
 
 	// scroll to top of article
 	window.scrollTo(0,0);
-
-	updateSideImages();
-
-	// enable or disable the previous and next buttons
-	var prev_button = document.getElementById("previous-button-div");
-	var next_button = document.getElementById("next-button-div");
-
-	if (curr_essay_num == 1) { 
-		prev_button.className += " disabled";
-	} else {
-		prev_button.classList.remove("disabled");
-	}
-
-	if (curr_essay_num == 10) {
-		next_button.className += " disabled";
-	} else {
-		next_button.classList.remove("disabled");
-	}
-
-	// highlight the current page button div
-	if (element_id != "previous" && element_id != "next"){
-		var updated_button_div = document.getElementById(element_id + "-button-div");
-		updated_button_div.className += " active";
-	}
 }
 
+function updatePageNavigation(){
+		// highlight the current page button div
+		var updated_button_div = document.getElementById(getCurrEssayId() + "-button-div");
+		updated_button_div.className += " active";
+
+		// enable or disable the previous and next buttons
+		var prev_button = document.getElementById("previous-button-div");
+		var next_button = document.getElementById("next-button-div");
+
+		if (curr_essay_num == 1) { 
+			prev_button.className += " disabled";
+		} else {
+			prev_button.classList.remove("disabled");
+		}
+
+		if (curr_essay_num == 10) {
+			next_button.className += " disabled";
+		} else {
+			next_button.classList.remove("disabled");
+		}
+}
 
 function updateEssay(e){
+	// // unhighlight the current page button div
+	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
+	// current_button_div.classList.remove("active");
+
 	var clicked_element_id = e.target.id;
 	var to_update = true;
-	var essay_id = "";
 
+	// update the curr_essay_num global variable
 	if (clicked_element_id == "left-image" || clicked_element_id == "previous"){
 		if (curr_essay_num == 1) {
 			to_update = false;
 		} else{
 			curr_essay_num -= 1;
-			essay_id = "essay" + curr_essay_num;
 		}
-
 	} else if (clicked_element_id == "right-image" || clicked_element_id == "next"){
 		if (curr_essay_num == 10){
 			to_update = false;
 		} else{
 			curr_essay_num += 1;
-			essay_id = "essay" + curr_essay_num;
 		}
 	} else {
 		var essay_selected_num = parseInt(clicked_element_id.match(/\d+$/));
 		curr_essay_num = essay_selected_num;
-		essay_id = "essay" + curr_essay_num;
 	}
 
 	if (to_update){
-		pageUpdates(essay_id);
+		updateImages();
+		updateArticle();
+		updatePageNavigation();
 	}
 }
-
-
-// handles all page navigation
-function onPageButtonClick(e){
-	// // unhighlight the current page button div
-	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
-	// current_button_div.classList.remove("active");
-
-	updateEssay(e);
-}
-
-function getMapHeight(){
-	var header_size = parseInt(getHeaderSize());
-	return $(window).height() - header_size;
-}
-
 
 function map(){
 	queue()
@@ -244,7 +245,9 @@ function map(){
 }
 
 
-// Initializes the page with the first essay
+/*********************
+	Initialization
+**********************/
 function init(){
 	// fix top image below navigation bar
 	var nav_bar = document.getElementById("nav");
