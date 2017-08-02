@@ -36,7 +36,28 @@ html, body {
 	max-height: 45%;
 	opacity: 0.4;
 	margin: 50px;
+	z-index: 102;
 }
+
+.nav-images{
+	/*position: relative;*/
+	/*display: flex;*/
+	/*align-items: center;*/
+	/*justify-content: center;*/
+}
+
+.nav-images img{
+/*	position: absolute;
+*/
+}
+
+.image-arrows{
+	z-index: 103;
+	max-height: 35%;
+}
+
+
+
 
 
 .flow-beneath{

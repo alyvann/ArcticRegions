@@ -56,12 +56,20 @@
 
 
     <!-- TOP IMAGES -->
-    <div id="top-images">  
-        <img id="left-image" class="side-image" onclick="onSideImageClick(event)" src=""/>
+    <div id="top-images">
+        <div class="nav-images">
+          <img id="left-image" class="side-image" onclick="onPageButtonClick(event)" src=""/>
+          <!-- <img class="image-arrows" src="assets/arrow-carousel-prev.png"/> -->
+        </div>
+
         <a href="#img-modal" data-toggle="modal" onclick="openModal()">
           <img id="main-image" src="images/HistoryEssay_ColtonMap.jpg"/>
         </a>
-        <img id="right-image" class="side-image" onclick="onSideImageClick(event)" src=""/>
+
+        <div class="nav-images">
+          <img id="right-image" class=" side-image" onclick="onPageButtonClick(event)" src=""/>
+          <!-- <img class="image-arrows" src="assets/arrow-carousel-next.png"/> -->
+        </div>
     </div> 
 
 

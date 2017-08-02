@@ -156,10 +156,6 @@ function updateEssay(e){
 	}
 }
 
-function onSideImageClick(e){
-	updateEssay(e);
-}
-
 
 // handles all page navigation
 function onPageButtonClick(e){
