@@ -35,9 +35,18 @@ window.onresize = function(event) {
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;
 
+	// keep map floating at the top
+	var header_size = getHeaderSize();
+	var map_container = document.getElementById("map-container");
+	map_container.style.left = "0px";
+	map_container.style.top = header_size;
+
 	// correct the location of the article
 	var article = document.getElementById("article");
 	article.style.marginTop = "0px";
+	article.style.marginLeft = (parseInt($(map_container).css('width')) * 2.0).toString() + "px"; // FIX THIS !!!
+
+	// re-scale/re-draw the map // DO THIS!!! 
 
 }
 
@@ -51,11 +60,15 @@ window.onscroll = function(event){
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;
 
+	// keep map floating at the top
+	var header_size = getHeaderSize();
+	var map_container = document.getElementById("map-container");
+	map_container.style.left = "0px";
+	map_container.style.top = header_size;
+
 	// correct the location of the article 
-	header_size = getHeaderSize();
 	var article = document.getElementById("article");
 	article.style.marginTop = header_size;
-
 }
 
 
@@ -166,6 +179,70 @@ function onPageButtonClick(e){
 	updateEssay(e);
 }
 
+function getMapHeight(){
+	var header_size = parseInt(getHeaderSize());
+	return $(window).height() - header_size;
+}
+
+
+function map(){
+	queue()
+	  .defer(d3.json, "world-50m.json")
+	  .defer(d3.json, "coast.topojson")
+	  .await(drawMap);
+
+	// Defaults
+	var map_div = document.getElementById("map")
+	var width = parseInt($(window).width()) * 0.45;
+	var height = getMapHeight();
+
+	var svg = d3.select('#map').append('svg')
+	  .attr('width', width)
+	  .attr('height', height)
+	  .attr('id', 'map-svg');
+
+	// Projection information
+	var projection = d3.geo.stereographic()
+	  .scale(2500)
+	  .translate([width / 2, height / 2])
+	  .rotate([50, -70])
+	  .clipAngle(180 - 1e-4)
+	  .clipExtent([[0, 0], [width, height]])
+	  .precision(.1);
+
+	var path = d3.geo.path()
+	    .projection(projection);
+
+	function drawMap(error, world, coastline) {
+		if (error) throw error;
+
+		// Draw world countries and borders
+		// svg.insert("path", ".graticule")
+		// 	.datum(topojson.feature(world, world.objects.land))
+		// 	.attr("class", "land")
+		// 	.attr("d", path);
+
+		// svg.insert("path", ".graticule")
+		// 	.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+		// 	.attr("class", "boundary")
+		// 	.attr("d", path);
+
+		// Select our coastline objects
+		var route = topojson.feature(coastline, coastline.objects['coast']);
+
+		// Make a group for features
+		var greenland_coast = svg.append('g');
+
+		// Add coastline data
+		greenland_coast.selectAll('.coastline')
+						.data(route.features)
+						.enter().append('path')
+						.attr('class', 'coastline')
+						.attr('d', path);
+
+	}
+}
+
 
 // Initializes the page with the first essay
 function init(){
@@ -178,10 +255,18 @@ function init(){
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;
 
+	// fix position of map
+	var map_container = document.getElementById("map-container");
+	map_container.style.position = "fixed";
+	map_container.style.left = "0px";
+	map_container.style.top = getHeaderSize();
+
+
 	// correct the location of the article 
 	header_size = getHeaderSize();
 	var article = document.getElementById("article");
 	article.style.marginTop = header_size;
+	article.style.marginLeft = (parseInt($(map_container).css('width')) * 2.0).toString() + "px"; // FIX THIS !!!
 
 	// load first essay
 	var first_essay_doc = essay_dict["essay1"]["article_content"];
@@ -201,7 +286,9 @@ function init(){
 	document.getElementById("right-image").src = right_image_src;
 	document.getElementById("left-image").src = left_image_src;
 
+	map();
 }
+
 
 init();
 

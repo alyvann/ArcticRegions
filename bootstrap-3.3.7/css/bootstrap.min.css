@@ -9,6 +9,24 @@ html, body {
    height: 100%;
 }
 
+#map{
+}
+
+#content{
+	padding-left: 2px;
+}
+
+.coastline {
+	fill: none;
+	/*stroke: orange;*/
+	stroke: #0f9e84;
+	stroke-width: 1px;
+}
+
+.land {
+    fill: #222;
+}
+
 #top-images{
 	/*max-height: 50%;*/
 	height: 40%;
@@ -21,7 +39,6 @@ html, body {
 	z-index: 101;
 }
 
-
 #main-image {
 	/*left: 0;
 	top: 0;
@@ -30,25 +47,25 @@ html, body {
     max-height: 95%;
 }
 
-
 .side-image{
 	float: left;
-	max-height: 45%;
+	max-height: 50%;
 	opacity: 0.4;
 	margin: 50px;
 	z-index: 102;
 }
 
 .nav-images{
-	/*position: relative;*/
+	position: relative;
 	/*display: flex;*/
 	/*align-items: center;*/
 	/*justify-content: center;*/
 }
 
 .nav-images img{
-/*	position: absolute;
-*/
+	/*position: absolute;
+	top: 0px;
+	left: 0px;*/
 }
 
 .image-arrows{
@@ -57,7 +74,9 @@ html, body {
 }
 
 
-
+#article{
+	max-width: 40%;
+}
 
 
 .flow-beneath{

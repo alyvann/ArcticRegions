@@ -10,10 +10,6 @@
     <!-- Bootstrap -->
     <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- 
-    <link href="coverflow/coverflow.css" rel="stylesheet">
- -->
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,7 +19,7 @@
   </head>
 
   <body>
-    <!-- NAVIGATION -->
+    <!-- navigation -->
     <nav id="nav" class="navbar navbar-fixed-top navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -55,7 +51,7 @@
     </nav>
 
 
-    <!-- TOP IMAGES -->
+    <!-- top images -->
     <div id="top-images">
         <div class="nav-images">
           <img id="left-image" class="side-image" onclick="onPageButtonClick(event)" src=""/>
@@ -73,7 +69,7 @@
     </div> 
 
 
-    <!-- MODAL -->
+    <!-- modal -->
     <div id="img-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -85,18 +81,20 @@
     </div>
 
 
-    <!-- ARTICLE -->
-    <div id="article" class="container-fluid"> 
-      <div class="row flow-beneath">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <p>Insert map here!</p>
+    <!-- article -->
+    <div  class="container-fluid"> 
+      <div class="row">
+        <div id="map-container" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <div id="map"></div>
         </div>
-        <div id="content" class="col-xs-9 col-sm-9 col-md-9 col-lg-9"></div>
+        <div id="article" class="col-xs-9 col-sm-9 col-md-9 col-lg-9 flow-beneath">
+          <div id="content"></div>
+        </div>
       </div>
     </div>
 
 
-    <!-- FOOTER -->
+    <!-- footer -->
     <footer class="footer text-center">
       <ul class="pagination">
         <li id="previous-button-div" class="page-item">
@@ -143,8 +141,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- d3 -->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
     
-    <!-- My script -->
+    <!-- custom script -->
     <script src="js/script.js"></script>
 
   </body>
