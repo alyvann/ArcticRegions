@@ -187,8 +187,8 @@ function getMapHeight(){
 
 function map(){
 	queue()
-	  .defer(d3.json, "world-50m.json")
-	  .defer(d3.json, "coast.topojson")
+	  .defer(d3.json, "json/world-50m.json")
+	  .defer(d3.json, "json/coast.topojson")
 	  .await(drawMap);
 
 	// Defaults
