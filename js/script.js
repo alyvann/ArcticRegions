@@ -231,6 +231,9 @@ function map(){
 		// Select our coastline objects
 		var route = topojson.feature(coastline, coastline.objects['coast']);
 
+		console.log(Object.keys(route.features));
+		console.log(route.features["0"]);
+
 		// Make a group for features
 		var greenland_coast = svg.append('g');
 
