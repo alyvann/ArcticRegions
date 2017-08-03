@@ -24,7 +24,8 @@ html, body {
 }
 
 .land {
-    fill: #222;
+    /*fill: #222;*/
+    fill: #d0d4db;
 }
 
 #top-images{
