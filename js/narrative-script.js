@@ -158,9 +158,9 @@ function updatePageNavigation(){
 }
 
 function updateEssay(e){
-	// // unhighlight the current page button div
-	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
-	// current_button_div.classList.remove("active");
+	// unhighlight the current page button div
+	var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
+	current_button_div.classList.remove("active");
 
 	var clicked_element_id = e.target.id;
 	var to_update = true;
