@@ -231,18 +231,24 @@ function map(width, height, essay_num){
 		// Select our coastline objects
 		var route = topojson.feature(coastline, coastline.objects['coast']);
 
-		// console.log(Object.keys(route.features));
-		// console.log(route.features["0"]);
-
 		// Make a group for features
 		var greenland_coast = svg.append('g');
 
 		// Add coastline data
-		greenland_coast.selectAll('.coastline')
+		var p = greenland_coast.selectAll('.coastline')
 						.data(route.features)
 						.enter().append('path')
 						.attr('class', 'coastline')
 						.attr('d', path);
+
+		var totalLength = p.node().getTotalLength(); //d3.select('path')
+
+	    p.attr("stroke-dasharray", totalLength + " " + totalLength)
+	      .attr("stroke-dashoffset", totalLength)
+	      .transition()
+	        .duration(2000)
+	        .ease("linear")
+	        .attr("stroke-dashoffset", 0);
 
 	}
 }
