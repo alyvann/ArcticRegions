@@ -94,6 +94,10 @@ function getMapHeight(){
 	return $(window).height() - header_size;
 }
 
+function getMapWidth(){
+	return parseInt($(window).width()) * 0.45;
+}
+
 function getCurrEssayId(){
 	return "essay" + curr_essay_num.toString();
 }
@@ -154,9 +158,9 @@ function updatePageNavigation(){
 }
 
 function updateEssay(e){
-	// // unhighlight the current page button div
-	// var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
-	// current_button_div.classList.remove("active");
+	// unhighlight the current page button div
+	var current_button_div = document.getElementById("essay" + curr_essay_num.toString() + "-button-div");
+	current_button_div.classList.remove("active");
 
 	var clicked_element_id = e.target.id;
 	var to_update = true;
@@ -183,24 +187,17 @@ function updateEssay(e){
 		updateImages();
 		updateArticle();
 		updatePageNavigation();
+		map(getMapWidth(), getMapHeight(), curr_essay_num);
 	}
 }
 
-function map(){
+function map(width, height, essay_num){
 	queue()
 	  .defer(d3.json, "json/world-50m.json")
 	  .defer(d3.json, "json/coast.topojson")
 	  .await(drawMap);
 
-	// Defaults
-	var map_div = document.getElementById("map")
-	var width = parseInt($(window).width()) * 0.45;
-	var height = getMapHeight();
-
-	var svg = d3.select('#map').append('svg')
-	  .attr('width', width)
-	  .attr('height', height)
-	  .attr('id', 'map-svg');
+	var svg = d3.select('#map-svg');
 
 	// Projection information
 	var projection = d3.geo.stereographic()
@@ -218,31 +215,40 @@ function map(){
 		if (error) throw error;
 
 		// Draw world countries and borders
-		// svg.insert("path", ".graticule")
-		// 	.datum(topojson.feature(world, world.objects.land))
-		// 	.attr("class", "land")
-		// 	.attr("d", path);
+		svg.insert("path", ".graticule")
+			.datum(topojson.feature(world, world.objects.land))
+			.attr("class", "land")
+			.attr("d", path);
 
-		// svg.insert("path", ".graticule")
-		// 	.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-		// 	.attr("class", "boundary")
-		// 	.attr("d", path);
+		svg.insert("path", ".graticule")
+			.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+			.attr("class", "boundary")
+			.attr("d", path);
+
+		// select part of the coast to be drawn (corresponding to essay)
+		coastline.objects.coast.geometries[0]["arcs"] = [[essay_num-1]];
 
 		// Select our coastline objects
 		var route = topojson.feature(coastline, coastline.objects['coast']);
-
-		console.log(Object.keys(route.features));
-		console.log(route.features["0"]);
 
 		// Make a group for features
 		var greenland_coast = svg.append('g');
 
 		// Add coastline data
-		greenland_coast.selectAll('.coastline')
+		var p = greenland_coast.selectAll('.coastline')
 						.data(route.features)
 						.enter().append('path')
 						.attr('class', 'coastline')
 						.attr('d', path);
+
+		var totalLength = p.node().getTotalLength(); //d3.select('path')
+
+	    p.attr("stroke-dasharray", totalLength + " " + totalLength)
+	      .attr("stroke-dashoffset", totalLength)
+	      .transition()
+	        .duration(2000)
+	        .ease("linear")
+	        .attr("stroke-dashoffset", 0);
 
 	}
 }
@@ -292,7 +298,17 @@ function init(){
 	document.getElementById("right-image").src = right_image_src;
 	document.getElementById("left-image").src = left_image_src;
 
-	map();
+
+	// Create map svg
+	var width = getMapWidth();
+	var height = getMapHeight();
+
+	var svg = d3.select('#map').append('svg')
+	  .attr('width', width)
+	  .attr('height', height)
+	  .attr('id', 'map-svg');
+
+	map(width, height, 1);
 }
 
 
