@@ -111,6 +111,25 @@ p.introduction:first-letter {
  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 /*<!-- Beginning of non title -->*/
+.contributors{
+  width: 60%;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+.contributors img{
+	float: left;
+	width: 150px;
+	margin-left: auto;
+}
+.contributors p{
+	margin-left: 150px;
+}
+.contributors h1{
+	font-size: 45px;
+}
+.contributors h4{
+	color: grey;
+}
 #map{
 }
 
