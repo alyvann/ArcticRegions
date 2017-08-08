@@ -142,11 +142,15 @@ p.introduction:first-letter {
 	z-index: 101;
 }
 
+/* contains the main-image */
+#modal-box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #main-image {
-	/*left: 0;
-	top: 0;
-	width: 100%;
-	vertical-align: middle;*/
     max-height: 95%;
 }
 
@@ -159,13 +163,15 @@ p.introduction:first-letter {
 }
 
 .nav-images{
+    height: 100%;
 	position: relative;
-	/*display: flex;*/
-	/*align-items: center;*/
-	/*justify-content: center;*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .nav-images img{
+    max-height: 50%;
 	/*position: absolute;
 	top: 0px;
 	left: 0px;*/
