@@ -1,3 +1,4 @@
+
 /*********************
 	Global Variables
 **********************/
@@ -18,6 +19,7 @@ var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "
 /*********************
 	Listeners
 **********************/
+
 window.onresize = function() {
 	// fix the position of the top image
 	var nav_bar = document.getElementById("nav");
@@ -76,6 +78,8 @@ function openModal(){
 /*********************
 	Other Functions
 **********************/
+
+//attempting to put map in
 
 // Get the combined size of the navigation bar and top image container
 function getHeaderSize(){
@@ -258,6 +262,7 @@ function map(width, height, essay_num){
 	Initialization
 **********************/
 function init(){
+
 	// fix top image below navigation bar
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
@@ -310,7 +315,6 @@ function init(){
 
 	map(width, height, 1);
 }
-
 
 init();
 
