@@ -259,6 +259,10 @@ p.introduction:first-letter {
     fill: #d0d4db;
 }
 
+#nav {
+    font-family: 'Crimson Text', serif;
+}
+
 #nav a{
     color: black;
 }
