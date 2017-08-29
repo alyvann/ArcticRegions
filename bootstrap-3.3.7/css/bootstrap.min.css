@@ -99,7 +99,8 @@ body {
 */
 
 .container {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   position: absolute;
   top: 0;
   left: 0;
