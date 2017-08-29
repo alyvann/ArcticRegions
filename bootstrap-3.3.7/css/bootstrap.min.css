@@ -97,6 +97,7 @@ body {
   margin: 20px 0 0;
 }
 */
+
 .container {
   width: auto;
   max-width: 100%;
@@ -190,9 +191,9 @@ p.introduction:first-letter {
 .contributors p{
 	margin-left: 160px;
 }
-/*Test*/
 
-#map {
+/*Test*/
+#map1 {
     width: 40%;
     height:40%;
   	float: left;
@@ -240,9 +241,12 @@ p.introduction:first-letter {
 	margin-right: 20%;
 }
 */
+
+
 /*Narrative*/
 #content{
-	padding-left: 2px;
+	margin-left: 5%;
+    width: 95%;
 }
 
 .coastline {
@@ -253,61 +257,81 @@ p.introduction:first-letter {
 }
 
 .land {
-    /*fill: #222;*/
     fill: #d0d4db;
 }
 
+#map {
+    position: fixed;
+}
+
+#map-svg {
+    position: fixed;
+    left: 0px;
+
+}
+
+#nav {
+    font-family: 'Crimson Text', serif;
+}
+
+#nav a{
+    color: black;
+}
+
+.navbar-book{
+    background-color: #e0d7b8;
+}
+
 #top-images{
-	/*max-height: 50%;*/
-	height: 40%;
+	height: 15%;
 	width: 100%;
-	/*overflow: hidden;*/
+    position: fixed;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: #222;
-	z-index: 101;
+	/*z-index: 101;*/
 }
 
-/* contains the main-image */
-#modal-box {
+.thumbnail-img-div{
     height: 100%;
+    overflow-x: hidden;
+    max-width: 9%;
+    margin: 0.5%;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#main-image {
+.thumbnail-img{
     max-height: 95%;
 }
 
-.side-image{
-	float: left;
-	max-height: 50%;
-	opacity: 0.4;
-	margin: 50px;
-	z-index: 102;
+
+#main-image-div {
+    width: 60%;
+    position: fixed;
+    background-color: white;
+    display: block;
+    /*vertical-align: bottom;*/
 }
 
-.nav-images{
-    height: 100%;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+#main-image-div:before {
+    content: '';
+    display: inline-block;
+    vertical-align: bottom;
+    width: 100%;
 }
 
-.nav-images img{
-    max-height: 50%;
-	/*position: absolute;
-	top: 0px;
-	left: 0px;*/
+#main-image {
+    display: inline-block;
+    vertical-align: bottom;
+    max-width: 80%;
+    /*padding-right: 20%;*/
 }
 
-.image-arrows{
-	z-index: 103;
-	max-height: 35%;
-}
+
 
 
 #article{
@@ -348,6 +372,15 @@ p.introduction:first-letter {
 	margin: auto;
 	max-height: 50%;
 	padding-bottom: 10px;
+}
+
+
+/* contains the main-image */
+#modal-box {
+    /*height: 100%;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
 }
 
 
