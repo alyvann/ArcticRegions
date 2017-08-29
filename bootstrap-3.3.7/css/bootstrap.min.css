@@ -256,21 +256,15 @@ p {
     font-size: 150%;
 }
 
-
-#content{
-    width: 50%;
-    /*position: fixed;*/
-}
-
 .coastline {
 	fill: none;
-	/*stroke: orange;*/
-	stroke: #0f9e84;
-	stroke-width: 1px;
+	/*stroke: #0f9e84;*/
+    stroke: #6badff;
+	stroke-width: 2px;
 }
 
 .land {
-    fill: #d0d4db;
+    fill: #efeded;
 }
 
 #map {
@@ -342,21 +336,17 @@ p {
     display: inline-block;
     vertical-align: bottom;
     max-height: 95%;
+    max-width: 50%;
 }
 
-
-
-
-#article{
-	max-width: 40%;
+#content{
+    width: 50%;
 }
-
 
 .flow-beneath{
 	z-index: -100;
 	position: relative;
 }
-
 
 .side-by-side{
 	text-align:center;

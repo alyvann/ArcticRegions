@@ -1,9 +1,11 @@
+//BUG: map needs to be resized when new essay clicked...
+
 
 /*********************
 	Global Variables
 **********************/
 var curr_essay_num = 1;
-var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "article_content": "essays/essay1.html"}, 
+var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap_smaller.jpg", "article_content": "essays/essay1.html"},
 				"essay2": {"top_image": "images/TARI_1.CapeDesolation.jpg", "article_content": "essays/essay2.html"},
 				"essay3": {"top_image": "images/TARI_2.Julianeshaab.jpg", "article_content": "essays/essay3.html"},
 				"essay4": {"top_image": "images/TARI_3.Kakortok.jpg", "article_content": "essays/essay4.html"},
@@ -16,19 +18,10 @@ var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "
 				};
 
 
-
-//BUG: 	resize window, click new essay...
-
 /*********************
 	Listeners
 **********************/
 window.onresize = function() {
-	// fix the position of the top image
-    // var nav_height = $("#nav").css('height');
-    // var top_image = document.getElementById("top-images");
-	// top_image.style.left = "0px";
-	// top_image.style.top = nav_height;
-
 	// keep map floating at the top
 	var header_size = getHeaderSize();
 	var map_container = document.getElementById("map");
@@ -41,22 +34,14 @@ window.onresize = function() {
     main_image_container.style.left = map_width;
     main_image_container.style.top = header_size.toString() + "px";
 
-    console.log(header_size);
-
     // correct the location of the article
     var article = document.getElementById("content");
-    article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";// + $("#main-image-div").css('height')).toString() + "px";
+    article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
     article.style.marginLeft = map_width.toString() + "px";
 
 };
 
 window.onscroll = function(){
-	// fix the position of the top image
-	// var nav_height = $("#nav").css('height');
-	// var top_image = document.getElementById("top-images");
-	// top_image.style.left = "0px";
-	// top_image.style.top = nav_height;
-
 	// keep map floating at the top
 	var header_size = getHeaderSize();
 	var map_container = document.getElementById("map");
@@ -65,7 +50,7 @@ window.onscroll = function(){
 
 	// correct the location of the article 
 	var article = document.getElementById("content");
-	article.style.marginTop = (header_size + $("#main-image-div").css('height')).toString() + "px";
+    article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
 };
 
 // Handles all page navigation updates
@@ -83,8 +68,6 @@ function openModal(){
 /*********************
 	Other Functions
 **********************/
-
-//attempting to put map in
 
 // Get the combined size of the navigation bar and top image container
 function getHeaderSize(){
@@ -208,7 +191,6 @@ function create_map(width, height, essay_num){
 	        .duration(2000)
 	        .ease("linear")
 	        .attr("stroke-dashoffset", 0);
-
 	}
 }
 
@@ -216,42 +198,36 @@ function create_map(width, height, essay_num){
 /*********************
 	Initialization
 **********************/
-function init(){
-	// fix top image below navigation bar
-	var nav_bar = document.getElementById("nav");
-	var nav_height = $(nav_bar).css('height');
+function init() {
+    // fix thumbnails below navigation bar
+    var nav_bar = document.getElementById("nav");
+    var nav_height = $(nav_bar).css('height');
+    var top_image = document.getElementById("top-images");
+    top_image.style.left = "0px";
+    top_image.style.top = nav_height;
 
-	// fix position of thumbnails
-	var top_image = document.getElementById("top-images");
-	top_image.style.left = "0px";
-	top_image.style.top = nav_height;
-
-
-	// fix position of map
+    // fix position of map
     var header_size = getHeaderSize().toString() + "px";
-
     var map_div = document.getElementById("map");
     map_div.style.left = "0px";
     map_div.style.top = header_size;
 
-	// Create map svg
-	var width = getMapWidth();
-	var height = getMapHeight();
+    // Create map svg
+    var width = getMapWidth();
+    var height = getMapHeight();
 
-	d3.select('#map').append('svg')
-	  .attr('width', width)
-	  .attr('height', height)
-	  .attr('id', 'map-svg');
+    d3.select('#map').append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('id', 'map-svg');
 
-	create_map(width, height, 1);
-
+    create_map(width, height, 1);
 
     // place main image
     var map_width = $('#map-svg').css('width');
-
     var main_image_container = document.getElementById("main-image-div");
-	main_image_container.style.left = map_width;
-	main_image_container.style.top = header_size;
+    main_image_container.style.left = map_width;
+    main_image_container.style.top = header_size;
 
     // correct the location of the article
     var article = document.getElementById("content");
@@ -261,7 +237,6 @@ function init(){
     // load first essay
     var first_essay_doc = essay_dict["essay1"]["article_content"];
     $("#content").load(first_essay_doc);
-
 }
 
 init();
