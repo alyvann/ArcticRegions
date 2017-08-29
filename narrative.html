@@ -25,164 +25,80 @@
     <nav id="nav" class="navbar navbar-fixed-top navbar-book">
       <div class="container-fluid">
         <div class="navbar-header">
-          <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>                        -->
-          <!--</button>-->
-
           <a class="navbar-brand" href="#">
             <img alt="Brand" src="assets/cesta-logos/CestaLogo_bw.svg" height="100%"/>
           </a>
           <a class="navbar-brand" href="#">TRACING THE ARCTIC REGIONS</a>
         </div>
-
-        <!--<div class="collapse navbar-collapse" id="myNavbar">-->
-          <!--<ul class="nav navbar-nav navbar-right">-->
-            <!--<li class="dropdown">-->
-              <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Project Description<span class="caret"></span></a>-->
-              <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="#">Page 1-1</a></li>-->
-                <!--<li><a href="#">Page 1-2</a></li>-->
-                <!--<li><a href="#">Page 1-3</a></li>-->
-              <!--</ul>-->
-            <!--</li>-->
-            <!--<li><a href="#">Contributors</a></li>-->
-          <!--</ul>-->
-        <!--</div>-->
       </div>
     </nav>
 
-
-    <!-- top images -->
-    <!--<div id="top-images">-->
-        <!--<div class="nav-images">-->
-          <!--<img id="left-image" class="side-image" onclick="onPageButtonClick(event)" src=""/>-->
-          <!--&lt;!&ndash; <img class="image-arrows" src="assets/arrow-carousel-prev.png"/> &ndash;&gt;-->
-        <!--</div>-->
-
-        <!--<a id="modal-box" href="#img-modal" data-toggle="modal" onclick="openModal()">-->
-          <!--<img id="main-image" src="images/HistoryEssay_ColtonMap.jpg"/>-->
-        <!--</a>-->
-
-        <!--<div class="nav-images">-->
-          <!--<img id="right-image" class="side-image" onclick="onPageButtonClick(event)" src=""/>-->
-          <!--&lt;!&ndash; <img class="image-arrows" src="assets/arrow-carousel-next.png"/> &ndash;&gt;-->
-        <!--</div>-->
-    <!--</div> -->
-
-
     <!-- image thumbnails -->
     <div id="top-images">
-
-      <div class="thumbnail-img">
-        <img src="images/HistoryEssay_ColtonMap.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay1" onclick="onPageButtonClick(event)" src="images/HistoryEssay_ColtonMap.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_1.CapeDesolation.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay2" onclick="onPageButtonClick(event)" src="images/TARI_1.CapeDesolation.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_2.Julianeshaab.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay3" onclick="onPageButtonClick(event)" src="images/TARI_2.Julianeshaab.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_3.Kakortok.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay4" onclick="onPageButtonClick(event)" src="images/TARI_3.Kakortok.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_4.sermitsialik.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay5" onclick="onPageButtonClick(event)" src="images/TARI_4.sermitsialik.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_5.karsut.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay6" onclick="onPageButtonClick(event)" src="images/TARI_5.karsut.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_6.devils.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay7" onclick="onPageButtonClick(event)" src="images/TARI_6.devils.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_7.75N.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay8" onclick="onPageButtonClick(event)" src="images/TARI_7.75N.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_8.godhavn.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay9" onclick="onPageButtonClick(event)" src="images/TARI_8.godhavn.jpg"/>
       </div>
 
-      <div class="thumbnail-img">
-        <img src="images/TARI_9.homewardbound.jpg"/>
+      <div class="thumbnail-img-div">
+        <img class="thumbnail-img" id="essay10" onclick="onPageButtonClick(event)" src="images/TARI_9.homewardbound.jpg"/>
       </div>
     </div>
 
     <!-- modal -->
-    <div id="img-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <img class="" src="#"/>
-            </div>
-        </div>
-      </div>
+    <!--<div id="img-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+      <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-body text-center">-->
+                <!--<img class="" src="#"/>-->
+            <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <div id="main-image-div">
+      <!--<a id="modal-box" href="#img-modal" data-toggle="modal" >-->
+      <img id="main-image" src="images/HistoryEssay_ColtonMap.jpg"/>
+      <!--</a>-->
     </div>
 
+    <div id="map"></div>
 
-    <!-- article -->
-    <div  class="container-fluid"> 
-      <div class="row">
-        <div id="map-container" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          <div id="map"></div>
-        </div>
-        <div id="article" class="col-xs-9 col-sm-9 col-md-9 col-lg-9 flow-beneath">
-          <div id="content"></div>
-        </div>
-      </div>
+    <div id="article" >
+      <div id="content"></div>
     </div>
-
-
-    <!-- footer -->
-    <footer class="footer text-center">
-      <ul class="pagination">
-        <li id="previous-button-div" class="page-item">
-          <a id="previous" class="page-link" onclick="onPageButtonClick(event)">Previous</a>
-        </li>
-        <li id="essay1-button-div" class="page-item">
-          <a id="essay1" class="page-link" onclick="onPageButtonClick(event)">1</a>
-        </li>
-        <li id="essay2-button-div" class="page-item">
-          <a id="essay2" class="page-link" onclick="onPageButtonClick(event)">2</a>
-        </li>
-        <li id="essay3-button-div" class="page-item">
-          <a id="essay3" class="page-link" onclick="onPageButtonClick(event)">3</a>
-        </li>
-        <li id="essay4-button-div" class="page-item">
-          <a id="essay4" class="page-link" onclick="onPageButtonClick(event)">4</a>
-        </li>
-        <li id="essay5-button-div" class="page-item">
-          <a id="essay5" class="page-link" onclick="onPageButtonClick(event)">5</a>
-        </li>
-        <li id="essay6-button-div" class="page-item">
-          <a id="essay6" class="page-link" onclick="onPageButtonClick(event)">6</a>
-        </li>
-        <li id="essay7-button-div" class="page-item">
-          <a id="essay7" class="page-link" onclick="onPageButtonClick(event)">7</a>
-        </li>
-        <li id="essay8-button-div" class="page-item">
-          <a id="essay8" class="page-link" onclick="onPageButtonClick(event)">8</a>
-        </li>
-        <li id="essay9-button-div" class="page-item">
-          <a id="essay9" class="page-link" onclick="onPageButtonClick(event)">9</a>
-        </li>
-        <li id="essay10-button-div" class="page-item">
-          <a id="essay10" class="page-link" onclick="onPageButtonClick(event)">10</a>
-        </li>
-        <li id="next-button-div" class="page-item">
-          <a id="next" class="page-link" onclick="onPageButtonClick(event)">Next</a>
-        </li>
-      </ul>
-    </footer>
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
