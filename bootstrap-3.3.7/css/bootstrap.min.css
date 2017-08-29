@@ -272,6 +272,7 @@ p {
 
 #map {
     position: fixed;
+    z-index: -100;
 }
 
 #map-svg {
@@ -280,16 +281,19 @@ p {
 
 }
 
-#nav {
-    font-family: 'Crimson Text', serif;
-}
-
 #nav a{
     color: black;
 }
 
 .navbar-book{
+    font-family: 'Crimson Text', serif;
     background-color: #e0d7b8;
+}
+
+#footer{
+    z-index: 200;
+    height: 6%;
+    /*box-shadow: 0px 500px 0px 500px #000;*/
 }
 
 #top-images{
@@ -301,6 +305,17 @@ p {
 	justify-content: center;
 	background-color: #222;
 	/*z-index: 101;*/
+}
+
+#footer{
+    width: 100%;
+    box-shadow: 0px 500px 0px 500px #e0d7b8;
+}
+
+
+#footer ul{
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .thumbnail-img-div{
@@ -317,7 +332,6 @@ p {
 .thumbnail-img{
     max-height: 95%;
 }
-
 
 #main-image-div {
     margin-left: 5%;
