@@ -16,52 +16,57 @@ var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap.jpg", "
 				};
 
 
+
+//BUG: 	resize window, click new essay...
+
 /*********************
 	Listeners
 **********************/
-
 window.onresize = function() {
 	// fix the position of the top image
-	var nav_bar = document.getElementById("nav");
-	var nav_height = $(nav_bar).css('height');
-
-    var top_image = document.getElementById("top-images");
-	top_image.style.left = "0px";
-	top_image.style.top = nav_height;
+    // var nav_height = $("#nav").css('height');
+    // var top_image = document.getElementById("top-images");
+	// top_image.style.left = "0px";
+	// top_image.style.top = nav_height;
 
 	// keep map floating at the top
 	var header_size = getHeaderSize();
 	var map_container = document.getElementById("map");
 	map_container.style.left = "0px";
-	map_container.style.top = header_size;
+	map_container.style.top = header_size.toString() + "px";
 
-	// correct the location of the article
-	var article = document.getElementById("article");
-	article.style.marginTop = "0px";
-	article.style.marginLeft = (parseInt($(map_container).css('width')) * 2.0).toString() + "px"; // FIX THIS !!!
+    // correct location of the main image
+    var map_width = $('#map-svg').css('width');
+    var main_image_container = document.getElementById("main-image-div");
+    main_image_container.style.left = map_width;
+    main_image_container.style.top = header_size.toString() + "px";
 
-	// re-scale/re-draw the map // DO THIS!!! 
-}
+    console.log(header_size);
+
+    // correct the location of the article
+    var article = document.getElementById("content");
+    article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";// + $("#main-image-div").css('height')).toString() + "px";
+    article.style.marginLeft = map_width.toString() + "px";
+
+};
 
 window.onscroll = function(){
 	// fix the position of the top image
-	var nav_bar = document.getElementById("nav");
-	var nav_height = $(nav_bar).css('height');
-
-	var top_image = document.getElementById("top-images");
-	top_image.style.left = "0px";
-	top_image.style.top = nav_height;
+	// var nav_height = $("#nav").css('height');
+	// var top_image = document.getElementById("top-images");
+	// top_image.style.left = "0px";
+	// top_image.style.top = nav_height;
 
 	// keep map floating at the top
 	var header_size = getHeaderSize();
 	var map_container = document.getElementById("map");
 	map_container.style.left = "0px";
-	map_container.style.top = header_size;
+	map_container.style.top = header_size.toString() + "px";
 
 	// correct the location of the article 
-	var article = document.getElementById("article");
-	article.style.marginTop = header_size;
-}
+	var article = document.getElementById("content");
+	article.style.marginTop = (header_size + $("#main-image-div").css('height')).toString() + "px";
+};
 
 // Handles all page navigation updates
 function onPageButtonClick(e){
@@ -89,17 +94,16 @@ function getHeaderSize(){
 	var top_image = document.getElementById("top-images");
 	var top_image_height = $(top_image).css('height');
 	
-	var total_height = parseInt(nav_height) + parseInt(top_image_height);
-	return total_height.toString() + "px";
+	return parseInt(nav_height) + parseInt(top_image_height);
 }
 
 function getMapHeight(){
-	var header_size = parseInt(getHeaderSize());
+	var header_size = getHeaderSize();
 	return $(window).height() - header_size;
 }
 
 function getMapWidth(){
-	return parseInt($(window).width()) * 0.45;
+	return parseInt($(window).width()) * 0.33;
 }
 
 function getCurrEssayId(){
@@ -108,8 +112,7 @@ function getCurrEssayId(){
 
 function updateImages(){
 	// updates the top image to the image corresponding with the correct page
-	var new_image_src = essay_dict[getCurrEssayId()]["top_image"];
-	document.getElementById("main-image").src = new_image_src;
+	document.getElementById("main-image").src = essay_dict[getCurrEssayId()]["top_image"];
 }
 
 function updateArticle(){
@@ -218,14 +221,18 @@ function init(){
 	var nav_bar = document.getElementById("nav");
 	var nav_height = $(nav_bar).css('height');
 
+	// fix position of thumbnails
 	var top_image = document.getElementById("top-images");
 	top_image.style.left = "0px";
 	top_image.style.top = nav_height;
 
+
 	// fix position of map
+    var header_size = getHeaderSize().toString() + "px";
+
     var map_div = document.getElementById("map");
     map_div.style.left = "0px";
-    map_div.style.top = getHeaderSize();
+    map_div.style.top = header_size;
 
 	// Create map svg
 	var width = getMapWidth();
@@ -238,18 +245,16 @@ function init(){
 
 	create_map(width, height, 1);
 
-	var map_width = $('#map-svg').css('width');
-    var header_size = getHeaderSize();
 
     // place main image
-	var main_image_container = document.getElementById("main-image-div");
+    var map_width = $('#map-svg').css('width');
+
+    var main_image_container = document.getElementById("main-image-div");
 	main_image_container.style.left = map_width;
 	main_image_container.style.top = header_size;
 
-
-
     // correct the location of the article
-    var article = document.getElementById("article");
+    var article = document.getElementById("content");
     article.style.marginLeft = map_width;
     article.style.marginTop = (parseInt(header_size) + parseInt($("#main-image-div").css('height'))).toString() + "px";
 

@@ -243,9 +243,23 @@ p.introduction:first-letter {
 
 
 /*Narrative*/
+h1, p {
+    margin-left: 5%;
+    font-family: 'Crimson Text', serif;
+}
+
+h1 {
+    font-size: 300%;
+}
+
+p {
+    font-size: 150%;
+}
+
+
 #content{
-	margin-left: 5%;
-    width: 95%;
+    width: 50%;
+    /*position: fixed;*/
 }
 
 .coastline {
@@ -309,7 +323,8 @@ p.introduction:first-letter {
 
 
 #main-image-div {
-    width: 60%;
+    height: 40%;
+    width: 100%;
     position: fixed;
     background-color: white;
     display: block;
@@ -320,14 +335,13 @@ p.introduction:first-letter {
     content: '';
     display: inline-block;
     vertical-align: bottom;
-    width: 100%;
+    height: 100%;
 }
 
 #main-image {
     display: inline-block;
     vertical-align: bottom;
-    max-width: 80%;
-    /*padding-right: 20%;*/
+    max-height: 95%;
 }
 
 
