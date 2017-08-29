@@ -37,7 +37,7 @@ window.onresize = function() {
     // correct the location of the article
     var article = document.getElementById("content");
     article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
-    article.style.marginLeft = map_width.toString() + "px";
+    article.style.marginLeft = parseInt(map_width) + document.body.clientWidth*0.05 + "px";
 
 };
 
@@ -231,7 +231,7 @@ function init() {
 
     // correct the location of the article
     var article = document.getElementById("content");
-    article.style.marginLeft = map_width;
+    article.style.marginLeft = parseInt(map_width) + document.body.clientWidth*0.05 + "px";
     article.style.marginTop = (parseInt(header_size) + parseInt($("#main-image-div").css('height'))).toString() + "px";
 
     // load first essay

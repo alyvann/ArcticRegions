@@ -245,22 +245,24 @@ p.introduction:first-letter {
 
 /*Narrative*/
 h1, p {
-    margin-left: 5%;
     font-family: 'Crimson Text', serif;
 }
 
 h1 {
     font-size: 300%;
+    margin-left: 0.6%;
 }
 
 p {
+    margin-left: 5%;
     font-size: 150%;
+    width: 70%;
 }
 
 .coastline {
 	fill: none;
-	/*stroke: #0f9e84;*/
-    stroke: #6badff;
+	/*stroke: #0f9e84; #6badff;*/
+    stroke: #636262;
 	stroke-width: 2px;
 }
 
@@ -291,7 +293,7 @@ p {
 }
 
 #top-images{
-	height: 15%;
+	height: 12%;
 	width: 100%;
     position: fixed;
 	display: flex;
@@ -318,6 +320,8 @@ p {
 
 
 #main-image-div {
+    margin-left: 5%;
+
     height: 40%;
     width: 100%;
     position: fixed;
@@ -341,7 +345,7 @@ p {
 }
 
 #content{
-    width: 50%;
+    width: 45%;
 }
 
 .flow-beneath{
@@ -350,32 +354,37 @@ p {
 }
 
 .side-by-side{
-	text-align:center;
+    margin-left: 0.6%;
+	/*text-align:center;*/
 }
 
 
 .side-by-side-image{
 	display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 30%; 
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    width: 45%;
     padding-bottom: 10px;
 }
 
 
 .in-line-horizontal-image{
 	display: block;
-	margin: auto;
-	width: 75%;
+	/*margin: auto;*/
+    margin-left: 0.6%;
+    width: 85%;
 	padding-bottom: 10px;
+
 }
 
 
 .in-line-vertical-image{
 	display: block;
-	margin: auto;
-	max-height: 50%;
+	/*margin: auto;*/
+    margin-left: 5%;
+    width: 50%;
 	padding-bottom: 10px;
+
 }
 
 
