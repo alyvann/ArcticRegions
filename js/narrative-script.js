@@ -108,6 +108,26 @@ function updateArticle(){
     window.scrollTo(0,0);
 }
 
+
+function updatePageNavigation(){
+    // enable or disable the previous and next buttons
+    var prev_button = document.getElementById("previous-button-div");
+    var next_button = document.getElementById("next-button-div");
+
+    if (curr_essay_num == 1) {
+        prev_button.className += " disabled";
+    } else {
+        prev_button.classList.remove("disabled");
+    }
+
+    if (curr_essay_num == 10) {
+        next_button.className += " disabled";
+    } else {
+        next_button.classList.remove("disabled");
+    }
+}
+
+
 function updateEssay(e){
 	var clicked_element_id = e.target.id;
 	var to_update = true;
@@ -132,6 +152,7 @@ function updateEssay(e){
 	if(to_update){
         updateImages();
         updateArticle();
+        updatePageNavigation();
         create_map(getMapWidth(), getMapHeight(), curr_essay_num);
 	}
 }
@@ -240,6 +261,7 @@ function init() {
     // load first essay
     var first_essay_doc = essay_dict["essay1"]["article_content"];
     $("#content").load(first_essay_doc);
+    updatePageNavigation();
 }
 
 init();
