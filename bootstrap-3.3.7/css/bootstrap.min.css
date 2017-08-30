@@ -362,15 +362,15 @@ sup {
     box-shadow: 0px 500px 0px 500px #e0d7b8;
 }
 
-#footer ul{
- 	margin: 0 auto;
-
-    margin-left: 2%;
+.footer-button-div {
+	display: flex;
+	margin-left: 2%;
     margin-right: 2%;
 }
 
-
-
+#footer ul{
+    align-items: center;
+}
 
 .flow-beneath{
 	z-index: -100;
