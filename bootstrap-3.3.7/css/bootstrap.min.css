@@ -244,43 +244,6 @@ p.introduction:first-letter {
 
 
 /*Narrative*/
-h1, p {
-    font-family: 'Crimson Text', serif;
-}
-
-h1 {
-    font-size: 300%;
-    margin-left: 0.6%;
-}
-
-p {
-    margin-left: 5%;
-    font-size: 150%;
-    width: 70%;
-}
-
-.coastline {
-	fill: none;
-	/*stroke: #0f9e84; #6badff;*/
-    stroke: #636262;
-	stroke-width: 2px;
-}
-
-.land {
-    fill: #efeded;
-}
-
-#map {
-    position: fixed;
-    z-index: -100;
-}
-
-#map-svg {
-    position: fixed;
-    left: 0px;
-
-}
-
 #nav a{
     color: black;
 }
@@ -288,12 +251,6 @@ p {
 .navbar-book{
     font-family: 'Crimson Text', serif;
     background-color: #e0d7b8;
-}
-
-#footer{
-    z-index: 200;
-    height: 6%;
-    /*box-shadow: 0px 500px 0px 500px #000;*/
 }
 
 #top-images{
@@ -304,17 +261,6 @@ p {
 	align-items: center;
 	justify-content: center;
 	background-color: #222;
-}
-
-#footer{
-    width: 100%;
-    box-shadow: 0px 500px 0px 500px #e0d7b8;
-}
-
-
-#footer ul{
-    margin-left: 2%;
-    margin-right: 2%;
 }
 
 .thumbnail-img-div{
@@ -340,6 +286,7 @@ p {
     position: fixed;
     background-color: white;
     display: block;
+
     /*vertical-align: bottom;*/
 }
 
@@ -360,7 +307,70 @@ p {
 
 #content{
     width: 45%;
+    z-index: -100;
 }
+
+h1, p {
+    font-family: 'Crimson Text', serif;
+}
+
+h1 {
+    font-size: 300%;
+    margin-left: 0.6%;
+}
+
+p {
+    margin-left: 5%;
+    font-size: 150%;
+    width: 70%;
+}
+
+sup {
+	z-index: -100;
+}
+
+.footnote {
+	font-size: 100%;
+}
+
+.coastline {
+	fill: none;
+	/*stroke: #0f9e84; #6badff;*/
+    stroke: #636262;
+	stroke-width: 2px;
+}
+
+.land {
+    fill: #efeded;
+}
+
+#map {
+    position: fixed;
+    z-index: -100;
+}
+
+#map-svg {
+    position: fixed;
+    left: 0px;
+
+}
+
+#footer{
+    z-index: 200;
+    height: 6%;
+    width: 100%;
+    box-shadow: 0px 500px 0px 500px #e0d7b8;
+}
+
+#footer ul{
+ 	margin: 0 auto;
+
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+
+
 
 .flow-beneath{
 	z-index: -100;
@@ -372,7 +382,6 @@ p {
 	/*text-align:center;*/
 }
 
-
 .side-by-side-image{
 	display: inline-block;
     /*margin-left: auto;*/
@@ -380,7 +389,6 @@ p {
     width: 45%;
     padding-bottom: 10px;
 }
-
 
 .in-line-horizontal-image{
 	display: block;
@@ -391,7 +399,6 @@ p {
 
 }
 
-
 .in-line-vertical-image{
 	display: block;
 	/*margin: auto;*/
@@ -401,7 +408,6 @@ p {
 
 }
 
-
 /* contains the main-image */
 #modal-box {
     /*height: 100%;*/
@@ -409,7 +415,6 @@ p {
     /*align-items: center;*/
     /*justify-content: center;*/
 }
-
 
 .modal-dialog{
 	position: relative;
