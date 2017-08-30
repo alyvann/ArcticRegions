@@ -304,7 +304,6 @@ p {
 	align-items: center;
 	justify-content: center;
 	background-color: #222;
-	/*z-index: 101;*/
 }
 
 #footer{
@@ -356,6 +355,7 @@ p {
     vertical-align: bottom;
     max-height: 95%;
     max-width: 50%;
+    box-shadow: 5px 5px 10px grey;
 }
 
 #content{
