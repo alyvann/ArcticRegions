@@ -95,7 +95,8 @@ function getCurrEssayId(){
 
 function updateImages(){
 	// updates the top image to the image corresponding with the correct page
-	document.getElementById("main-image").src = essay_dict[getCurrEssayId()]["top_image"];
+    var essay_id = getCurrEssayId();
+    document.getElementById("main-image").src = essay_dict[essay_id]["top_image"];
 }
 
 function updateArticle(){
@@ -109,28 +110,30 @@ function updateArticle(){
 
 function updateEssay(e){
 	var clicked_element_id = e.target.id;
+	var to_update = true;
 
-	// // update the curr_essay_num global variable
-	// if (clicked_element_id == "previous"){
-	// 	if (curr_essay_num == 1) {
-	// 		to_update = false;
-	// 	} else{
-	// 		curr_essay_num -= 1;
-	// 	}
-	// } else if (clicked_element_id == "next"){
-	// 	if (curr_essay_num == 10){
-	// 		to_update = false;
-	// 	} else{
-	// 		curr_essay_num += 1;
-	// 	}
-	// } else {
-	//	curr_essay_num = parseInt(clicked_element_id.match(/\d+$/));
-	// }
+	// update the curr_essay_num global variable
+	if (clicked_element_id == "previous"){
+		if (curr_essay_num == 1) {
+			to_update = false;
+		} else{
+			curr_essay_num -= 1;
+		}
+	} else if (clicked_element_id == "next"){
+		if (curr_essay_num == 10){
+			to_update = false;
+		} else{
+			curr_essay_num += 1;
+		}
+	} else {
+		curr_essay_num = parseInt(clicked_element_id.match(/\d+$/));
+	}
 
-    curr_essay_num = parseInt(clicked_element_id.match(/\d+$/));
-	updateImages();
-	updateArticle();
-    create_map(getMapWidth(), getMapHeight(), curr_essay_num);
+	if(to_update){
+        updateImages();
+        updateArticle();
+        create_map(getMapWidth(), getMapHeight(), curr_essay_num);
+	}
 }
 
 function create_map(width, height, essay_num){
