@@ -116,14 +116,21 @@ function updatePageNavigation(){
 
     if (curr_essay_num == 1) {
         prev_button.className += " disabled";
+       	$('#previous').attr('style', 'color: grey');
+
     } else {
         prev_button.classList.remove("disabled");
+        $('#previous').attr('style', 'color: black');
     }
 
     if (curr_essay_num == 10) {
         next_button.className += " disabled";
+        $('#next').attr('style', 'color: grey');
+
     } else {
         next_button.classList.remove("disabled");
+        $('#next').attr('style', 'color: black');
+
     }
 }
 
