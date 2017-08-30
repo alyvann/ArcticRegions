@@ -1,5 +1,9 @@
 @import url(https://yui.yahooapis.com/pure/0.3.0/pure-min.css);
-html{background: #111;}
+
+html {
+  background: #111;
+}
+
 body{
   max-width: 500px;
   margin: 1em auto;
@@ -9,10 +13,12 @@ body{
   padding: 0 25px;
   border-radius: 3%;
 }
+
 #leafletmap{
   height: 300px;
   border: 1px solid #ccc;
 }
+
 button{
   margin: 1.5em;
 }
