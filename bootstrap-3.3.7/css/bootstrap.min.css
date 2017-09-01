@@ -152,7 +152,7 @@ sup {
     display: inline-block;
     vertical-align: bottom;
     max-height: 95%;
-    max-width: 50%;
+    max-width: 100%;
     box-shadow: 5px 5px 10px grey;
 }
 
