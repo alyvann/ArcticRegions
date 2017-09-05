@@ -108,7 +108,6 @@ function updateArticle(){
     window.scrollTo(0,0);
 }
 
-
 function updatePageNavigation(){
     // enable or disable the previous and next buttons
     var prev_button = document.getElementById("previous-button-div");
@@ -133,7 +132,6 @@ function updatePageNavigation(){
 
     }
 }
-
 
 function updateEssay(e){
 	var clicked_element_id = e.target.id;
@@ -164,10 +162,18 @@ function updateEssay(e){
 	}
 }
 
+
 function create_map(width, height, essay_num){
+	var coast_json = '';
+	if(essay_num == 1) {
+		coast_json = 'json/entire-coast.topojson';
+	} else {
+		coast_json = 'json/coast.topojson';
+	}
+
 	queue()
 	  .defer(d3.json, "json/world-50m.json")
-	  .defer(d3.json, "json/coast.topojson")
+	  .defer(d3.json, coast_json)
 	  .await(drawMap);
 
 	var svg = d3.select('#map-svg');
@@ -187,16 +193,16 @@ function create_map(width, height, essay_num){
 	function drawMap(error, world, coastline) {
 		if (error) throw error;
 
-		// Draw world countries and borders
-		svg.insert("path", ".graticule")
-			.datum(topojson.feature(world, world.objects.land))
-			.attr("class", "land")
-			.attr("d", path);
+		// // Draw world countries and borders
+		// svg.insert("path", ".graticule")
+		// 	.datum(topojson.feature(world, world.objects.land))
+		// 	.attr("class", "land")
+		// 	.attr("d", path);
 
-		svg.insert("path", ".graticule")
-			.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-			.attr("class", "boundary")
-			.attr("d", path);
+		// svg.insert("path", ".graticule")
+		// 	.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+		// 	.attr("class", "boundary")
+		// 	.attr("d", path);
 
 		// select part of the coast to be drawn (corresponding to essay)
 		coastline.objects.coast.geometries[0]["arcs"] = [[essay_num-1]];
@@ -204,26 +210,27 @@ function create_map(width, height, essay_num){
 		// Select our coastline objects
 		var route = topojson.feature(coastline, coastline.objects['coast']);
 
-		// Make a group for features
-		var greenland_coast = svg.append('g');
-
 		// Add coastline data
-		var p = greenland_coast.selectAll('.coastline')
+		var p = svg.selectAll('.coastline')
 						.data(route.features)
-						.enter().append('path')
-						.attr('class', 'coastline')
-						.attr('d', path);
+						.enter()
+						.append('path')
+						.attr('d', path)
+						.attr('class', 'coastline');
 
-		var totalLength = p.node().getTotalLength(); //d3.select('path')
-
-	    p.attr("stroke-dasharray", totalLength + " " + totalLength)
-	      .attr("stroke-dashoffset", totalLength)
+		// timed path drawing
+		var total_length = p.node().getTotalLength();
+	    p.attr("stroke-dasharray", total_length + " " + total_length)
+	      .attr("stroke-dashoffset", total_length)
 	      .transition()
-	        .duration(2000)
+	        .duration(9000)
 	        .ease("linear")
 	        .attr("stroke-dashoffset", 0);
 	}
 }
+
+
+
 
 
 /*********************
