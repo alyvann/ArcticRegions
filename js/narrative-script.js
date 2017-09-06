@@ -166,7 +166,7 @@ function updateEssay(e){
 
 var scrollTop = 0;
 var newScrollTop = 0;
-var content = d3.select('body';
+var content = d3.select('body');
 
 content
   .on("scroll.scroller", function() {
