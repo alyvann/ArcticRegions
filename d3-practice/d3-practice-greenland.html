@@ -101,7 +101,6 @@
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="https://d3js.org/queue.v1.min.js"></script>
 
-
     <script>
       var WIDTH = 0.9 * window.innerWidth / 2;
       var HEIGHT = 0.9 * window.innerHeight;
@@ -114,7 +113,8 @@
       var container = d3.select('#container');
       var content = d3.select('#content');
       
-      var SCROLL_LENGTH = content.node().getBoundingClientRect().height - HEIGHT;
+      var SCROLL_LENGTH = content.node().getBoundingClientRect().height - window.innerHeight;
+      console.log('scroll length = ', SCROLL_LENGTH);
 
       var projection = d3.geo.stereographic()
           .scale(2500)
@@ -124,16 +124,11 @@
           .clipExtent([[0, 0], [WIDTH, HEIGHT]])
           .precision(.1);
 
-      // var projection = d3.geo.mercator()
-      // .scale(6*(WIDTH + 1) / 2 / Math.PI)
-      // .translate([WIDTH / 2, HEIGHT / 2])
-      // .rotate([-130, -15, 0])
-      // .precision(.1);
-
       var path = d3.geo.path()
           .projection(projection);
 
       var graticule = d3.geo.graticule();
+
       var graticulePath = svg.append("path")
         .datum(graticule)
         .attr("class", "graticule")
@@ -165,6 +160,8 @@
                                   return d3.select(this).node().getTotalLength() + 'px';
                                 });
 
+        console.log('path length = ', greenlandPath.node().getTotalLength());
+
         var greenlandPathScale = d3.scale.linear()
           .domain([0, SCROLL_LENGTH])
           .range([0, greenlandPath.node().getTotalLength()])
@@ -181,7 +178,8 @@
         var render = function() {
           if (scrollTop !== newScrollTop) {
             scrollTop = newScrollTop
-            
+            console.log('here!');
+
             greenlandPath
                .style('stroke-dashoffset', function(d) {
                   return greenlandPath.node().getTotalLength() - greenlandPathScale(scrollTop) + 'px';
@@ -195,102 +193,6 @@
         
         // window.onresize = setDimensions
       });
-
-     
-
-
-      // d3.json("track.json", function(error, track) {
-      //   d3.json("world-50m.json", function(error, world) {
-
-      //     var pathLine = d3.svg.line()
-      //       .interpolate("cardinal")
-      //       .x(function(d) { return projection([d.lon, d.lat])[0]; })
-      //       .y(function(d) { return projection([d.lon, d.lat])[1]; });
-
-      //     var greenlandPath = svg.append("path")
-      //       .attr("d",pathLine(track))
-      //       .attr("class","path")
-      //       .style("fill", "none")
-      //       .style("stroke-opacity", .8)
-      //       .style("stroke", "#f44")
-      //       .style("stroke-width", 3)
-      //       .style('stroke-dasharray', function(d) {
-      //         var l = d3.select(this).node().getTotalLength();
-      //         return l + 'px, ' + l + 'px';
-      //       })
-      //       .style('stroke-dashoffset', function(d) {
-      //         return d3.select(this).node().getTotalLength() + 'px';
-      //       });
-
-      //     var greenlandPathScale = d3.scale.linear()
-      //       .domain([0, SCROLL_LENGTH])
-      //       .range([0, greenlandPath.node().getTotalLength()])
-      //       .clamp(true);
-
-      //       var scrollTop = 0;
-      //       var newScrollTop = 0;
-          
-      //     container
-      //       .on("scroll.scroller", function() {
-      //         newScrollTop = container.node().scrollTop
-      //       });
-
-      //     var setDimensions = function() {
-      //       WIDTH = 0.9 * window.innerWidth / 2;
-      //       HEIGHT = 0.9 *window.innerHeight;
-      //       SCROLL_LENGTH = content.node().getBoundingClientRect().height - HEIGHT;
-
-      //       projection.scale(6*(WIDTH + 1) / 2 / Math.PI)
-      //         .translate([WIDTH / 2, HEIGHT / 2]);
-
-            
-      //       path.projection(projection);
-
-      //       landPath.attr("d", path);
-      //       countriesPath.attr("d", path);
-      //       graticulePath.attr("d", path);
-
-      //       //Before changing the scale! If done with scale, a bad range will be created
-      //       greenlandPath
-      //         .attr("d",pathLine(track));
-
-      //       greenlandPathScale
-      //         .domain([0, SCROLL_LENGTH])
-      //         .range([0, greenlandPath.node().getTotalLength()]);
-
-      //       greenlandPath
-      //         .style('stroke-dasharray', function(d) {
-      //           var l = d3.select(this).node().getTotalLength();
-      //           return l + 'px, ' + l + 'px';
-      //          })
-      //         .style('stroke-dashoffset', function(d) {
-      //           return d3.select(this).node().getTotalLength() - greenlandPathScale(scrollTop) + 'px';
-      //         });
-
-      //     }
-          
-      //     var render = function() {
-      //       if (scrollTop !== newScrollTop) {
-      //         scrollTop = newScrollTop
-              
-      //         greenlandPath
-      //            .style('stroke-dashoffset', function(d) {
-      //               return greenlandPath.node().getTotalLength() - greenlandPathScale(scrollTop) + 'px';
-      //             });
-                        
-      //       }
-            
-      //       window.requestAnimationFrame(render)
-      //     }
-
-      //     window.requestAnimationFrame(render)
-          
-      //     window.onresize = setDimensions
-      //   });
-      // });
-
-
-
     </script>
 
 

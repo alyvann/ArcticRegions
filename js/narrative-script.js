@@ -163,70 +163,103 @@ function updateEssay(e){
 }
 
 
+
+var scrollTop = 0;
+var newScrollTop = 0;
+var content = d3.select('body';
+
+content
+  .on("scroll.scroller", function() {
+    newScrollTop = content.node().scrollTop
+    console.log('updating scrollTop');
+  });
+
+
 function create_map(width, height, essay_num){
-	var coast_json = '';
-	if(essay_num == 1) {
-		coast_json = 'json/entire-coast.topojson';
-	} else {
-		coast_json = 'json/coast.topojson';
-	}
-
-	queue()
-	  .defer(d3.json, "json/world-50m.json")
-	  .defer(d3.json, coast_json)
-	  .await(drawMap);
-
 	var svg = d3.select('#map-svg');
+  	var window_height = 0.9 * window.innerHeight;
 
-	// Projection information
-	var projection = d3.geo.stereographic()
-	  .scale(2500)
-	  .translate([width / 2, height / 2])
-	  .rotate([50, -70])
-	  .clipAngle(180 - 1e-4)
-	  .clipExtent([[0, 0], [width, height]])
-	  .precision(.1);
+  	var body = d3.select('body').node();
+  	var container = d3.select('#container');
+  	// var content = d3.select('#content');
 
-	var path = d3.geo.path()
-	    .projection(projection);
+  	// var scroll_length = content.node().getBoundingClientRect().height; //- window.innerHeight;
+  	// console.log('scroll length = ', scroll_length);
+  	var scroll_length = 2895.984375;
 
-	function drawMap(error, world, coastline) {
-		if (error) throw error;
+  	var projection = d3.geo.stereographic()
+    	.scale(2500)
+   		.translate([width / 2, height / 2])
+    	.rotate([50, -70])
+    	.clipAngle(180 - 1e-4)
+    	.clipExtent([[0, 0], [width, height]])
+    	.precision(.1);
 
-		// // Draw world countries and borders
-		// svg.insert("path", ".graticule")
-		// 	.datum(topojson.feature(world, world.objects.land))
-		// 	.attr("class", "land")
-		// 	.attr("d", path);
+  	var path = d3.geo.path()
+      .projection(projection);
 
-		// svg.insert("path", ".graticule")
-		// 	.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-		// 	.attr("class", "boundary")
-		// 	.attr("d", path);
+  	var graticule = d3.geo.graticule();
 
-		// select part of the coast to be drawn (corresponding to essay)
-		coastline.objects.coast.geometries[0]["arcs"] = [[essay_num-1]];
+  	d3.json("json/entire-coast.topojson", function(error, coastline){
+	    // coastline.objects.coast.geometries[0]["arcs"] = [[0]];
+	    var route = topojson.feature(coastline, coastline.objects['coast']).features;
 
-		// Select our coastline objects
-		var route = topojson.feature(coastline, coastline.objects['coast']);
+	    var greenlandPath = svg.selectAll('.coastline')
+	                            .data(route)
+	                            .enter()
+	                            .append("path")
+	                            .attr("d", path)
+	                            .style("fill", "none")
+	                            .style("stroke-opacity", .8)
+	                            .style("stroke", "#f44")
+	                            .style("stroke-width", 3)
+	                            .style('stroke-dasharray', function(d) {
+	                              var l = d3.select(this).node().getTotalLength();
+	                              return l + 'px, ' + l + 'px';
+	                            })
+	                            .style('stroke-dashoffset', function(d) {
+	                              return d3.select(this).node().getTotalLength() + 'px';
+	                            });
 
-		// Add coastline data
-		var p = svg.selectAll('.coastline')
-						.data(route.features)
-						.enter()
-						.append('path')
-						.attr('d', path)
-						.attr('class', 'coastline');
+	    console.log('path length = ', greenlandPath.node().getTotalLength());
 
-		// timed path drawing
-		var total_length = p.node().getTotalLength();
-	    p.attr("stroke-dasharray", total_length + " " + total_length)
-	      .attr("stroke-dashoffset", total_length)
-	      .transition()
-	        .duration(9000)
-	        .ease("linear")
-	        .attr("stroke-dashoffset", 0);
-	}
+	    var greenlandPathScale = d3.scale.linear()
+	      .domain([0, scroll_length])
+	      .range([0, greenlandPath.node().getTotalLength()])
+	      .clamp(true);
+
+	    // var scrollTop = 0;
+	    // var newScrollTop = 0;
+	    
+	    // container
+	    //   .on("scroll.scroller", function() {
+	    //     newScrollTop = container.node().scrollTop
+	    //   });
+
+	    content
+	      .on("scroll.scroller", function() {
+	        newScrollTop = content.node().scrollTop
+	        console.log('updating scrollTop');
+	      });
+
+	    var render = function() {
+	      if (scrollTop !== newScrollTop) {
+	        scrollTop = newScrollTop
+	        console.log('here!');
+	        
+	        greenlandPath
+	           .style('stroke-dashoffset', function(d) {
+	              return greenlandPath.node().getTotalLength() - greenlandPathScale(scrollTop) + 'px';
+	            });       
+	      }
+	      
+	      window.requestAnimationFrame(render);
+	    }
+
+	    window.requestAnimationFrame(render);
+	    
+	    // window.onresize = setDimensions
+	  });
 }
 
 
