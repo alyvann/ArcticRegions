@@ -39,6 +39,9 @@ window.onresize = function() {
     article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
     article.style.marginLeft = parseInt(map_width) + document.body.clientWidth*0.05 + "px";
 
+    var width = getMapWidth();
+    var height = getMapHeight();
+    create_map(width, height, 1);
 };
 
 window.onscroll = function(){
@@ -162,113 +165,38 @@ function updateEssay(e){
 	}
 }
 
-
-
-var scrollTop = 0;
-var newScrollTop = 0;
-var content = d3.select('body');
-
-content
-  .on("scroll.scroller", function() {
-    newScrollTop = content.node().scrollTop
-    console.log('updating scrollTop');
-  });
-
-
 function create_map(width, height, essay_num){
-	var svg = d3.select('#map-svg');
-  	var window_height = 0.9 * window.innerHeight;
+	var map_div = document.getElementById("map-svg");
+    map_div.style.height = height;
 
-  	var body = d3.select('body').node();
-  	var container = d3.select('#container');
-  	// var content = d3.select('#content');
+	var path = document.querySelector('#essay6-path');
+	var pathLength = path.getTotalLength();
 
-  	// var scroll_length = content.node().getBoundingClientRect().height; //- window.innerHeight;
-  	// console.log('scroll length = ', scroll_length);
-  	var scroll_length = 2895.984375;
+	path.style.strokeDasharray = pathLength + ' ' + pathLength;
+	path.style.strokeDashoffset = pathLength;
+	path.getBoundingClientRect();
 
-  	var projection = d3.geo.stereographic()
-    	.scale(2500)
-   		.translate([width / 2, height / 2])
-    	.rotate([50, -70])
-    	.clipAngle(180 - 1e-4)
-    	.clipExtent([[0, 0], [width, height]])
-    	.precision(.1);
+	window.addEventListener("scroll", function(e) {
+		var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+		var drawLength = pathLength * scrollPercentage;
 
-  	var path = d3.geo.path()
-      .projection(projection);
+		path.style.strokeDashoffset = pathLength - drawLength;
 
-  	var graticule = d3.geo.graticule();
+		if (scrollPercentage >= 0.99) {
+		  path.style.strokeDasharray = "none";
+		  
+		} else {
+		  path.style.strokeDasharray = pathLength + ' ' + pathLength;
+		}
+	});
 
-  	d3.json("json/entire-coast.topojson", function(error, coastline){
-	    // coastline.objects.coast.geometries[0]["arcs"] = [[0]];
-	    var route = topojson.feature(coastline, coastline.objects['coast']).features;
-
-	    var greenlandPath = svg.selectAll('.coastline')
-	                            .data(route)
-	                            .enter()
-	                            .append("path")
-	                            .attr("d", path)
-	                            .style("fill", "none")
-	                            .style("stroke-opacity", .8)
-	                            .style("stroke", "#f44")
-	                            .style("stroke-width", 3)
-	                            .style('stroke-dasharray', function(d) {
-	                              var l = d3.select(this).node().getTotalLength();
-	                              return l + 'px, ' + l + 'px';
-	                            })
-	                            .style('stroke-dashoffset', function(d) {
-	                              return d3.select(this).node().getTotalLength() + 'px';
-	                            });
-
-	    console.log('path length = ', greenlandPath.node().getTotalLength());
-
-	    var greenlandPathScale = d3.scale.linear()
-	      .domain([0, scroll_length])
-	      .range([0, greenlandPath.node().getTotalLength()])
-	      .clamp(true);
-
-	    // var scrollTop = 0;
-	    // var newScrollTop = 0;
-	    
-	    // container
-	    //   .on("scroll.scroller", function() {
-	    //     newScrollTop = container.node().scrollTop
-	    //   });
-
-	    content
-	      .on("scroll.scroller", function() {
-	        newScrollTop = content.node().scrollTop
-	        console.log('updating scrollTop');
-	      });
-
-	    var render = function() {
-	      if (scrollTop !== newScrollTop) {
-	        scrollTop = newScrollTop
-	        console.log('here!');
-	        
-	        greenlandPath
-	           .style('stroke-dashoffset', function(d) {
-	              return greenlandPath.node().getTotalLength() - greenlandPathScale(scrollTop) + 'px';
-	            });       
-	      }
-	      
-	      window.requestAnimationFrame(render);
-	    }
-
-	    window.requestAnimationFrame(render);
-	    
-	    // window.onresize = setDimensions
-	  });
 }
-
-
-
 
 
 /*********************
 	Initialization
 **********************/
+
 function init() {
     // fix thumbnails below navigation bar
     var nav_bar = document.getElementById("nav");
@@ -286,12 +214,6 @@ function init() {
     // Create map svg
     var width = getMapWidth();
     var height = getMapHeight();
-
-    d3.select('#map').append('svg')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('id', 'map-svg');
-
     create_map(width, height, 1);
 
     // place main image
