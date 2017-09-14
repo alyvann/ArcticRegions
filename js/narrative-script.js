@@ -132,7 +132,6 @@ function updatePageNavigation(){
     } else {
         next_button.classList.remove("disabled");
         $('#next').attr('style', 'color: black');
-
     }
 }
 
@@ -165,18 +164,36 @@ function updateEssay(e){
 	}
 }
 
+function hide_map_paths(){
+	for (i=2; i<=9; i++){ //UPDATE THIS WHEN HAVE ALL THE PATHS!!
+		var path_id = "#essay" + i + "-path";
+		var path = document.querySelector(path_id);
+
+		if (i == curr_essay_num) {
+			path.style.visibility = "visible";
+		} else {
+			path.style.visibility = "hidden";
+		}
+ 	}
+}
+
 function create_map(width, height, essay_num){
 	var map_div = document.getElementById("map-svg");
     map_div.style.height = height;
 
-	var path = document.querySelector('#essay6-path');
-	var pathLength = path.getTotalLength();
+    hide_map_paths();
+}
 
-	path.style.strokeDasharray = pathLength + ' ' + pathLength;
-	path.style.strokeDashoffset = pathLength;
-	path.getBoundingClientRect();
+window.addEventListener("scroll", function(e){
+	if (curr_essay_num != 1 && curr_essay_num != 10){ //UPDATE THIS WHEN HAVE ALL THE PATHS!!
+	 	var path_id = "#essay" + curr_essay_num + "-path";
+		var path = document.querySelector(path_id);
+		var pathLength = path.getTotalLength();
 
-	window.addEventListener("scroll", function(e) {
+		path.style.strokeDasharray = pathLength + ' ' + pathLength;
+		path.style.strokeDashoffset = pathLength;
+		path.getBoundingClientRect();
+
 		var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 		var drawLength = pathLength * scrollPercentage;
 
@@ -184,13 +201,11 @@ function create_map(width, height, essay_num){
 
 		if (scrollPercentage >= 0.99) {
 		  path.style.strokeDasharray = "none";
-		  
 		} else {
 		  path.style.strokeDasharray = pathLength + ' ' + pathLength;
 		}
-	});
-
-}
+	}
+});
 
 
 /*********************
