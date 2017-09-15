@@ -1,6 +1,3 @@
-//BUG: map needs to be resized when new essay clicked...
-
-
 /*********************
 	Global Variables
 **********************/
@@ -165,15 +162,17 @@ function updateEssay(e){
 }
 
 function hide_map_paths(){
-	for (i=2; i<=9; i++){ //UPDATE THIS WHEN HAVE ALL THE PATHS!!
+	for (i=2; i<=9; i++){ //UPDATE THIS WHEN HAVE ALL THE PATHS!! i=1; i<=10;
 		var path_id = "#essay" + i + "-path";
 		var path = document.querySelector(path_id);
 
-		if (i == curr_essay_num) {
-			path.style.visibility = "visible";
-		} else {
-			path.style.visibility = "hidden";
-		}
+		path.style.visibility = "hidden";
+
+		// if (i == curr_essay_num) {
+		// 	path.style.visibility = "visible";
+		// } else {
+		//	path.style.visibility = "hidden";
+		// }
  	}
 }
 
@@ -185,10 +184,11 @@ function create_map(width, height, essay_num){
 }
 
 window.addEventListener("scroll", function(e){
-	if (curr_essay_num != 1 && curr_essay_num != 10){ //UPDATE THIS WHEN HAVE ALL THE PATHS!!
+	if (curr_essay_num != 1 && curr_essay_num != 10){ //DELETE THIS WHEN HAVE ALL THE PATHS!!
 	 	var path_id = "#essay" + curr_essay_num + "-path";
 		var path = document.querySelector(path_id);
 		var pathLength = path.getTotalLength();
+		path.style.visibility = "visible";
 
 		path.style.strokeDasharray = pathLength + ' ' + pathLength;
 		path.style.strokeDashoffset = pathLength;
@@ -246,6 +246,12 @@ function init() {
     var first_essay_doc = essay_dict["essay1"]["article_content"];
     $("#content").load(first_essay_doc);
     updatePageNavigation();
+
+
+    // TESTING ZOOMING !! 
+    var panZoomTiger = svgPanZoom('#map-svg');
+	panZoomTiger.zoomAtPoint(2, {x: 75, y: 100});
+    console.log('ahhh!');
 }
 
 init();
