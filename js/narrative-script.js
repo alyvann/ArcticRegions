@@ -28,17 +28,15 @@ window.onresize = function() {
     // correct location of the main image
     var map_width = $('#map-svg').css('width');
     var main_image_container = document.getElementById("main-image-div");
-    main_image_container.style.left = map_width;
+    main_image_container.style.left = (parseInt(map_width)*0.6).toString() + "px";;
     main_image_container.style.top = header_size.toString() + "px";
 
     // correct the location of the article
     var article = document.getElementById("content");
     article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
-    article.style.marginLeft = parseInt(map_width) + document.body.clientWidth*0.05 + "px";
+    article.style.marginLeft = (parseInt(map_width)*0.6 + document.body.clientWidth*0.05).toString() + "px";
 
-    var width = getMapWidth();
-    var height = getMapHeight();
-    create_map(width, height, 1);
+    create_map(getMapHeight());
 };
 
 window.onscroll = function(){
@@ -86,7 +84,7 @@ function getMapHeight(){
 }
 
 function getMapWidth(){
-	return parseInt($(window).width()) * 0.33;
+	return $('#map-svg').css('width');
 }
 
 function getCurrEssayId(){
@@ -157,26 +155,22 @@ function updateEssay(e){
         updateImages();
         updateArticle();
         updatePageNavigation();
-        create_map(getMapWidth(), getMapHeight(), curr_essay_num);
+        create_map(getMapHeight());
 	}
 }
 
 function hide_map_paths(){
-	for (i=2; i<=9; i++){ //UPDATE THIS WHEN HAVE ALL THE PATHS!! i=1; i<=10;
+	for (i=1; i<=10; i++){ 
 		var path_id = "#essay" + i + "-path";
 		var path = document.querySelector(path_id);
 
-		path.style.visibility = "hidden";
-
-		// if (i == curr_essay_num) {
-		// 	path.style.visibility = "visible";
-		// } else {
-		//	path.style.visibility = "hidden";
-		// }
+		if (i != curr_essay_num) {
+			path.style.visibility = "hidden";
+		}
  	}
 }
 
-function create_map(width, height, essay_num){
+function create_map(height){
 	var map_div = document.getElementById("map-svg");
     map_div.style.height = height;
 
@@ -184,26 +178,24 @@ function create_map(width, height, essay_num){
 }
 
 window.addEventListener("scroll", function(e){
-	if (curr_essay_num != 1 && curr_essay_num != 10){ //DELETE THIS WHEN HAVE ALL THE PATHS!!
-	 	var path_id = "#essay" + curr_essay_num + "-path";
-		var path = document.querySelector(path_id);
-		var pathLength = path.getTotalLength();
-		path.style.visibility = "visible";
+ 	var path_id = "#essay" + curr_essay_num + "-path";
+	var path = document.querySelector(path_id);
+	var pathLength = path.getTotalLength();
+	path.style.visibility = "visible";
 
-		path.style.strokeDasharray = pathLength + ' ' + pathLength;
-		path.style.strokeDashoffset = pathLength;
-		path.getBoundingClientRect();
+	path.style.strokeDasharray = pathLength + ' ' + pathLength;
+	path.style.strokeDashoffset = pathLength;
+	path.getBoundingClientRect();
 
-		var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-		var drawLength = pathLength * scrollPercentage;
+	var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+	var drawLength = pathLength * scrollPercentage;
 
-		path.style.strokeDashoffset = pathLength - drawLength;
+	path.style.strokeDashoffset = pathLength - drawLength;
 
-		if (scrollPercentage >= 0.99) {
-		  path.style.strokeDasharray = "none";
-		} else {
-		  path.style.strokeDasharray = pathLength + ' ' + pathLength;
-		}
+	if (scrollPercentage >= 0.99) {
+	  path.style.strokeDasharray = "none";
+	} else {
+	  path.style.strokeDasharray = pathLength + ' ' + pathLength;
 	}
 });
 
@@ -222,24 +214,58 @@ function init() {
 
     // fix position of map
     var header_size = getHeaderSize().toString() + "px";
-    var map_div = document.getElementById("map");
+    var map_div = document.getElementById("map-svg");
     map_div.style.left = "0px";
     map_div.style.top = header_size;
 
     // Create map svg
-    var width = getMapWidth();
-    var height = getMapHeight();
-    create_map(width, height, 1);
+    var map_width = getMapWidth();
+    var map_height = getMapHeight();
+    create_map(map_height);
+
+    var path_id = "#essay1-path";
+    var path = document.querySelector(path_id);
+	path.style.visibility = "hidden";
+
+    // Add gradient to right side of map svg
+    var svg_defs = d3.select("#map-svg");
+
+	var gradient = svg_defs.append("linearGradient")
+	    .attr("id", "gradient")
+	    .attr("x1", "0%")
+	    .attr("y1", "0%")
+	    .attr("x2", "100%")
+	    .attr("y2", "0%")
+	    .attr("spreadMethod", "pad");
+
+	    // .attr("x1", "0%")
+	    // .attr("y1", "0%")
+	    // .attr("x2", "0%")
+	    // .attr("y2", "100%")
+
+	gradient.append("stop")
+	    .attr("offset", "0%")
+	    .attr("stop-color", "white")
+	    .attr("stop-opacity", 0);
+
+	gradient.append("stop")
+	    .attr("offset", "40%")
+	    .attr("stop-color", "white")
+	    .attr("stop-opacity", 1);
+
+	svg_defs.append("rect")
+	    .attr("width", map_width)
+	    .attr("height", map_height)
+	    .style("fill", "url(#gradient)");
 
     // place main image
-    var map_width = $('#map-svg').css('width');
     var main_image_container = document.getElementById("main-image-div");
-    main_image_container.style.left = map_width;
+    main_image_container.style.left = (parseInt(map_width)*0.3).toString() + "px";
     main_image_container.style.top = header_size;
 
     // correct the location of the article
     var article = document.getElementById("content");
-    article.style.marginLeft = parseInt(map_width) + document.body.clientWidth*0.05 + "px";
+    article.style.marginLeft = (parseInt(map_width)*0.3 + document.body.clientWidth*0.05).toString() + "px"; //+ document.body.clientWidth*0.05 
     article.style.marginTop = (parseInt(header_size) + parseInt($("#main-image-div").css('height'))).toString() + "px";
 
     // load first essay
@@ -248,10 +274,9 @@ function init() {
     updatePageNavigation();
 
 
-    // TESTING ZOOMING !! 
-    var panZoomTiger = svgPanZoom('#map-svg');
-	panZoomTiger.zoomAtPoint(2, {x: 75, y: 100});
-    console.log('ahhh!');
+    // ZOOMING !! 
+	// var panZoomTiger = svgPanZoom('#map-svg');
+	// panZoomTiger.zoomAtPoint(1.5, {x: 75, y: 100});
 }
 
 init();
