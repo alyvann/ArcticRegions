@@ -2,16 +2,16 @@
 	Global Variables
 **********************/
 var curr_essay_num = 1;
-var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap_smaller.jpg", "article_content": "essays/essay1.html"},
-				"essay2": {"top_image": "images/TARI_1.CapeDesolation.jpg", "article_content": "essays/essay2.html"},
-				"essay3": {"top_image": "images/TARI_2.Julianeshaab.jpg", "article_content": "essays/essay3.html"},
-				"essay4": {"top_image": "images/TARI_3.Kakortok.jpg", "article_content": "essays/essay4.html"},
-				"essay5": {"top_image": "images/TARI_4.sermitsialik.jpg", "article_content": "essays/essay5.html"},
-				"essay6": {"top_image": "images/TARI_5.karsut.jpg", "article_content": "essays/essay6.html"},
-				"essay7": {"top_image": "images/TARI_6.devils.jpg", "article_content": "essays/essay7.html"},
-				"essay8": {"top_image": "images/TARI_7.75N.jpg", "article_content": "essays/essay8.html"},
-				"essay9": {"top_image": "images/TARI_8.godhavn.jpg", "article_content": "essays/essay9.html"},
-				"essay10": {"top_image": "images/TARI_9.homewardbound.jpg", "article_content": "essays/essay10.html"}
+var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap_smaller.jpg", "article_content": "essays/essay1.html", "caption": "caption1"},
+				"essay2": {"top_image": "images/TARI_1.CapeDesolation.jpg", "article_content": "essays/essay2.html", "caption": "caption2"},
+				"essay3": {"top_image": "images/TARI_2.Julianeshaab.jpg", "article_content": "essays/essay3.html", "caption": "caption3"},
+				"essay4": {"top_image": "images/TARI_3.Kakortok.jpg", "article_content": "essays/essay4.html", "caption": "caption4"},
+				"essay5": {"top_image": "images/TARI_4.sermitsialik.jpg", "article_content": "essays/essay5.html", "caption": "caption5"},
+				"essay6": {"top_image": "images/TARI_5.karsut.jpg", "article_content": "essays/essay6.html", "caption": "caption6"},
+				"essay7": {"top_image": "images/TARI_6.devils.jpg", "article_content": "essays/essay7.html", "caption": "caption7"},
+				"essay8": {"top_image": "images/TARI_7.75N.jpg", "article_content": "essays/essay8.html", "caption": "caption8"},
+				"essay9": {"top_image": "images/TARI_8.godhavn.jpg", "article_content": "essays/essay9.html", "caption": "caption9"},
+				"essay10": {"top_image": "images/TARI_9.homewardbound.jpg", "article_content": "essays/essay10.html", "caption": "caption10"}
 				};
 
 
@@ -101,6 +101,9 @@ function updateArticle(){
 	// load new article
 	var new_content_doc = essay_dict[getCurrEssayId()]["article_content"];
 	$("#content").load(new_content_doc);
+
+	var main_image_caption = essay_dict[getCurrEssayId()]["caption"];
+    document.getElementById("main-image-caption").innerHTML = main_image_caption; 
 
     // scroll to top of article
     window.scrollTo(0,0);
@@ -273,6 +276,9 @@ function init() {
     $("#content").load(first_essay_doc);
     updatePageNavigation();
 
+    var main_image_caption = essay_dict["essay1"]["caption"];
+    document.getElementById("main-image-caption").innerHTML = main_image_caption; 
+	
 
     // ZOOMING !! 
 	// var panZoomTiger = svgPanZoom('#map-svg');
