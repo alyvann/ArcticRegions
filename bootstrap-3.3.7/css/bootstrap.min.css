@@ -8,7 +8,6 @@
 html, body {
    height: 100%;
    font-family: 'Crimson Text', serif;
-
 }
 
 #nav a {
@@ -16,12 +15,7 @@ html, body {
 }
 
 .navbar-book {
-    font-family: 'Crimson Text', serif;
     background-color: #e0d7b8;
-}
-
-h1, p, figcaption {
-    font-family: 'Crimson Text', serif;
 }
 
 h1 {
@@ -55,6 +49,19 @@ figcaption {
   /************/
  /* HOMEPAGE */
 /************/
+#intro-video-container {
+	width: 100%;
+	position: relative;
+}
+
+#intro-video-container h1 {
+	position: absolute;
+	top: 20vh;
+	left: 50%;
+	text-align: center;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 #intro-video {
 	width: 100%;
 }
@@ -106,7 +113,6 @@ figcaption {
 
 .contributors h1 {
 	margin-left: 20%;
-	font-size: 45px;
 }
 
 .contributors h4 {
