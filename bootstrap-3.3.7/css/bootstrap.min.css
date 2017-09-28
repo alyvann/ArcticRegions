@@ -7,6 +7,8 @@
 
 html, body {
    height: 100%;
+   font-family: 'Crimson Text', serif;
+
 }
 
 #nav a {
@@ -70,6 +72,7 @@ figcaption {
 	margin-left: 15%;
 	margin-top: 10px;
 	width: 70%;
+	max-width: 1000px;
 	margin-bottom: 10px;
 }
 
@@ -92,27 +95,27 @@ figcaption {
 
 .contributors img {
 	float: left;
-	width: 150px;
-	height: 150px;
+	width: 10%;
+	height: 50%;
 	margin-left: auto;
 }
 
 .contributors p {
-	margin-left: 150px;
+	margin-left: 10%;
 }
 
 .contributors h1 {
-	margin-left: 160px;
+	margin-left: 20%;
 	font-size: 45px;
 }
 
 .contributors h4 {
-	margin-left: 160px;
+	margin-left: 20%;
 	color: grey;
 }
 
 .contributors p {
-	margin-left: 160px;
+	margin-left: 20%;
 }
 
 
