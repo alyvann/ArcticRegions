@@ -231,35 +231,35 @@ function init() {
 	path.style.visibility = "hidden";
 
     // Add gradient to right side of map svg
-    var svg_defs = d3.select("#map-svg");
+ //    var svg_defs = d3.select("#map-svg");
 
-	var gradient = svg_defs.append("linearGradient")
-	    .attr("id", "gradient")
-	    .attr("x1", "0%")
-	    .attr("y1", "0%")
-	    .attr("x2", "100%")
-	    .attr("y2", "0%")
-	    .attr("spreadMethod", "pad");
+	// var gradient = svg_defs.append("linearGradient")
+	//     .attr("id", "gradient")
+	//     .attr("x1", "0%")
+	//     .attr("y1", "0%")
+	//     .attr("x2", "100%")
+	//     .attr("y2", "0%")
+	//     .attr("spreadMethod", "pad");
 
-	    // .attr("x1", "0%")
-	    // .attr("y1", "0%")
-	    // .attr("x2", "0%")
-	    // .attr("y2", "100%")
+	//     // .attr("x1", "0%")
+	//     // .attr("y1", "0%")
+	//     // .attr("x2", "0%")
+	//     // .attr("y2", "100%")
 
-	gradient.append("stop")
-	    .attr("offset", "0%")
-	    .attr("stop-color", "white")
-	    .attr("stop-opacity", 0);
+	// gradient.append("stop")
+	//     .attr("offset", "0%")
+	//     .attr("stop-color", "white")
+	//     .attr("stop-opacity", 0);
 
-	gradient.append("stop")
-	    .attr("offset", "40%")
-	    .attr("stop-color", "white")
-	    .attr("stop-opacity", 1);
+	// gradient.append("stop")
+	//     .attr("offset", "40%")
+	//     .attr("stop-color", "white")
+	//     .attr("stop-opacity", 1);
 
-	svg_defs.append("rect")
-	    .attr("width", map_width)
-	    .attr("height", map_height)
-	    .style("fill", "url(#gradient)");
+	// svg_defs.append("rect")
+	//     .attr("width", map_width)
+	//     .attr("height", map_height)
+	//     .style("fill", "url(#gradient)");
 
     // place main image
     var main_image_container = document.getElementById("main-image-div");
