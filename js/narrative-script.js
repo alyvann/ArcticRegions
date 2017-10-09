@@ -21,7 +21,7 @@ var essay_dict = {"essay1": {"top_image": "images/HistoryEssay_ColtonMap_smaller
 window.onresize = function() {
 	// keep map floating at the top
 	var header_size = getHeaderSize();
-	var map_container = document.getElementById("map");
+	var map_container = document.getElementById("map-svg");
 	map_container.style.left = "0px";
 	map_container.style.top = header_size.toString() + "px";
 
@@ -29,7 +29,7 @@ window.onresize = function() {
     var map_width = $('#map-svg').css('width');
     var main_image_container = document.getElementById("main-image-div");
     main_image_container.style.left = (parseInt(map_width)*0.6).toString() + "px";;
-    main_image_container.style.top = header_size.toString() + "px";
+    main_image_container.style.top = header_size.toString() + "px"; //FIX THIS!!
 
     // correct the location of the article
     var article = document.getElementById("content");
@@ -226,40 +226,36 @@ function init() {
     var map_height = getMapHeight();
     create_map(map_height);
 
+
     var path_id = "#essay1-path";
     var path = document.querySelector(path_id);
 	path.style.visibility = "hidden";
 
     // Add gradient to right side of map svg
- //    var svg_defs = d3.select("#map-svg");
+    var svg_defs = d3.select("#map-svg");
 
-	// var gradient = svg_defs.append("linearGradient")
-	//     .attr("id", "gradient")
-	//     .attr("x1", "0%")
-	//     .attr("y1", "0%")
-	//     .attr("x2", "100%")
-	//     .attr("y2", "0%")
-	//     .attr("spreadMethod", "pad");
+	var gradient = svg_defs.append("linearGradient")
+	    .attr("id", "gradient")
+	    .attr("x1", "0%")
+	    .attr("y1", "0%")
+	    .attr("x2", "100%")
+	    .attr("y2", "0%")
+	    .attr("spreadMethod", "pad");
 
-	//     // .attr("x1", "0%")
-	//     // .attr("y1", "0%")
-	//     // .attr("x2", "0%")
-	//     // .attr("y2", "100%")
+	gradient.append("stop")
+	    .attr("offset", "0%")
+	    .attr("stop-color", "white")
+	    .attr("stop-opacity", 0);
 
-	// gradient.append("stop")
-	//     .attr("offset", "0%")
-	//     .attr("stop-color", "white")
-	//     .attr("stop-opacity", 0);
+	gradient.append("stop")
+	    .attr("offset", "100%")
+	    .attr("stop-color", "white")
+	    .attr("stop-opacity", 1);
 
-	// gradient.append("stop")
-	//     .attr("offset", "40%")
-	//     .attr("stop-color", "white")
-	//     .attr("stop-opacity", 1);
-
-	// svg_defs.append("rect")
-	//     .attr("width", map_width)
-	//     .attr("height", map_height)
-	//     .style("fill", "url(#gradient)");
+	svg_defs.append("rect")
+	    .attr("width", map_height)
+	    .attr("height", map_width)
+	    .style("fill", "url(#gradient)");
 
     // place main image
     var main_image_container = document.getElementById("main-image-div");
@@ -281,8 +277,8 @@ function init() {
 	
 
     // ZOOMING !! 
-	// var panZoomTiger = svgPanZoom('#map-svg');
-	// panZoomTiger.zoomAtPoint(1.5, {x: 75, y: 100});
+	// var panZoom = svgPanZoom('#map-svg');
+	// panZoom.zoomAtPoint(1.5, {x: 75, y: 100});
 }
 
 init();
