@@ -110,27 +110,27 @@ function updateArticle(){
 }
 
 function updatePageNavigation(){
-    // enable or disable the previous and next buttons
-    var prev_button = document.getElementById("previous-button-div");
-    var next_button = document.getElementById("next-button-div");
+    // // enable or disable the previous and next buttons
+    // var prev_button = document.getElementById("previous-button-div");
+    // var next_button = document.getElementById("next-button-div");
 
-    if (curr_essay_num == 1) {
-        prev_button.className += " disabled";
-       	$('#previous').attr('style', 'color: grey');
+    // if (curr_essay_num == 1) {
+    //     prev_button.className += " disabled";
+    //    	$('#previous').attr('style', 'color: grey');
 
-    } else {
-        prev_button.classList.remove("disabled");
-        $('#previous').attr('style', 'color: black');
-    }
+    // } else {
+    //     prev_button.classList.remove("disabled");
+    //     $('#previous').attr('style', 'color: black');
+    // }
 
-    if (curr_essay_num == 10) {
-        next_button.className += " disabled";
-        $('#next').attr('style', 'color: grey');
+    // if (curr_essay_num == 10) {
+    //     next_button.className += " disabled";
+    //     $('#next').attr('style', 'color: grey');
 
-    } else {
-        next_button.classList.remove("disabled");
-        $('#next').attr('style', 'color: black');
-    }
+    // } else {
+    //     next_button.classList.remove("disabled");
+    //     $('#next').attr('style', 'color: black');
+    // }
 }
 
 function updateEssay(e){
@@ -278,7 +278,8 @@ function init() {
 
     // ZOOMING !! 
 	// var panZoom = svgPanZoom('#map-svg');
-	// panZoom.zoomAtPoint(1.5, {x: 75, y: 100});
+	// panZoom.zoomBy(1.3);
+	// panZoom.panBy({x: map_width, y: map_height});
 }
 
 init();

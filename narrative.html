@@ -49,6 +49,10 @@
 
     <!-- image thumbnails -->
     <div id="top-images">
+      <div class="thumbnail-button-div">
+        <img class="thumbnail-img" id="previous" height="50" onclick="onPageButtonClick(event)" src="assets/arrow-carousel-prev.png"/>
+      </div>
+
       <div class="thumbnail-img-div">
         <img class="thumbnail-img" id="essay1" onclick="onPageButtonClick(event)" src="images/HistoryEssay_ColtonMap.jpg"/>
       </div>
@@ -88,6 +92,10 @@
       <div class="thumbnail-img-div">
         <img class="thumbnail-img" id="essay10" onclick="onPageButtonClick(event)" src="images/TARI_9.homewardbound.jpg"/>
       </div>
+
+      <div class="thumbnail-button-div">
+        <img class="thumbnail-img" id="next" height="50" onclick="onPageButtonClick(event)" src="assets/arrow-carousel-next.png"/>
+      </div>
     </div>
 
     <!-- modal -->
@@ -114,7 +122,7 @@
         </defs>
         <style type="text/css">
           /*.st0{fill:none;stroke:#F37A21;stroke-width:0.25;stroke-miterlimit:10;}*/
-          .st0{fill:none;stroke:#a81c1c;stroke-width:1;stroke-miterlimit:10;}
+          .st0{fill:none;stroke:#a81c1c;stroke-width:3;stroke-miterlimit:10;}
           .st1{fill:#FFFFFF;stroke:#010101;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;}
         </style>
         <g id="Hillshade">
@@ -218,7 +226,7 @@
     </div>
 
     <!-- footer -->
-    <footer id="footer" class="footer navbar-book">
+<!--     <footer id="footer" class="footer navbar-book">
       <div class="footer-button-div pull-left">
         <ul class="pagination">
           <li id="previous-button-div">
@@ -234,7 +242,7 @@
           </li>
         </ul>
       </div>
-    </footer>
+    </footer> -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

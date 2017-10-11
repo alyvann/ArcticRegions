@@ -149,6 +149,20 @@ figcaption {
     justify-content: center;
 }
 
+.thumbnail-img-button{
+	/*height: 50px;*/
+}
+
+.thumbnail-button-div {
+    height: 100%;
+    /*overflow-x: hidden;*/
+    max-width: 9%;
+    margin: 0.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .thumbnail-img {
     max-height: 95%;
 }
