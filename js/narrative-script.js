@@ -49,6 +49,27 @@ window.onscroll = function(){
 	// correct the location of the article 
 	var article = document.getElementById("content");
     article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
+
+    // path drawing on scroll
+    var path_id = "#essay" + curr_essay_num + "-path";
+	var path = document.querySelector(path_id);
+	var pathLength = path.getTotalLength();
+	path.style.visibility = "visible";
+
+	path.style.strokeDasharray = pathLength + ' ' + pathLength;
+	path.style.strokeDashoffset = pathLength;
+	path.getBoundingClientRect();
+
+	var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+	var drawLength = pathLength * scrollPercentage;
+
+	path.style.strokeDashoffset = pathLength - drawLength;
+
+	if (scrollPercentage >= 0.99) {
+	  path.style.strokeDasharray = "none";
+	} else {
+	  path.style.strokeDasharray = pathLength + ' ' + pathLength;
+	}
 };
 
 // Handles all page navigation updates
@@ -180,27 +201,27 @@ function create_map(height){
     hide_map_paths();
 }
 
-window.addEventListener("scroll", function(e){
- 	var path_id = "#essay" + curr_essay_num + "-path";
-	var path = document.querySelector(path_id);
-	var pathLength = path.getTotalLength();
-	path.style.visibility = "visible";
+// window.addEventListener("scroll", function(e){
+//  	var path_id = "#essay" + curr_essay_num + "-path";
+// 	var path = document.querySelector(path_id);
+// 	var pathLength = path.getTotalLength();
+// 	path.style.visibility = "visible";
 
-	path.style.strokeDasharray = pathLength + ' ' + pathLength;
-	path.style.strokeDashoffset = pathLength;
-	path.getBoundingClientRect();
+// 	path.style.strokeDasharray = pathLength + ' ' + pathLength;
+// 	path.style.strokeDashoffset = pathLength;
+// 	path.getBoundingClientRect();
 
-	var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-	var drawLength = pathLength * scrollPercentage;
+// 	var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+// 	var drawLength = pathLength * scrollPercentage;
 
-	path.style.strokeDashoffset = pathLength - drawLength;
+// 	path.style.strokeDashoffset = pathLength - drawLength;
 
-	if (scrollPercentage >= 0.99) {
-	  path.style.strokeDasharray = "none";
-	} else {
-	  path.style.strokeDasharray = pathLength + ' ' + pathLength;
-	}
-});
+// 	if (scrollPercentage >= 0.99) {
+// 	  path.style.strokeDasharray = "none";
+// 	} else {
+// 	  path.style.strokeDasharray = pathLength + ' ' + pathLength;
+// 	}
+// });
 
 
 /*********************
@@ -226,36 +247,9 @@ function init() {
     var map_height = getMapHeight();
     create_map(map_height);
 
-
     var path_id = "#essay1-path";
     var path = document.querySelector(path_id);
 	path.style.visibility = "hidden";
-
-    // Add gradient to right side of map svg
-    var svg_defs = d3.select("#map-svg");
-
-	var gradient = svg_defs.append("linearGradient")
-	    .attr("id", "gradient")
-	    .attr("x1", "0%")
-	    .attr("y1", "0%")
-	    .attr("x2", "100%")
-	    .attr("y2", "0%")
-	    .attr("spreadMethod", "pad");
-
-	gradient.append("stop")
-	    .attr("offset", "0%")
-	    .attr("stop-color", "white")
-	    .attr("stop-opacity", 0);
-
-	gradient.append("stop")
-	    .attr("offset", "100%")
-	    .attr("stop-color", "white")
-	    .attr("stop-opacity", 1);
-
-	svg_defs.append("rect")
-	    .attr("width", map_height)
-	    .attr("height", map_width)
-	    .style("fill", "url(#gradient)");
 
     // place main image
     var main_image_container = document.getElementById("main-image-div");
@@ -274,12 +268,41 @@ function init() {
 
     var main_image_caption = essay_dict["essay1"]["caption"];
     document.getElementById("main-image-caption").innerHTML = main_image_caption; 
-	
 
-    // ZOOMING !! 
-	// var panZoom = svgPanZoom('#map-svg');
-	// panZoom.zoomBy(1.3);
-	// panZoom.panBy({x: map_width, y: map_height});
 }
 
 init();
+
+
+
+// Add gradient to right side of map svg
+// var svg_defs = d3.select("#map-svg");
+
+// var gradient = svg_defs.append("linearGradient")
+//     .attr("id", "gradient")
+//     .attr("x1", "0%")
+//     .attr("y1", "0%")
+//     .attr("x2", "100%")
+//     .attr("y2", "0%")
+//     .attr("spreadMethod", "pad");
+
+// gradient.append("stop")
+//     .attr("offset", "0%")
+//     .attr("stop-color", "white")
+//     .attr("stop-opacity", 0);
+
+// gradient.append("stop")
+//     .attr("offset", "100%")
+//     .attr("stop-color", "white")
+//     .attr("stop-opacity", 1);
+
+// svg_defs.append("rect")
+//     .attr("width", map_height)
+//     .attr("height", map_width)
+//     .style("fill", "url(#gradient)");
+
+
+// ZOOMING !! 
+// var panZoom = svgPanZoom('#map-svg');
+// panZoom.zoomBy(1.3);
+// panZoom.panBy({x: map_width, y: map_height});
