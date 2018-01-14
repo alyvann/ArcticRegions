@@ -235,12 +235,11 @@ function create_map(height){
 **************/
 function panZoom() {
 	var svg = d3.select("#map-svg")
-	svg.attr("transform", transform());
-	// .transition()
-	//   .delay(10)
-	//   .duration(i.duration * 2)
-	//   .attrTween("transform", function() {});
-
+	svg
+		.transition()
+		.attr("transform", transform())
+		.duration(2000);
+	
 	function transform() {
 		if (curr_essay_num >= 3 && curr_essay_num <= 6) {
 			return "translate(" + 200 + "," + -400 + ")scale(" + 2 + ")";
