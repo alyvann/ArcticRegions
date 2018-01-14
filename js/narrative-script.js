@@ -83,9 +83,9 @@ function openModal(){
 	$('#img-modal img').attr('src', curr_image); 
 }
 
-$(window).on('load', function() {
-   $("#cover").hide();
-});
+// $(window).on('load', function() {
+//    $("#cover").hide();
+// });
 
 /*********************
 	Other Functions
@@ -230,8 +230,11 @@ function create_map(height){
 /*********************
 	Initialization
 **********************/
+function uncover(){
+	$("#cover").hide();
+}
 
-function init() {
+function init(callback) {
     // fix thumbnails below navigation bar
     var nav_bar = document.getElementById("nav");
     var nav_height = $(nav_bar).css('height');
@@ -242,6 +245,10 @@ function init() {
     // fix position of map
     var header_size = getHeaderSize().toString() + "px";
     var map_div = document.getElementById("map-svg");
+    map_div.style.left = "0px";
+    map_div.style.top = header_size;
+
+    var map_div = document.getElementById("map");
     map_div.style.left = "0px";
     map_div.style.top = header_size;
 
@@ -274,9 +281,10 @@ function init() {
 
     window.scrollTo(0,0);
 
+    callback();
 }
 
-init();
+init(uncover);
 
 
 
