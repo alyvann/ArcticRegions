@@ -82,11 +82,6 @@ function openModal(){
 	var curr_image = essay_dict[curr_essay]["top_image"];
 	$('#img-modal img').attr('src', curr_image); 
 }
-
-// $(window).on('load', function() {
-//    $("#cover").hide();
-// });
-
 /*********************
 	Other Functions
 **********************/
@@ -167,7 +162,6 @@ function updateEssay(e){
 	var clicked_element_id = e.target.id;
 	var to_update = true;
 	var prev_essay_num = curr_essay_num;
-	console.log(prev_essay_num);
 
 	// update the curr_essay_num global variable
 	if (clicked_element_id == "previous"){
@@ -191,6 +185,7 @@ function updateEssay(e){
         updateArticle();
         updatePageNavigation(prev_essay_num);
         create_map(getMapHeight());
+        panZoom();
 	}
 }
 
@@ -234,6 +229,28 @@ function create_map(height){
 // 	}
 // });
 
+
+/*************
+	Zooming
+**************/
+function panZoom() {
+	var svg = d3.select("#map-svg")
+	svg.attr("transform", transform());
+	// .transition()
+	//   .delay(10)
+	//   .duration(i.duration * 2)
+	//   .attrTween("transform", function() {});
+
+	function transform() {
+		if (curr_essay_num >= 3 && curr_essay_num <= 6) {
+			return "translate(" + 200 + "," + -400 + ")scale(" + 2 + ")";
+		} else if (curr_essay_num >=7 && curr_essay_num <= 9) {
+			return "translate(" + 150 + "," + 200 + ")scale(" + 1.5 + ")";
+		} else {
+			return "translate(" + 0 + "," + 0 + ")scale(" + 1 + ")";
+		}
+	}
+}
 
 /*********************
 	Initialization
