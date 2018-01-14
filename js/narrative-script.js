@@ -133,7 +133,13 @@ function updateArticle(){
     window.scrollTo(0,0);
 }
 
-function updatePageNavigation(){
+function updatePageNavigation(prev_essay_num){
+	var prev_essay_image = document.getElementById("essay" + prev_essay_num.toString());
+	prev_essay_image.style.borderBottom = "none";
+
+	var curr_essay_image = document.getElementById(getCurrEssayId());
+	curr_essay_image.style.borderBottom = "thick solid #a81c1c"; 
+
     // // enable or disable the previous and next buttons
     // var prev_button = document.getElementById("previous-button-div");
     // var next_button = document.getElementById("next-button-div");
@@ -160,6 +166,8 @@ function updatePageNavigation(){
 function updateEssay(e){
 	var clicked_element_id = e.target.id;
 	var to_update = true;
+	var prev_essay_num = curr_essay_num;
+	console.log(prev_essay_num);
 
 	// update the curr_essay_num global variable
 	if (clicked_element_id == "previous"){
@@ -181,7 +189,7 @@ function updateEssay(e){
 	if(to_update){
         updateImages();
         updateArticle();
-        updatePageNavigation();
+        updatePageNavigation(prev_essay_num);
         create_map(getMapHeight());
 	}
 }
@@ -274,7 +282,7 @@ function init(callback) {
     // load first essay
     var first_essay_doc = essay_dict["essay1"]["article_content"];
     $("#content").load(first_essay_doc);
-    updatePageNavigation();
+    updatePageNavigation(curr_essay_num);
 
     var main_image_caption = essay_dict["essay1"]["caption"];
     document.getElementById("main-image-caption").innerHTML = main_image_caption; 
@@ -285,7 +293,6 @@ function init(callback) {
 }
 
 init(uncover);
-
 
 
 // Add gradient to right side of map svg
