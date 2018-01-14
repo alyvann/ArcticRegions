@@ -83,6 +83,9 @@ function openModal(){
 	$('#img-modal img').attr('src', curr_image); 
 }
 
+$(window).on('load', function() {
+   $("#cover").hide();
+});
 
 /*********************
 	Other Functions
@@ -268,6 +271,8 @@ function init() {
 
     var main_image_caption = essay_dict["essay1"]["caption"];
     document.getElementById("main-image-caption").innerHTML = main_image_caption; 
+
+    window.scrollTo(0,0);
 
 }
 
