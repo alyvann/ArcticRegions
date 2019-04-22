@@ -73,6 +73,14 @@ figcaption {
     transform: translateX(-50%) translateY(-50%);
 }
 
+#intro-video-container h2 {
+	position: absolute;
+	top: 20vh;
+	left: 50%;
+	text-align: center;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 #intro-video {
 	width: 100%;
 }
