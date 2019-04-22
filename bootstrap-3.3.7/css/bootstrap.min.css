@@ -74,8 +74,8 @@ figcaption {
 }
 
 #intro-video-container h2 {
-	position: relative;
-	top: 25vh;
+	position: absolute;
+	top: 30vh;
 	left: 50%;
 	text-align: center;
     transform: translateX(-50%) translateY(-50%);
