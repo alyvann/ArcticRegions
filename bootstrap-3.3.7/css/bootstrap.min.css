@@ -105,8 +105,8 @@ figcaption {
 
 #book-image img {
     display: block;
-    margin: auto;
-    width: 400px;
+    margin: 5%;
+    width: 40%;
     padding-top: 10px;
 }
 
