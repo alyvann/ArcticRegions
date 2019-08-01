@@ -96,7 +96,7 @@ figcaption {
 }
 
 #homepage-text-inner img {
-	align-items: center;
+	margin-left: 20%;
 	margin-top: 10px;
 	width: 50%;
 	max-width: 1000px;
