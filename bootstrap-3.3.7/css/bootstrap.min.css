@@ -97,8 +97,9 @@ figcaption {
 
 #homepage-text-inner img {
 	margin-left: 15%;
+  margin-right: 15%;
 	margin-top: 10px;
-	width: 40%;
+	width: 50%;
 	max-width: 1000px;
 	margin-bottom: 10px;
 }
