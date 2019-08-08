@@ -27,14 +27,11 @@ window.onresize = function() {
 
     // correct location of the main image
     var map_width = $('#map-svg').css('width');
-    var main_image_container = document.getElementById("main-image-div");
-    main_image_container.style.left = (parseInt(map_width)*0.6).toString() + "px";;
-    main_image_container.style.top = header_size.toString() + "px"; //FIX THIS!!
 
     // correct the location of the article
     var article = document.getElementById("content");
-    article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
-    article.style.marginLeft = (parseInt(map_width)*0.6 + document.body.clientWidth*0.05).toString() + "px";
+    article.style.marginTop = (10+header_size).toString() + "px";
+    article.style.marginLeft = (parseInt(map_width)*0.6).toString() + "px";
 
     create_map(getMapHeight());
 };
@@ -48,7 +45,7 @@ window.onscroll = function(){
 
 	// correct the location of the article 
 	var article = document.getElementById("content");
-    article.style.marginTop = (header_size + document.getElementById("main-image-div").clientHeight).toString() + "px";
+    article.style.marginTop = (10+header_size).toString()+ "px";
 
     // path drawing on scroll
     var path_id = "#essay" + curr_essay_num + "-path";
@@ -113,16 +110,12 @@ function getCurrEssayId(){
 function updateImages(){
 	// updates the top image to the image corresponding with the correct page
     var essay_id = getCurrEssayId();
-    document.getElementById("main-image").src = essay_dict[essay_id]["top_image"];
 }
 
 function updateArticle(){
 	// load new article
 	var new_content_doc = essay_dict[getCurrEssayId()]["article_content"];
 	$("#content").load(new_content_doc);
-
-	var main_image_caption = essay_dict[getCurrEssayId()]["caption"];
-    document.getElementById("main-image-caption").innerHTML = main_image_caption; 
 
     // scroll to top of article
     window.scrollTo(0,0);
@@ -200,11 +193,23 @@ function hide_map_paths(){
  	}
 }
 
+function hide_progress_paths(){
+	for (ii=3; ii<=10; ii++){ 
+		var progress_id = "#essay" + ii + "-progress";
+		var progress = document.querySelector(progress_id);
+		progress.style.visibility = "visible";
+		if (ii != curr_essay_num) {
+			progress.style.visibility = "hidden";
+		}
+	}
+}
+
 function create_map(height){
 	var map_div = document.getElementById("map-svg");
     map_div.style.height = height;
 
     hide_map_paths();
+    hide_progress_paths();
 }
 
 // window.addEventListener("scroll", function(e){
@@ -284,24 +289,17 @@ function init(callback) {
     var path_id = "#essay1-path";
     var path = document.querySelector(path_id);
 	path.style.visibility = "hidden";
-
-    // place main image
-    var main_image_container = document.getElementById("main-image-div");
-    main_image_container.style.left = (parseInt(map_width)*0.3).toString() + "px";
-    main_image_container.style.top = header_size;
+	
 
     // correct the location of the article
     var article = document.getElementById("content");
-    article.style.marginLeft = (parseInt(map_width)*0.3 + document.body.clientWidth*0.05).toString() + "px"; //+ document.body.clientWidth*0.05 
-    article.style.marginTop = (parseInt(header_size) + parseInt($("#main-image-div").css('height'))).toString() + "px";
+    article.style.marginLeft = (parseInt(map_width)*0.3).toString() + "px"; //+ document.body.clientWidth*0.05 
+    article.style.marginTop = (10+parseInt(header_size)).toString() + "px";
 
     // load first essay
     var first_essay_doc = essay_dict["essay1"]["article_content"];
     $("#content").load(first_essay_doc);
     updatePageNavigation(curr_essay_num);
-
-    var main_image_caption = essay_dict["essay1"]["caption"];
-    document.getElementById("main-image-caption").innerHTML = main_image_caption; 
 
     window.scrollTo(0,0);
 
