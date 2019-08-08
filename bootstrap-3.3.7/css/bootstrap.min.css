@@ -6,18 +6,18 @@
 /*# sourceMappingURL=bootstrap.min.css.map */
 
 
-html, body { 
+html, body {
    height: 100%;
    font-family: 'Crimson Text', serif;
 }
 
 #cover {
-	position: fixed; 
-	height: 100%; 
-	width: 100%; 
-	top:0; 
-	left: 0; 
-	background: #ffffff; 
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top:0;
+	left: 0;
+	background: #ffffff;
 	z-index:9999;
 }
 
@@ -95,6 +95,14 @@ figcaption {
     font-size: 25px;
 }
 
+#intro-video-container h2 {
+	position: absolute;
+	top: 30vh;
+	left: 50%;
+	text-align: center;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 #intro-video {
 	width: 100%;
 }
@@ -110,9 +118,9 @@ figcaption {
 }
 
 #homepage-text-inner img {
-	margin-left: 15%;
+	margin-left: 25%;
 	margin-top: 10px;
-	width: 70%;
+	width: 50%;
 	max-width: 1000px;
 	margin-bottom: 10px;
 }
@@ -128,7 +136,10 @@ figcaption {
   /****************/
  /* CONTRIBUTORS */
 /****************/
-.contributors {
+
+/* Decided to remove Contributors tab and simply to identify contributors and thanks in Project Description */
+
+/*.contributors {
   width: 60%;
   margin-left: auto ;
   margin-right: auto ;
@@ -156,7 +167,7 @@ figcaption {
 
 .contributors p {
 	margin-left: 20%;
-}
+}*/
 
 
   /*************/
@@ -225,7 +236,7 @@ figcaption {
 
 #main-image-div:hover figcaption{
     visibility: visible;
-} 
+}
 
 #main-image-div:before {
     content: '';
@@ -331,7 +342,7 @@ figcaption {
 .modal-dialog {
 	position: relative;
     display: table;
-    overflow-y: auto;    
+    overflow-y: auto;
     overflow-x: auto;
     width: auto;
 }
@@ -356,12 +367,10 @@ figcaption {
 
 p.introduction:first-letter {
  font-size: 44px;
- float: left; 
+ float: left;
  line-height: 35px;
- padding-top: 3px; 
+ padding-top: 3px;
  padding-right: 3px;
  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 */
-
-
