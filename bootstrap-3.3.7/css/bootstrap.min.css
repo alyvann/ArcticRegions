@@ -366,3 +366,14 @@ p.introduction:first-letter {
  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 */
+
+
+/***********************/
+/* Project-description */
+/***********************/
+
+#project-description-text-inner p {
+  margin-left: 15%;
+  margin-right: 15%;
+  max-width: 70%;
+}
