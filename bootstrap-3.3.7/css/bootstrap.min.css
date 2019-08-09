@@ -73,8 +73,7 @@ figcaption {
 /************/
 #intro-video-container {
 	width: 100%;
-  position: absolute;
-	top: 30vh;;
+	position: relative;
 }
 
 #intro-video-container h1 {
@@ -83,8 +82,8 @@ figcaption {
 	top: 18vh;
 	margin-left: 700px;
 	width: 700px;
-    transform: translateX(-50%) translateY(-50%);
-    font-size: 50px;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 50px;
 }
 #intro-video-container h2 {
 	word-wrap: normal;
@@ -92,16 +91,19 @@ figcaption {
 	top: 27vh;
 	margin-left: 700px;
 	width: 700px;
-    transform: translateX(-50%) translateY(-50%);
-    font-size: 25px;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 25px;
 }
 
+
 #intro-video-container h2 {
-	position: absolute;
-	top: 30vh;
-	left: 50%;
-	text-align: center;
-    transform: translateX(-50%) translateY(-50%);
+  word-wrap: normal;
+  position: absolute;
+  top: 27vh;
+  margin-left: 700px;
+  width: 700px;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 25px;
 }
 
 #intro-video {
