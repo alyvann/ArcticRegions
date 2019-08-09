@@ -77,22 +77,18 @@ figcaption {
 }
 
 #intro-video-container h1 {
-	word-wrap: normal;
-	position: absolute;
-	top: 18vh;
-	margin-left: 25%;
-	width: 50%;
+  position: absolute;
+	top: 20vh;
+	left: 50%;
+	text-align: center;
   transform: translateX(-50%) translateY(-50%);
-  font-size: 50px;
 }
 #intro-video-container h2 {
-	word-wrap: normal;
-	position: absolute;
-	top: 27vh;
-	margin-left: 25%;
-	width: px;
+  position: absolute;
+	top: 20vh;
+	left: 50%;
+	text-align: center;
   transform: translateX(-50%) translateY(-50%);
-  font-size: 25px;
 }
 
 #intro-video {
