@@ -77,6 +77,7 @@ figcaption {
 }
 
 #intro-video-container h1 {
+  font-size: 50em;
   position: absolute;
 	top: 20vh;
 	left: 50%;
@@ -84,6 +85,7 @@ figcaption {
   transform: translateX(-50%) translateY(-50%);
 }
 #intro-video-container h2 {
+  font-size: 35em;
   position: absolute;
 	top: 27vh;
 	left: 50%;
