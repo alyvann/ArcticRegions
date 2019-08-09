@@ -90,7 +90,7 @@ figcaption {
 	position: absolute;
 	top: 27vh;
 	margin-left: 25%;
-	width: 50px;
+	width: px;
   transform: translateX(-50%) translateY(-50%);
   font-size: 25px;
 }
@@ -110,9 +110,11 @@ figcaption {
 }
 
 #homepage-text-inner img {
-  margin-left: 15%;
+	margin-left: 25%;
+  margin-right: 25%;
 	margin-top: 10px;
-	width: 75%;
+	width: 50%;
+	max-width: 1000px;
 	margin-bottom: 10px;
 }
 
