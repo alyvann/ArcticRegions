@@ -73,7 +73,8 @@ figcaption {
 /************/
 #intro-video-container {
 	width: 100%;
-	position: relative;
+  position: absolute;
+	top: 30vh;;
 }
 
 #intro-video-container h1 {
