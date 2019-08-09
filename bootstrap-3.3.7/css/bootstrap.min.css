@@ -79,8 +79,9 @@ figcaption {
 #intro-video-container h1 {
   font-size: 5em;
   position: absolute;
-	top: 20vh;
-	left: 50%;
+	margin-left: 15%;
+  margin-right: 15%
+  width: 50%;
 	text-align: center;
   transform: translateX(-50%) translateY(-50%);
 }
