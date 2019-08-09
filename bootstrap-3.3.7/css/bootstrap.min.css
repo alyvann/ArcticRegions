@@ -95,17 +95,6 @@ figcaption {
   font-size: 25px;
 }
 
-
-#intro-video-container h2 {
-  word-wrap: normal;
-  position: absolute;
-  top: 27vh;
-  margin-left: 25%;
-  width: 700px;
-  transform: translateX(-50%) translateY(-50%);
-  font-size: 25px;
-}
-
 #intro-video {
 	width: 100%;
 }
