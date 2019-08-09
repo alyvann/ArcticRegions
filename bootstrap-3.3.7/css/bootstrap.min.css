@@ -85,7 +85,7 @@ figcaption {
 }
 #intro-video-container h2 {
   position: absolute;
-	top: 20vh;
+	top: 27vh;
 	left: 50%;
 	text-align: center;
   transform: translateX(-50%) translateY(-50%);
@@ -103,7 +103,6 @@ figcaption {
 #homepage-text-inner p {
 	margin-left: 15%;
   margin-right: 15%;
-  align: justify;
 	max-width: 70%;
 }
 
